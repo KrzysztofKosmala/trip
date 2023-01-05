@@ -8,6 +8,9 @@ import { DefaultModule } from './layouts/default/default.module';
 import { HomeComponent } from './modules/home/home.component';
 import { ProductComponent } from './modules/product/product.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { FullpageComponent } from './layouts/fullpage/fullpage.component';
+import { FullpageModule } from './layouts/fullpage/fullpage.module';
+import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DefaultModule
+    DefaultModule,
+    FullpageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
