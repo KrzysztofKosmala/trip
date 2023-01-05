@@ -1,0 +1,17 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: trip
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:50/trip
+    username: kosmala
+  jpa:
+     hibernate:
+       ddl-auto: update
+     properties:
+       hibernate:
+         dialect: org.hibernate.dialect.PostgreSQLDialect
+         format_sql: true
+     show-sql: true
