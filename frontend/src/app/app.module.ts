@@ -11,6 +11,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FullpageComponent } from './layouts/fullpage/fullpage.component';
 import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { LoginComponent } from './modules/login/login.component';
+import { AdminComponent } from './modules/admin/admin.component';
+import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { LoginComponent } from './modules/login/login.component';
     BrowserModule,
     AppRoutingModule,
     DefaultModule,
-    FullpageModule
+    FullpageModule,
+    FullpageadminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
