@@ -1,4 +1,7 @@
-:host{
-    background: #bbb;
+@import '../../../../variables.scss';
+
+:host
+{
+    background: $lightgrey;
     padding: 20px;
 }
