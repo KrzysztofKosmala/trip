@@ -1,24 +1,16 @@
-:host
-{
+:host{
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     height: 100%;
 }
-
-.content
-{
+.content{
     padding: 20px;
 }
-
-header
-{
+header{
     background: #ddd;
     padding: 20px;
 }
-
-.sidebar
-{
-    background: #ddd;
+.sidebar{
+    background: #bbb;
     padding: 20px;
 }

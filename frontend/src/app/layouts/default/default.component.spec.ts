@@ -11,7 +11,9 @@ describe('DefaultComponent', () => {
       declarations: [ DefaultComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(DefaultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

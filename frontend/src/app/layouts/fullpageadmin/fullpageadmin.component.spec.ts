@@ -11,7 +11,9 @@ describe('FullpageadminComponent', () => {
       declarations: [ FullpageadminComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(FullpageadminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

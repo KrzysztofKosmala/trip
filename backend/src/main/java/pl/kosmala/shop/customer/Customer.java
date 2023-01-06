@@ -1,4 +1,4 @@
-package pl.kosmala.trip.customer;
+package pl.kosmala.shop.customer;
 
 import jakarta.persistence.*;
 import lombok.*;

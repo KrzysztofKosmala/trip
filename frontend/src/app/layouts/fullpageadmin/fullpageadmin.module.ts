@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FullpageadminComponent } from './fullpageadmin.component';
 import { AdminComponent } from 'src/app/modules/admin/admin.component';
 import { RouterModule } from '@angular/router';
-import { FlexModule } from '@angular/flex-layout';
-
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -15,7 +13,7 @@ import { FlexModule } from '@angular/flex-layout';
   imports: [
     CommonModule,
     RouterModule,
-    FlexModule
+    FlexLayoutModule
   ]
 })
 export class FullpageadminModule { }

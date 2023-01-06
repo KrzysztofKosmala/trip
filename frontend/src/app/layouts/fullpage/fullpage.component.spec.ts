@@ -11,7 +11,9 @@ describe('FullpageComponent', () => {
       declarations: [ FullpageComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(FullpageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
