@@ -1,1 +1,24 @@
-<p>product works!</p>
+
+
+<h1>Produkty</h1>
+    
+<mat-card  *ngFor="let product of products">
+ <div fxLayout="row">
+    <div fxFlex="30">
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+        <img src="assets/image-placeholder.png" mat-card-sm-image>
+    </div>
+    <div fxFlex>
+        <mat-card-content>{{product.desc}}</mat-card-content>
+    </div>
+    <div fxLayoutAlign="start center">
+        {{product.price}}{{product.currency}}
+    </div>
+ </div>
+    <mat-card-actions fxLayoutAlign="end">
+    <button mat-button>Pokaż</button>
+    <button mat-button>Do ulubionych</button>
+    </mat-card-actions>
+</mat-card>
+   
