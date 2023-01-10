@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.kosmala.shop.product.fakeData.ProductGenerator;
 import pl.kosmala.shop.product.model.Product;
-import pl.kosmala.shop.product.model.Trip;
-import pl.kosmala.shop.product.repository.ProductRepository;
-import pl.kosmala.shop.product.repository.TripRepository;
+import pl.kosmala.shop.product.trip.model.Trip;
+import pl.kosmala.shop.product.trip.repository.ProductRepository;
+import pl.kosmala.shop.product.trip.repository.TripRepository;
 
 import java.util.List;
 

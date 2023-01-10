@@ -15,7 +15,7 @@ import pl.kosmala.shop.product.service.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/product")
+@RequestMapping("api/v1/products")
 @AllArgsConstructor
 public class ProductController
 {

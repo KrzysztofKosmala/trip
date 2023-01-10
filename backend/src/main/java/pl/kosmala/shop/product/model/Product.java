@@ -37,7 +37,7 @@ public class Product
 
     @Column
             (
-                    name = "description",
+                    name = "currency",
                     nullable = false,
                     columnDefinition = "TEXT"
 

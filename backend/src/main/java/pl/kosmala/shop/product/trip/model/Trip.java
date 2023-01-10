@@ -1,9 +1,10 @@
-package pl.kosmala.shop.product.model;
+package pl.kosmala.shop.product.trip.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jdk.jfr.Enabled;
 import lombok.*;
+import pl.kosmala.shop.product.model.Product;
 
 import java.math.BigDecimal;
 

@@ -1,20 +1,28 @@
-<header flexLayout="column" fxLayoutAlign="start center">
-    <div fxFlex>
-        Logo
+<header class="header" [fxLayout]="'column'" [fxLayoutAlign]="'start center'">
+
+    <div [fxFlex]="'1 1 auto'">
+      <mat-toolbar class="sidebar">Panel</mat-toolbar>
     </div>
-    <div>
-        <button routerLink="">Link</button>
-        <button routerLink="">Link</button>
-        <button routerLink="">Link</button>
+
+    <div [fxFlex]="'1 1 auto'" >
+      <mat-toolbar class="sidebar" fxLayoutGap="10">
+        <button mat-flat-button color="accent" routerLink="">Link</button>
+        <button mat-flat-button color="accent" routerLink="">Link</button>
+        <button mat-flat-button color="accent" routerLink="">Link</button>
+      </mat-toolbar>
     </div>
 </header>
-<div flexLayout="row" fxFlex>
-    <div fxFlex="15">
-        <div fxFlex class="sidebar">
-            Sidebar
-        </div>
-    </div>
-    <div fxFlex="85" class="content">
+
+
+    <div  class="sidebar"  fxLayout="row" fxFlex>
+        <mat-selection-list [multiple]="false" fxFlex="10">
+            <mat-list-option  *ngFor="let category of categories">
+                <span class="contact-names"> {{category}}</span>
+            </mat-list-option>
+        </mat-selection-list>
+    
+    <div class="content" fxFlex>
         <router-outlet></router-outlet>
     </div>
+
 </div>

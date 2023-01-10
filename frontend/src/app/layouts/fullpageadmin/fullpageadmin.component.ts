@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullpageadminComponent implements OnInit {
 
+  categories = ["kat1","kat2"]
+
   constructor() { }
 
   ngOnInit(): void {

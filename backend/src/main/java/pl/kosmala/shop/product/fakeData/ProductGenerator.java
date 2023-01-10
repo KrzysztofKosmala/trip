@@ -2,7 +2,7 @@ package pl.kosmala.shop.product.fakeData;
 
 import com.github.javafaker.Faker;
 import pl.kosmala.shop.product.model.Product;
-import pl.kosmala.shop.product.model.Trip;
+import pl.kosmala.shop.product.trip.model.Trip;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ public class ProductGenerator
         Product product = new Product();
         product.setName(faker.name().name());
         product.setDesc(faker.lorem().characters(10, 300));
+        product.setCurrency(faker.currency().name());
         return product;
     }
 
@@ -29,7 +30,7 @@ public class ProductGenerator
         trip.setBasePrice(BigDecimal.valueOf(faker.number().numberBetween(700, 25000)));
         trip.setName(faker.name().name());
         trip.setDesc(faker.lorem().sentence( 30));
-
+        trip.setCurrency(faker.currency().name());
         return trip;
     }
 
