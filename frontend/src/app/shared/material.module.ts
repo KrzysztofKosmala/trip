@@ -7,6 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -17,7 +19,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatCheckboxModule, 
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatPaginatorModule
   ],
   exports: 
   [
@@ -27,7 +30,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatCheckboxModule, 
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatPaginatorModule
   ]
   
 })

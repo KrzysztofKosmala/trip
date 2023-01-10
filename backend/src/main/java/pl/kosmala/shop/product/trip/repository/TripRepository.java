@@ -1,13 +1,11 @@
-package pl.kosmala.shop.product.repository;
+package pl.kosmala.shop.product.trip.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
-import pl.kosmala.shop.product.model.Trip;
+import pl.kosmala.shop.product.trip.model.Trip;
 
 import java.util.List;
 
-public interface TripRepository extends CrudRepository<Trip, Long>
+public interface TripRepository extends JpaRepository<Trip, Long>
 {
-
-    @Override
-    List<Trip> findAll();
 }

@@ -5,9 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.kosmala.shop.product.fakeData.ProductGenerator;
-import pl.kosmala.shop.product.model.Product;
 import pl.kosmala.shop.product.trip.model.Trip;
-import pl.kosmala.shop.product.trip.repository.ProductRepository;
 import pl.kosmala.shop.product.trip.repository.TripRepository;
 
 import java.util.List;
@@ -20,13 +18,12 @@ public class TripApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(TripRepository tripRepository, ProductRepository productRepository)
+	CommandLineRunner commandLineRunner(TripRepository tripRepository)
 	{
 		return args ->
 		{
 			ProductGenerator productGenerator = new ProductGenerator();
 			List<Trip> trips = productGenerator.trips(100);
-			List<Product> products = productGenerator.products(50);
 
 			tripRepository.saveAll(trips);
 

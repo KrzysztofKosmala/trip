@@ -1,30 +1,29 @@
-package pl.kosmala.shop.product.controller;
+package pl.kosmala.shop.product.trip.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kosmala.shop.product.model.Product;
-import pl.kosmala.shop.product.model.Trip;
-import pl.kosmala.shop.product.repository.TripRepository;
-import pl.kosmala.shop.product.service.ProductService;
+import pl.kosmala.shop.product.trip.model.Trip;
+import pl.kosmala.shop.product.trip.service.TripService;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("api/v1/products")
-@AllArgsConstructor
-public class ProductController
-{
-    final ProductService productService;
 
-    @GetMapping("/trips")
-    public ResponseEntity<List<Trip>> getTrips()
+@RestController
+@RequestMapping("api/v1/trips")
+@AllArgsConstructor
+public class TripController
+{
+    final TripService tripService;
+
+    @GetMapping
+    public Page<Trip> getTrips(@PageableDefault(size = 30) Pageable pageable)
     {
-        List<Trip> all = productService.getAllTrips();
-        return ResponseEntity.ok(all);
+        return tripService.getAllTrips(pageable);
     }
 }
