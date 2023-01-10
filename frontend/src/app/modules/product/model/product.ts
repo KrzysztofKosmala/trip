@@ -3,6 +3,6 @@ export interface Product
     name: string,
     category: string,
     desc: string,
-    price: number,
+    basePrice: number,
     currency: string
 }
