@@ -1,4 +1,4 @@
-<header class="header" [fxLayout]="'column'" [fxLayoutAlign]="'start center'">
+<header class="header" [fxLayout]="'row'" [fxLayoutAlign]="'start start'">
 
     <div [fxFlex]="'1 1 auto'">
       <mat-toolbar class="sidebar">Panel</mat-toolbar>
@@ -6,8 +6,8 @@
 
     <div [fxFlex]="'1 1 auto'" >
       <mat-toolbar class="sidebar" fxLayoutGap="10">
-        <button mat-flat-button color="accent" routerLink="">Link</button>
-        <button mat-flat-button color="accent" routerLink="">Link</button>
+        <button mat-flat-button color="accent" routerLink="/admin">Admin</button>
+        <button mat-flat-button color="accent" routerLink="/admin/products">Produkty</button>
         <button mat-flat-button color="accent" routerLink="">Link</button>
       </mat-toolbar>
     </div>

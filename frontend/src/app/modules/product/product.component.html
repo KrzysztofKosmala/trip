@@ -1,7 +1,6 @@
 
 
 <h1>Produkty</h1>
-    
 <mat-card  *ngFor="let product of page?.content">
  <div fxLayout="row">
     <div fxFlex="30">
@@ -17,11 +16,10 @@
     </div>
  </div>
     <mat-card-actions fxLayoutAlign="end">
-    <button mat-button>Pokaż</button>
-    <button mat-button>Do ulubionych</button>
+        <button mat-button>Pokaż</button>
+        <button mat-button>Do ulubionych</button>
     </mat-card-actions>
 </mat-card>
-   
 <mat-paginator 
     *ngIf="page && page.totalElements > 0" 
     [length]="page.totalElements" 
