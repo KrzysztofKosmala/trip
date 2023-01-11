@@ -2,6 +2,7 @@ package pl.kosmala.shop.product.trip.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jdk.jfr.Enabled;
 import lombok.*;
 import pl.kosmala.shop.product.model.Product;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @AllArgsConstructor
+@Table(name = "trip")
 public class Trip extends Product
 {
     @Column

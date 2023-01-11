@@ -13,7 +13,6 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Product
 {
-    @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

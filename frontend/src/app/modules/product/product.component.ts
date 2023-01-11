@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Page } from 'src/app/shared/model/page';
 import { Product } from './model/product';
+import { Trip } from './model/trip';
 import { ProductService } from './product.service';
 
 @Component({
@@ -13,22 +14,22 @@ export class ProductComponent implements OnInit {
 
 
   
-  page!: Page<Product>;
+  page!: Page<Trip>;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getTrips()
   }
 
-  getProducts()
+  getTrips()
   {
-      this.getProductPage(0,10)
+      this.getTripPage(0,10)
   }
 
-  private getProductPage(page: number, size: number)
+  private getTripPage(page: number, size: number)
   {
-    this.productService.getProducts(page, size).subscribe
+    this.productService.getTrips(page, size).subscribe
     (
       page => 
       {
@@ -39,6 +40,6 @@ export class ProductComponent implements OnInit {
 
   onPageEvent(event: PageEvent): void
   {
-    this.getProductPage(event.pageIndex, event.pageSize);
+    this.getTripPage(event.pageIndex, event.pageSize);
   }
 }
