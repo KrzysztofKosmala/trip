@@ -29,6 +29,7 @@ public class ProductGenerator
         trip.setDestination(faker.country().capital());
         trip.setBasePrice(BigDecimal.valueOf(faker.number().numberBetween(700, 25000)));
         trip.setName(faker.name().name());
+        trip.setCategory(faker.dog().breed());
         trip.setDesc(faker.lorem().sentence( 30));
         trip.setCurrency(faker.currency().name());
         return trip;

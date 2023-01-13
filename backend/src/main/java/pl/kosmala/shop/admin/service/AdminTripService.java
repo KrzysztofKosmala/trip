@@ -17,4 +17,19 @@ public class AdminTripService
     {
         return adminTripRepository.findAll(pageable);
     }
+
+    public AdminTrip getProduct(Long id)
+    {
+        return adminTripRepository.findById(id).orElseThrow();
+    }
+
+    public AdminTrip createTrip(AdminTrip trip)
+    {
+        return adminTripRepository.save(trip);
+    }
+
+    public AdminTrip updateTrip(AdminTrip trip)
+    {
+        return adminTripRepository.save(trip);
+    }
 }

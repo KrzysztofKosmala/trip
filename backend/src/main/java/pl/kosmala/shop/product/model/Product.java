@@ -1,19 +1,15 @@
 package pl.kosmala.shop.product.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @MappedSuperclass
 @Setter
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Product
 {
-    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -42,4 +38,27 @@ public class Product
 
             )
     private String currency;
+    @Column
+            (
+                    name = "category"
+                    //           nullable = false
+            )
+    private String category;
+
+    public Product(String name, String desc, String currency, String category)
+    {
+        this.name = name;
+        this.desc = desc;
+        this.currency = currency;
+        this.category = category;
+    }
+    public Product(Long id, String name, String desc, String currency, String category)
+    {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.currency = currency;
+        this.category = category;
+    }
+
 }

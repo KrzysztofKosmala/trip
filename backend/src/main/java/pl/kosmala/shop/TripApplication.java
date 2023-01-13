@@ -8,6 +8,7 @@ import pl.kosmala.shop.product.fakeData.ProductGenerator;
 import pl.kosmala.shop.product.trip.model.Trip;
 import pl.kosmala.shop.product.trip.repository.TripRepository;
 
+
 import java.util.List;
 
 @SpringBootApplication
@@ -29,4 +30,5 @@ public class TripApplication {
 
 		};
 	}
+
 }

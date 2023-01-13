@@ -32,4 +32,13 @@ public class Trip extends Product
          //           nullable = false
             )
     private BigDecimal basePrice;
+
+
+
+    @Builder
+    public Trip(String name, String desc, String currency, String category, String destination, BigDecimal basePrice) {
+        super(name, desc, currency, category);
+        this.destination = destination;
+        this.basePrice = basePrice;
+    }
 }

@@ -9,6 +9,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +23,9 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatSnackBarModule
   ],
   exports: 
   [
@@ -33,7 +37,9 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatSnackBarModule
   ]
   
 })
