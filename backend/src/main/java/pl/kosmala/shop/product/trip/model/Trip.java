@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import jdk.jfr.Enabled;
 import lombok.*;
 import pl.kosmala.shop.product.model.Product;
+import pl.kosmala.shop.product.model.ProductCurrency;
 
 import java.math.BigDecimal;
 
@@ -36,7 +37,7 @@ public class Trip extends Product
 
 
     @Builder
-    public Trip(String name, String desc, String currency, String category, String destination, BigDecimal basePrice) {
+    public Trip(String name, String desc, ProductCurrency currency, String category, String destination, BigDecimal basePrice) {
         super(name, desc, currency, category);
         this.destination = destination;
         this.basePrice = basePrice;

@@ -1,7 +1,9 @@
 package pl.kosmala.shop.product.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 
 @MappedSuperclass
@@ -37,7 +39,8 @@ public class Product
                     columnDefinition = "TEXT"
 
             )
-    private String currency;
+    @Enumerated(EnumType.STRING)
+    private ProductCurrency currency;
     @Column
             (
                     name = "category"
@@ -45,14 +48,14 @@ public class Product
             )
     private String category;
 
-    public Product(String name, String desc, String currency, String category)
+    public Product(String name, String desc, ProductCurrency currency, String category)
     {
         this.name = name;
         this.desc = desc;
         this.currency = currency;
         this.category = category;
     }
-    public Product(Long id, String name, String desc, String currency, String category)
+    public Product(Long id, String name, String desc, ProductCurrency currency, String category)
     {
         this.id = id;
         this.name = name;

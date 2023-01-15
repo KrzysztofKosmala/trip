@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AdminMessagesService } from '../admin-messages/admin-messages.service';
 import { AdminProductUpdateService } from '../admin-product-update.service';
 import { AdminProductUpdate } from './model/adminProductUpdate';
 
@@ -18,18 +19,19 @@ export class AdminProductUpdateComponent implements OnInit {
     private router: ActivatedRoute, 
     private adminProductUpdateService: AdminProductUpdateService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private adminMessageService: AdminMessagesService
     ) { }
 
   ngOnInit(): void {
     this.getProduct();
 
     this.productForm = this.formBuilder.group({
-      name: [''],
-      desc:[''],
-      category:[''],
-      basePrice:[''],
-      currency:['PLN']
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      desc:['', [Validators.required, Validators.minLength(4)]],
+      category:['', [Validators.required]],
+      basePrice:['', [Validators.required, Validators.min(0)]],
+      currency:['PLN', Validators.required]
     })
   }
 
@@ -41,10 +43,16 @@ export class AdminProductUpdateComponent implements OnInit {
         category: this.productForm.get('category')?.value,
         basePrice: this.productForm.get('basePrice')?.value,
         currency: this.productForm.get('currency')?.value,
-      } as AdminProductUpdate).subscribe(product => {
-        this.mapFormValues(product)
-        this.snackBar.open("Produkt został zapisany", '', {duration: 3000})
-      });
+      } as AdminProductUpdate).subscribe
+      (
+        {
+          next: product => 
+          {
+            this.mapFormValues(product)
+            this.snackBar.open("Produkt został zapisany", '', {duration: 3000})
+          },
+          error: error => this.adminMessageService.addSpringErrors(error.error),
+        });
   }
 
   private mapFormValues(product: AdminProductUpdate): void {

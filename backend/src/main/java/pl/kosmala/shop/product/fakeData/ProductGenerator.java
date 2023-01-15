@@ -2,6 +2,7 @@ package pl.kosmala.shop.product.fakeData;
 
 import com.github.javafaker.Faker;
 import pl.kosmala.shop.product.model.Product;
+import pl.kosmala.shop.product.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.Trip;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class ProductGenerator
         Product product = new Product();
         product.setName(faker.name().name());
         product.setDesc(faker.lorem().characters(10, 300));
-        product.setCurrency(faker.currency().name());
+        product.setCurrency(ProductCurrency.PLN);
         return product;
     }
 
@@ -31,7 +32,7 @@ public class ProductGenerator
         trip.setName(faker.name().name());
         trip.setCategory(faker.dog().breed());
         trip.setDesc(faker.lorem().sentence( 30));
-        trip.setCurrency(faker.currency().name());
+        trip.setCurrency(ProductCurrency.PLN);
         return trip;
     }
 

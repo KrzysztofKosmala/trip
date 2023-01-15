@@ -1,6 +1,7 @@
 package pl.kosmala.shop.admin.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
 import pl.kosmala.shop.admin.model.AdminTrip;
 import pl.kosmala.shop.admin.service.AdminTripService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/admin")
@@ -29,7 +32,7 @@ public class AdminController
     }
 
     @PostMapping("/trips")
-    public AdminTrip getTrip(@RequestBody AdminTripDto adminProductDto)
+    public AdminTrip addTrip(@RequestBody @Valid AdminTripDto adminProductDto)
     {
         return adminTripService.createTrip(AdminTrip.builder()
                 .name(adminProductDto.getName())
@@ -42,7 +45,7 @@ public class AdminController
     }
 
     @PutMapping("/trips/{id}")
-    public AdminTrip updateTrip(@RequestBody AdminTripDto adminProductDto, @PathVariable Long id)
+    public AdminTrip updateTrip(@RequestBody @Valid AdminTripDto adminProductDto, @PathVariable Long id)
     {
         AdminTrip build = AdminTrip.builderWithId()
                 .id(id)

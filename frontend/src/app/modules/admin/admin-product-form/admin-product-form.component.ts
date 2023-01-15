@@ -13,4 +13,25 @@ export class AdminProductFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get name()
+  {
+    return this.parentForm.get("name");
+  }
+  get desc()
+  {
+    return this.parentForm.get("desc");
+  }
+  get category()
+  {
+    return this.parentForm.get("category");
+
+  }
+  get basePrice()
+  {
+    return this.parentForm.get("basePrice");
+  }
+  get currency()
+  {
+    return this.parentForm.get("currency");
+  }
 }

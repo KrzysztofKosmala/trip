@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 import pl.kosmala.shop.product.model.Product;
+import pl.kosmala.shop.product.model.ProductCurrency;
 
 import java.math.BigDecimal;
 
@@ -31,13 +32,13 @@ public class AdminTrip extends Product
     private BigDecimal basePrice;
 
     @Builder
-    public AdminTrip(String name, String desc, String currency, String category, String destination, BigDecimal basePrice) {
+    public AdminTrip(String name, String desc, ProductCurrency currency, String category, String destination, BigDecimal basePrice) {
         super(name, desc, currency, category);
         this.destination = destination;
         this.basePrice = basePrice;
     }
     @Builder(builderMethodName = "builderWithId", buildMethodName = "buildWithId")
-    public AdminTrip(Long id, String name, String desc, String currency, String category, String destination, BigDecimal basePrice) {
+    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String category, String destination, BigDecimal basePrice) {
         super(id, name, desc, currency, category);
         this.destination = destination;
         this.basePrice = basePrice;
