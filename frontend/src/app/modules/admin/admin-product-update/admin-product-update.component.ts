@@ -31,7 +31,8 @@ export class AdminProductUpdateComponent implements OnInit {
       desc:['', [Validators.required, Validators.minLength(4)]],
       category:['', [Validators.required]],
       basePrice:['', [Validators.required, Validators.min(0)]],
-      currency:['PLN', Validators.required]
+      currency:['PLN', Validators.required],
+      slug: ['', [Validators.required, Validators.minLength(4)]]
     })
   }
 
@@ -43,6 +44,7 @@ export class AdminProductUpdateComponent implements OnInit {
         category: this.productForm.get('category')?.value,
         basePrice: this.productForm.get('basePrice')?.value,
         currency: this.productForm.get('currency')?.value,
+        slug: this.productForm.get('slug')?.value,
       } as AdminProductUpdate).subscribe
       (
         {
@@ -61,7 +63,8 @@ export class AdminProductUpdateComponent implements OnInit {
       desc: product.desc,
       category: product.category,
       basePrice: product.basePrice,
-      currency: product.currency
+      currency: product.currency,
+      slug: product.slug
     });
   }
 

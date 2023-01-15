@@ -9,10 +9,15 @@ import { AdminProduct } from './adminProduct';
 })
 export class AdminProductService {
 
+
   constructor(private http: HttpClient) { }
 
   getProducts(page: number, size: number) : Observable<Page<AdminProduct>>
   {
       return this.http.get<Page<AdminProduct>>(`api/v1/admin/trips?page=${page}&size=${size}`);
+  }
+
+  delete(id: number): Observable<void>{
+    return this.http.delete<void>('api/v1/admin/trips/'+id)
   }
 }

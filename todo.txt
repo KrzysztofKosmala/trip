@@ -1,0 +1,31 @@
+admin
+- dodawanie produktu
+- usuwanie produktu
+- edytowanie produktu
+- dodawanie pracownika 
+- przypisywanie pracownika do wycieczki
+- dodawanie miejscowości
+- dodawanie hotelu 
+- listowanie produktów
+- listowanie pracowników
+- listowanie pracowników
+- logowanie
+
+
+customer
+- listowanie prodoków wszystkich
+- listowanie prodoków po dacie
+- listowanie prodoków po kraju
+- dodawanie do ulubionych 
+- zamawianie produktu
+- uzupełnianie danych do produktu
+- sortowanie po atrybutach(filtry)
+- logowanie
+- przypomnienie hasła
+- strina główna 
+- moje wyjazdy
+- szczegóły rezerwacji 
+- moje dane 
+
+
+guide

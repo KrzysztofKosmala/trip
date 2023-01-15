@@ -1,5 +1,6 @@
 package pl.kosmala.shop.admin.controller;
 
+import com.github.slugify.Slugify;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -40,6 +41,7 @@ public class AdminController
                 .basePrice(adminProductDto.getBasePrice())
                 .desc(adminProductDto.getDesc())
                 .destination(adminProductDto.getDestination())
+                .slug(adminProductDto.getSlug())
                 .build()
         );
     }
@@ -55,8 +57,21 @@ public class AdminController
                 .desc(adminProductDto.getDesc())
                 .category(adminProductDto.getCategory())
                 .destination(adminProductDto.getDestination())
+                .slug(slugifySlug(adminProductDto.getSlug()))
                 .buildWithId();
 
         return adminTripService.updateTrip(build);
+    }
+
+    private String slugifySlug(String slug)
+    {
+        final Slugify slg = Slugify.builder().customReplacement("_", "-").build();
+        return slg.slugify(slug);
+    }
+
+    @DeleteMapping("/trips/{id}")
+    public void deleteTrip(@PathVariable Long id)
+    {
+        adminTripService.deleteTrip(id);
     }
 }

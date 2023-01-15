@@ -1,5 +1,6 @@
 package pl.kosmala.shop.admin.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +22,7 @@ public class AdminTripDto
     private ProductCurrency currency;
     private String category;
     private String destination;
+    @Length(min = 4)
+    @NotBlank
+    private String slug;
 }

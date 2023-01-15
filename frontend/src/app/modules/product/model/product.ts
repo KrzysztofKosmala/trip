@@ -4,5 +4,6 @@ export interface Product
     category: string,
     desc: string,
     basePrice: number,
-    currency: string
+    currency: string,
+    slug: string
 }

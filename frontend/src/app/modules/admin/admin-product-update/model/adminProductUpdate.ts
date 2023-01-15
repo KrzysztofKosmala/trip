@@ -4,5 +4,6 @@ export interface AdminProductUpdate{
     desc: string,
     category: string,
     basePrice: number,
-    currency: string
+    currency: string,
+    slug: string
 }

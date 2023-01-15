@@ -32,14 +32,14 @@ public class AdminTrip extends Product
     private BigDecimal basePrice;
 
     @Builder
-    public AdminTrip(String name, String desc, ProductCurrency currency, String category, String destination, BigDecimal basePrice) {
-        super(name, desc, currency, category);
+    public AdminTrip(String name, String desc, ProductCurrency currency, String category, String slug, String destination, BigDecimal basePrice) {
+        super(name, desc, currency, category, slug);
         this.destination = destination;
         this.basePrice = basePrice;
     }
     @Builder(builderMethodName = "builderWithId", buildMethodName = "buildWithId")
-    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String category, String destination, BigDecimal basePrice) {
-        super(id, name, desc, currency, category);
+    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String category, String slug, String destination, BigDecimal basePrice) {
+        super(id, name, desc, currency, category, slug);
         this.destination = destination;
         this.basePrice = basePrice;
     }

@@ -32,4 +32,9 @@ public class AdminTripService
     {
         return adminTripRepository.save(trip);
     }
+
+    public void deleteTrip(Long id)
+    {
+        adminTripRepository.deleteById(id);
+    }
 }

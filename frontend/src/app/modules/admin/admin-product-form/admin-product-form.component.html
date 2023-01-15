@@ -13,6 +13,20 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+        <mat-label>przyjazny url</mat-label>
+        <input matInput placeholder="podaj url" formControlName="slug">
+        <div *ngIf="slug?.invalid && (slug?.dirty || slug?.touched)" class="errorMessages">
+
+            <div *ngIf="slug?.errors?.['required']">
+                    Url jest wymagany
+            </div>
+            <div *ngIf="slug?.errors?.['minlength']">
+                Nazwa musi mieć przynajmniej 4 znaki
+        </div>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Opis</mat-label>
         <textarea matInput rows="20" placeholder="Podaj opis produktu" formControlName="desc"></textarea>
         <div *ngIf="desc?.invalid && (desc?.dirty || desc?.touched)" class="errorMessages">

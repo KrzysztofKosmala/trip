@@ -48,20 +48,30 @@ public class Product
             )
     private String category;
 
-    public Product(String name, String desc, ProductCurrency currency, String category)
+    @Column
+            (
+                    name = "slug",
+                    //           nullable = false
+                    unique = true
+            )
+    private String slug;
+
+    public Product(String name, String desc, ProductCurrency currency, String category, String slug)
     {
         this.name = name;
         this.desc = desc;
         this.currency = currency;
         this.category = category;
+        this.slug = slug;
     }
-    public Product(Long id, String name, String desc, ProductCurrency currency, String category)
+    public Product(Long id, String name, String desc, ProductCurrency currency, String category, String slug)
     {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.currency = currency;
         this.category = category;
+        this.slug = slug;
     }
 
 }
