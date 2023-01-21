@@ -1,6 +1,7 @@
 package pl.kosmala.shop.product.fakeData;
 
 import com.github.javafaker.Faker;
+import com.github.slugify.Slugify;
 import pl.kosmala.shop.product.model.Product;
 import pl.kosmala.shop.product.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.Trip;
@@ -29,14 +30,20 @@ public class ProductGenerator
 
         trip.setDestination(faker.country().capital());
         trip.setBasePrice(BigDecimal.valueOf(faker.number().numberBetween(700, 25000)));
-        trip.setName(faker.name().name());
+        String name = faker.name().name();
+        trip.setName(name);
         trip.setCategory(faker.dog().breed());
         trip.setDesc(faker.lorem().sentence( 30));
+        trip.setSlug(slugifySlug(name));
         trip.setCurrency(ProductCurrency.PLN);
         return trip;
     }
 
-
+    private String slugifySlug(String slug)
+    {
+        final Slugify slg = Slugify.builder().customReplacement("_", "-").build();
+        return slg.slugify(slug);
+    }
 
     public List<Trip> trips(int howMany)
     {

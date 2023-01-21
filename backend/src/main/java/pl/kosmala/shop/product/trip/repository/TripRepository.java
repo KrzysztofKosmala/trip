@@ -5,7 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 import pl.kosmala.shop.product.trip.model.Trip;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TripRepository extends JpaRepository<Trip, Long>
 {
+    Optional<Trip> findTripBySlug(String slug);
 }

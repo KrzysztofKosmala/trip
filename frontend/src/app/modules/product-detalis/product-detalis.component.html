@@ -1,0 +1,18 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxFlex fxLayoutGap="20">
+        <div>
+            <img src="/assets/image-placeholder.png" width="350">
+        </div>
+        <div fxLayout="column" fxFlex>
+            <h1>{{product?.name}}</h1>
+            <small>{{product?.category}}</small>
+            <div class="description">
+                {{product?.desc}}
+            </div>
+            <div fxLayout="row" fxFlexAlign="end">
+            </div>
+                <span class="price">{{product?.basePrice}} {{product?.currency}}</span>
+            <button mat-flat-button color="warn">Do ulubionych</button>
+        </div>
+    </div>
+</div>
