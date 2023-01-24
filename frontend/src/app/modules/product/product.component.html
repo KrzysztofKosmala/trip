@@ -1,27 +1,37 @@
 
 
 <h1>Produkty</h1>
-<mat-card  *ngFor="let product of page?.content">
- <div fxLayout="row">
-    <div fxFlex="30">
-        <mat-card-title> <a routerLink="{{'/products/' + product.slug}}"> {{product.name}}</a></mat-card-title>
-        <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+
+
+<mat-card *ngFor="let product of page?.content">
+<a routerLink="{{'/products/' + product.slug}}">
+
+    <div class="card-header">
+      <img src="assets/dolomites.jpg" class="product-image">
+    </div>
+</a>
+
+    <div class="card-content">
         <a routerLink="{{'/products/' + product.slug}}">
-        <img src="assets/image-placeholder.png" mat-card-sm-image>
-        </a>
-    </div>
-    <div fxFlex>
-        <mat-card-content>{{product.desc}}</mat-card-content>
-    </div>
-    <div fxLayoutAlign="start center">
-        {{product.basePrice}} {{product.currency}}
-    </div>
- </div>
-    <mat-card-actions fxLayoutAlign="end">
-        <button mat-button routerLink="{{'/products/' + product.slug}}">Pokaż</button>
-        <button mat-button>Do ulubionych</button>
-    </mat-card-actions>
-</mat-card>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>{{product.name}}</mat-list-item>
+          <mat-list-item>{{product.desc}}</mat-list-item>
+          <mat-list-item fxLayoutAlign="end">{{product.basePrice}} {{product.currency}}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    
+    </a>
+<mat-card-actions fxLayoutAlign="center">
+    <button mat-button><mat-icon>star</mat-icon></button>
+</mat-card-actions>
+</div>
+  </mat-card>
+
+
+
+
+
 <mat-paginator 
     *ngIf="page && page.totalElements > 0" 
     [length]="page.totalElements" 

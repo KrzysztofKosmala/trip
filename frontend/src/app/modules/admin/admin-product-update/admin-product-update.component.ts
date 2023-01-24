@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AdminImageService } from '../admin-image/admin-image-service';
 import { AdminMessagesService } from '../admin-messages/admin-messages.service';
 import { AdminProductUpdateService } from '../admin-product-update.service';
 import { AdminProductUpdate } from './model/adminProductUpdate';
@@ -20,7 +21,8 @@ export class AdminProductUpdateComponent implements OnInit {
     private adminProductUpdateService: AdminProductUpdateService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private adminMessageService: AdminMessagesService
+    private adminMessageService: AdminMessagesService,
+    private adminImageService: AdminImageService
     ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class AdminProductUpdateComponent implements OnInit {
       category:['', [Validators.required]],
       basePrice:['', [Validators.required, Validators.min(0)]],
       currency:['PLN', Validators.required],
-      slug: ['', [Validators.required, Validators.minLength(4)]]
+      slug: ['', [Validators.required, Validators.minLength(4)]],
+      imageId: [null, Validators.required],
     })
   }
 

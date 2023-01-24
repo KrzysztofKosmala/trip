@@ -6,12 +6,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
+import pl.kosmala.shop.admin.dto.UploadResponse;
 import pl.kosmala.shop.admin.model.AdminTrip;
+import pl.kosmala.shop.admin.model.Image;
 import pl.kosmala.shop.admin.service.AdminTripService;
+import pl.kosmala.shop.admin.service.ImageService;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("api/v1/admin")
@@ -19,6 +31,8 @@ import javax.validation.Valid;
 public class AdminController
 {
     private final AdminTripService adminTripService;
+    private final ImageService imageService;
+
 
     @GetMapping("/trips")
     public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable)
@@ -63,15 +77,36 @@ public class AdminController
         return adminTripService.updateTrip(build);
     }
 
-    private String slugifySlug(String slug)
-    {
-        final Slugify slg = Slugify.builder().customReplacement("_", "-").build();
-        return slg.slugify(slug);
-    }
-
     @DeleteMapping("/trips/{id}")
     public void deleteTrip(@PathVariable Long id)
     {
         adminTripService.deleteTrip(id);
+    }
+
+    @PostMapping("/images/upload-image")
+    public ResponseEntity<UploadResponse> uploadImage(@RequestParam("image") MultipartFile image) {
+
+        Image model = new Image();
+        String name = slugifySlug(image.getOriginalFilename());
+        model.setName(name);
+        model.setType(image.getContentType());
+        try {
+            model.setData(image.getBytes());
+            //imageRepository.save(image);
+            imageService.saveFile(model);
+            return ResponseEntity.ok(new UploadResponse(name, "Image uploaded successfully"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new UploadResponse(name, "Error uploading image"));
+        }
+
+    }
+
+
+
+    private String slugifySlug(String slug)
+    {
+        final Slugify slg = Slugify.builder().customReplacement("_", "-").build();
+        return slg.slugify(slug);
     }
 }

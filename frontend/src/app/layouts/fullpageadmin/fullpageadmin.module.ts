@@ -12,6 +12,8 @@ import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-ad
 import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product-form/admin-product-form.component';
 import { AdminMessagesComponent } from 'src/app/modules/admin/admin-messages/admin-messages.component';
 import { AdminConfirmDialogComponent } from 'src/app/modules/admin/admin-confirm-dialog/admin-confirm-dialog.component';
+import { AdminImageAddComponent } from 'src/app/modules/admin/admin-image-add/admin-image-add.component';
+import { AdminImageComponent } from 'src/app/modules/admin/admin-image/admin-image.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AdminConfirmDialogComponent } from 'src/app/modules/admin/admin-confirm
     AdminProductAddComponent,
     AdminProductFormComponent,
     AdminMessagesComponent,
-    AdminConfirmDialogComponent
+    AdminConfirmDialogComponent,
+    AdminImageComponent,
+    AdminImageAddComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ admin
 - usuwanie produktu
 - edytowanie produktu
 - dodawanie pracownika 
+- dodawanie zdjec
 - przypisywanie pracownika do wycieczki
 - dodawanie miejscowości
 - dodawanie hotelu 
