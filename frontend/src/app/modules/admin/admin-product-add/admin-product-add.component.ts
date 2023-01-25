@@ -19,12 +19,20 @@ export class AdminProductAddComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       desc:['', [Validators.required, Validators.minLength(4)]],
-      category:['', [Validators.required]],
+      destination:[''],
       basePrice:['', [Validators.required, Validators.min(0)]],
       currency:['PLN', Validators.required],
-      slug: ['', [Validators.required, Validators.minLength(4)]]
+      slug: ['', [Validators.required, Validators.minLength(4)]],
+      fullDesc: ['', [Validators.minLength(4)]],
+      food:[false],
+      apartment:[false],
+      slopNearby:[false],
+      house:[false],
+      spa:[false],
+      wifi:[false]
     })
   }
+
   submit(){
     this.adminProductAddService.saveNewProduct(this.productForm.value)
     .subscribe(

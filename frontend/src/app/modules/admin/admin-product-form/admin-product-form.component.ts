@@ -12,7 +12,7 @@ export class AdminProductFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  countries: string[] = ['PL', 'AU', 'FR'];
   get name()
   {
     return this.parentForm.get("name");
@@ -21,9 +21,9 @@ export class AdminProductFormComponent implements OnInit {
   {
     return this.parentForm.get("desc");
   }
-  get category()
+  get destination()
   {
-    return this.parentForm.get("category");
+    return this.parentForm.get("destination");
 
   }
   get basePrice()
@@ -37,5 +37,34 @@ export class AdminProductFormComponent implements OnInit {
   get slug()
   {
     return this.parentForm.get("slug");
+  }
+  get fullDesc()
+  {
+    return this.parentForm.get("fullDesc");
+  }
+  get apartment()
+  {
+    return this.parentForm.get("apartment");
+  }
+  get food()
+  {
+    return this.parentForm.get("food");
+  
+  }
+  get slopNearby()
+  {
+    return this.parentForm.get("slopNearby");
+  }
+  get spa()
+  {
+    return this.parentForm.get("spa");
+  }
+  get house()
+  {
+    return this.parentForm.get("house");
+  }
+  get wifi()
+  {
+    return this.parentForm.get("wifi");
   }
 }

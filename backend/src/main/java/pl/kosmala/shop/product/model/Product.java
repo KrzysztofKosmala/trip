@@ -41,12 +41,6 @@ public class Product
             )
     @Enumerated(EnumType.STRING)
     private ProductCurrency currency;
-    @Column
-            (
-                    name = "category"
-                    //           nullable = false
-            )
-    private String category;
 
     @Column
             (
@@ -56,22 +50,28 @@ public class Product
             )
     private String slug;
 
-    public Product(String name, String desc, ProductCurrency currency, String category, String slug)
+    @Column
+            (
+                    name = "full_dessc"
+            )
+    private String fullDesc;
+
+    public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc)
     {
         this.name = name;
         this.desc = desc;
         this.currency = currency;
-        this.category = category;
         this.slug = slug;
+        this.fullDesc = fullDesc;
     }
-    public Product(Long id, String name, String desc, ProductCurrency currency, String category, String slug)
+    public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc)
     {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.currency = currency;
-        this.category = category;
         this.slug = slug;
+        this.fullDesc = fullDesc;
     }
 
 }

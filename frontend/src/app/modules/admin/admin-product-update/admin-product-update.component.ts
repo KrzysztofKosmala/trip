@@ -31,11 +31,11 @@ export class AdminProductUpdateComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       desc:['', [Validators.required, Validators.minLength(4)]],
-      category:['', [Validators.required]],
+      destination:['', [Validators.required]],
       basePrice:['', [Validators.required, Validators.min(0)]],
       currency:['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]],
-      imageId: [null, Validators.required],
+      fullDesc: ['', [Validators.minLength(4)]]
     })
   }
 
@@ -44,10 +44,11 @@ export class AdminProductUpdateComponent implements OnInit {
     this.adminProductUpdateService.savePost(id, {
         name: this.productForm.get('name')?.value,
         desc: this.productForm.get('desc')?.value,
-        category: this.productForm.get('category')?.value,
+        destination: this.productForm.get('destination')?.value,
         basePrice: this.productForm.get('basePrice')?.value,
         currency: this.productForm.get('currency')?.value,
         slug: this.productForm.get('slug')?.value,
+        fullDesc: this.productForm.get('fullDesc')?.value
       } as AdminProductUpdate).subscribe
       (
         {
@@ -64,10 +65,11 @@ export class AdminProductUpdateComponent implements OnInit {
     return this.productForm.setValue({
       name: product.name,
       desc: product.desc,
-      category: product.category,
+      destination: product.destination,
       basePrice: product.basePrice,
       currency: product.currency,
-      slug: product.slug
+      slug: product.slug,
+      fullDesc: product.fullDesc
     });
   }
 

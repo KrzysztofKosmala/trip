@@ -5,6 +5,7 @@ import com.github.slugify.Slugify;
 import pl.kosmala.shop.product.model.Product;
 import pl.kosmala.shop.product.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.Trip;
+import pl.kosmala.shop.product.trip.model.TripDestination;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,13 +29,13 @@ public class ProductGenerator
     {
         Trip trip = new Trip();
 
-        trip.setDestination(faker.country().capital());
+        trip.setDestination(TripDestination.AU);
         trip.setBasePrice(BigDecimal.valueOf(faker.number().numberBetween(700, 25000)));
         String name = faker.name().name();
         trip.setName(name);
-        trip.setCategory(faker.dog().breed());
         trip.setDesc(faker.lorem().sentence( 30));
         trip.setSlug(slugifySlug(name));
+        trip.setFullDesc(faker.lorem().sentence(20));
         trip.setCurrency(ProductCurrency.PLN);
         return trip;
     }

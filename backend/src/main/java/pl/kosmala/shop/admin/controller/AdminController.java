@@ -2,7 +2,6 @@ package pl.kosmala.shop.admin.controller;
 
 import com.github.slugify.Slugify;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,11 +18,6 @@ import pl.kosmala.shop.admin.service.ImageService;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("api/v1/admin")
@@ -55,9 +49,17 @@ public class AdminController
                 .basePrice(adminProductDto.getBasePrice())
                 .desc(adminProductDto.getDesc())
                 .destination(adminProductDto.getDestination())
-                .slug(adminProductDto.getSlug())
+                .slug(slugifySlug(adminProductDto.getSlug()))
+                .fullDesc(adminProductDto.getFullDesc())
+                .slopNearby(adminProductDto.getSlopNearby())
+                .food(adminProductDto.getFood())
+                .spa(adminProductDto.getSpa())
+                .house(adminProductDto.getHouse())
+                .wifi(adminProductDto.getWifi())
+                .apartment(adminProductDto.getApartment())
                 .build()
         );
+
     }
 
     @PutMapping("/trips/{id}")
@@ -69,9 +71,15 @@ public class AdminController
                 .currency(adminProductDto.getCurrency())
                 .basePrice(adminProductDto.getBasePrice())
                 .desc(adminProductDto.getDesc())
-                .category(adminProductDto.getCategory())
                 .destination(adminProductDto.getDestination())
                 .slug(slugifySlug(adminProductDto.getSlug()))
+                .fullDesc(adminProductDto.getFullDesc())
+                .slopNearby(adminProductDto.getSlopNearby())
+                .food(adminProductDto.getFood())
+                .spa(adminProductDto.getSpa())
+                .house(adminProductDto.getHouse())
+                .wifi(adminProductDto.getWifi())
+                .apartment(adminProductDto.getApartment())
                 .buildWithId();
 
         return adminTripService.updateTrip(build);

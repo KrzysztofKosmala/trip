@@ -1,9 +1,6 @@
 package pl.kosmala.shop.product.trip.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jdk.jfr.Enabled;
+import jakarta.persistence.*;
 import lombok.*;
 import pl.kosmala.shop.product.model.Product;
 import pl.kosmala.shop.product.model.ProductCurrency;
@@ -22,23 +19,67 @@ public class Trip extends Product
 {
     @Column
             (
-                    name = "destination",
-            //        nullable = false,
-                    columnDefinition = "TEXT"
-            )
-    private String destination;
-    @Column
-            (
                     name = "base_price"
          //           nullable = false
             )
     private BigDecimal basePrice;
 
+    @Column
+            (
+                    name = "destination",
+                    nullable = false,
+                    columnDefinition = "TEXT"
+
+            )
+    @Enumerated(EnumType.STRING)
+    private TripDestination destination;
+
+    @Column
+            (
+                    name = "slope_nearby"
+                    //           nullable = false
+            )
+    private Boolean slopNearby;
+
+    @Column
+            (
+                    name = "apartment"
+                    //           nullable = false
+            )
+    private Boolean apartment;
+
+    @Column
+            (
+                    name = "house"
+                    //           nullable = false
+            )
+    private Boolean house;
+
+    @Column
+            (
+                    name = "wifi"
+                    //           nullable = false
+            )
+    private Boolean wifi;
+
+    @Column
+            (
+                    name = "food"
+                    //           nullable = false
+            )
+    private Boolean food;
+
+    @Column
+            (
+                    name = "spa"
+                    //           nullable = false
+            )
+    private Boolean spa;
 
 
     @Builder
-    public Trip(String name, String desc, ProductCurrency currency, String category, String slug, String destination, BigDecimal basePrice) {
-        super(name, desc, currency, category, slug);
+    public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice) {
+        super(name, desc, currency, slug, fullDesc);
         this.destination = destination;
         this.basePrice = basePrice;
     }

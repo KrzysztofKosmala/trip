@@ -33,8 +33,8 @@ public class TripService
                         .desc(tripBySlug.getDesc())
                         .basePrice(tripBySlug.getBasePrice())
                         .currency(tripBySlug.getCurrency())
-                        .category(tripBySlug.getCategory())
                         .slug(tripBySlug.getSlug())
+                        .fullDesc(tripBySlug.getFullDesc())
                         .build();
     }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import pl.kosmala.shop.product.model.ProductCurrency;
+import pl.kosmala.shop.product.trip.model.TripDestination;
 
 import java.math.BigDecimal;
 
@@ -20,9 +21,16 @@ public class AdminTripDto
     @PositiveOrZero
     private BigDecimal basePrice;
     private ProductCurrency currency;
-    private String category;
-    private String destination;
     @Length(min = 4)
     @NotBlank
     private String slug;
+    private String fullDesc;
+    private TripDestination destination;
+    private Boolean slopNearby;
+    private Boolean apartment;
+    private Boolean house;
+    private Boolean wifi;
+    private Boolean food;
+    private Boolean spa;
+
 }

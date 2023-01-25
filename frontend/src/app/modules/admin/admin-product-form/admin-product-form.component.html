@@ -40,14 +40,25 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Kategoria</mat-label>
-        <input matInput placeholder="podaj kategoria" formControlName="category">
-        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="errorMessages">
-            <div *ngIf="category?.errors?.['required']">
-                    Kategoria jest wymagana
-            </div>
+        <mat-label>Dokładny opis</mat-label>
+        <textarea matInput rows="20" placeholder="Podaj dokładny opis produktu" formControlName="fullDesc"></textarea>
+        <div *ngIf="desc?.invalid && (desc?.dirty || desc?.touched)" class="errorMessages">
+            <div *ngIf="desc?.errors?.['minlength']">
+                Opis musi mieć więcej niż 4 znaki
+        </div>
         </div>
     </mat-form-field>
+
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Kraj</mat-label>
+        <mat-select formControlName="destination">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let destination of countries" [value]="destination">{{destination}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
 
     <mat-form-field appearance="fill">
         <mat-label>Cena</mat-label>
@@ -72,6 +83,12 @@
 
         </div>
     </mat-form-field>
+    <mat-checkbox formControlName="apartment">Apartament</mat-checkbox>
+    <mat-checkbox formControlName="food">Opcja wyżywienia</mat-checkbox>
+    <mat-checkbox formControlName="slopNearby">Blisko stoku</mat-checkbox>
+    <mat-checkbox formControlName="spa">SPA</mat-checkbox>
+    <mat-checkbox formControlName="house">Domek</mat-checkbox>
+    <mat-checkbox formControlName="wifi">wifi</mat-checkbox>
 
     <div fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10">
         <button mat-flat-button color="primary" [disabled]="!parentForm.valid">Zapisz</button>

@@ -1,7 +1,7 @@
 export interface Product 
 {
     name: string,
-    category: string,
+    destination: string,
     desc: string,
     basePrice: number,
     currency: string,
