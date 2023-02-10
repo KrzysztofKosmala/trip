@@ -37,6 +37,12 @@ public class ProductGenerator
         trip.setSlug(slugifySlug(name));
         trip.setFullDesc(faker.lorem().sentence(20));
         trip.setCurrency(ProductCurrency.PLN);
+        trip.setHouse(faker.bool().bool());
+        trip.setSpa(true);
+        trip.setFood(true);
+        trip.setSlopNearby(true);
+        trip.setWifi(true);
+        trip.setApartment(true);
         return trip;
     }
 

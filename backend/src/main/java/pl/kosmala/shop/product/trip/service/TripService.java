@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.support.QuerydslJpaRepository;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.product.trip.dto.TripDto;
 import pl.kosmala.shop.product.trip.model.Trip;
+import pl.kosmala.shop.product.trip.model.TripDestination;
 import pl.kosmala.shop.product.trip.repository.TripRepository;
 
 import java.util.List;
@@ -36,5 +37,9 @@ public class TripService
                         .slug(tripBySlug.getSlug())
                         .fullDesc(tripBySlug.getFullDesc())
                         .build();
+    }
+
+    public Page<Trip> getTripsByFilter(Pageable pageable, TripDestination destination, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa) {
+        return tripRepository.findByFilter(pageable, destination, slopNearby, apartment, house, wifi, food, spa);
     }
 }

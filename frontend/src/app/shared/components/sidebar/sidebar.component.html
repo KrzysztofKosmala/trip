@@ -1,5 +1,17 @@
-<mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let category of categories">
-      {{category}}
-    </mat-list-option>
-  </mat-selection-list>
+<form [formGroup]="form" fxLayout="column">
+  <mat-form-field>
+    <mat-label>Destination</mat-label>
+    <mat-select formControlName="destination">
+      <mat-option *ngFor="let destination of destinations" [value]="destination.value">
+        {{destination.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="slopNearby">Blisko stoku</mat-checkbox>
+  <mat-checkbox formControlName="apartment">Apartament</mat-checkbox>
+  <mat-checkbox formControlName="house">Domek</mat-checkbox>
+  <mat-checkbox formControlName="wifi">Wi-Fi</mat-checkbox>
+  <mat-checkbox formControlName="food">Wyżywienie</mat-checkbox>
+  <mat-checkbox formControlName="spa">Spa</mat-checkbox>
+</form>

@@ -36,7 +36,7 @@ public class Trip extends Product
 
     @Column
             (
-                    name = "slope_nearby"
+                    name = "slop_nearby"
                     //           nullable = false
             )
     private Boolean slopNearby;
