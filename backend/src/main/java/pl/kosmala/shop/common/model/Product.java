@@ -1,9 +1,9 @@
-package pl.kosmala.shop.product.model;
+package pl.kosmala.shop.common.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
 
 
 @MappedSuperclass
@@ -55,6 +55,12 @@ public class Product
                     name = "full_dessc"
             )
     private String fullDesc;
+
+
+    @OneToMany
+    @JoinColumn(name = "productId")
+    private List<Review> reviews;
+
 
     public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc)
     {

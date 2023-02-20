@@ -1,3 +1,5 @@
+import { Review } from "./review";
+
 export interface ProductDetails
 {
     name: string,
@@ -7,4 +9,11 @@ export interface ProductDetails
     currency: string,
     slug: string,
     destination: string,
+    slopNearby: boolean;
+    apartment: boolean;
+    house: boolean;
+    wifi: boolean;
+    food: boolean;
+    spa: boolean;
+    reviews: Array<Review>
 }

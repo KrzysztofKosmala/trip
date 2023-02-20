@@ -2,10 +2,11 @@ package pl.kosmala.shop.product.fakeData;
 
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
-import pl.kosmala.shop.product.model.Product;
-import pl.kosmala.shop.product.model.ProductCurrency;
+import pl.kosmala.shop.common.model.Product;
+import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.Trip;
 import pl.kosmala.shop.product.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.Review;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,6 +24,15 @@ public class ProductGenerator
         product.setDesc(faker.lorem().characters(10, 300));
         product.setCurrency(ProductCurrency.PLN);
         return product;
+    }
+
+    public Review generateReview()
+    {
+        Review review = new Review();
+        review.setProductId(Long.valueOf(faker.number().numberBetween(1,10)));
+        review.setContent(faker.lorem().sentence(15));
+        review.setAuthorName(faker.name().fullName());
+        return review;
     }
 
     public Trip generateTrip()
@@ -55,7 +65,7 @@ public class ProductGenerator
     public List<Trip> trips(int howMany)
     {
         List<Trip> trips = new ArrayList<>();
-        for (int i =0; i<howMany; i++)
+        for (int i =0; i<10; i++)
         {
             trips.add(this.generateTrip());
         }
@@ -64,6 +74,16 @@ public class ProductGenerator
     }
 
 
+    public List<Review> review(int howMany)
+    {
+        List<Review> reviews = new ArrayList<>();
+        for (int i =0; i<50; i++)
+        {
+            reviews.add(this.generateReview());
+        }
+
+        return reviews;
+    }
 
 
     public List<Product> products(int howMany)

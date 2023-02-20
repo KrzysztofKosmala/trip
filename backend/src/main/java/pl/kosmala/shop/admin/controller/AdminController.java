@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
 import pl.kosmala.shop.admin.dto.UploadResponse;
 import pl.kosmala.shop.admin.model.AdminTrip;
-import pl.kosmala.shop.admin.model.Image;
+import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.admin.service.AdminTripService;
 import pl.kosmala.shop.admin.service.ImageService;
 

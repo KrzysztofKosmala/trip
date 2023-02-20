@@ -2,8 +2,8 @@ package pl.kosmala.shop.admin.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.kosmala.shop.product.model.Product;
-import pl.kosmala.shop.product.model.ProductCurrency;
+import pl.kosmala.shop.common.model.Product;
+import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.TripDestination;
 
 import java.math.BigDecimal;

@@ -6,18 +6,21 @@ import { ProductComponent } from 'src/app/modules/product/product.component';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProductDetalisComponent } from 'src/app/modules/product-detalis/product-detalis.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetalisComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     FlexLayoutModule,
-    SharedModule
-  ]
-})
+    SharedModule,
+    ReactiveFormsModule
+]})
 export class DefaultModule { }

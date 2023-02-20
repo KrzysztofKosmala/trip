@@ -1,18 +1,17 @@
 package pl.kosmala.shop.product.trip.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import pl.kosmala.shop.product.model.ProductCurrency;
+import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.TripDestination;
+import pl.kosmala.shop.review.dto.ReviewDto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,6 +35,7 @@ public class TripDto
     private Boolean wifi;
     private Boolean food;
     private Boolean spa;
+    private List<ReviewDto> reviews;
 
 
 }

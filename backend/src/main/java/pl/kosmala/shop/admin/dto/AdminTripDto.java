@@ -5,7 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import pl.kosmala.shop.product.model.ProductCurrency;
+import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.product.trip.model.TripDestination;
 
 import java.math.BigDecimal;

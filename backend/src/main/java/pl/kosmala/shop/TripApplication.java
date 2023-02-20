@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import pl.kosmala.shop.product.fakeData.ProductGenerator;
 import pl.kosmala.shop.product.trip.model.Trip;
 import pl.kosmala.shop.product.trip.repository.TripRepository;
+import pl.kosmala.shop.common.model.Review;
+import pl.kosmala.shop.review.repository.ReviewRepository;
 
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class TripApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(TripRepository tripRepository)
+	CommandLineRunner commandLineRunner(TripRepository tripRepository, ReviewRepository reviewRepository)
 	{
 		return args ->
 		{
@@ -27,6 +29,10 @@ public class TripApplication {
 			List<Trip> trips = productGenerator.trips(100);
 
 			tripRepository.saveAll(trips);
+
+			List<Review> review = productGenerator.review(10);
+			reviewRepository.saveAll(review);
+
 
 		};
 	}

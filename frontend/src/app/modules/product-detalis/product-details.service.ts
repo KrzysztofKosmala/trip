@@ -11,7 +11,7 @@ export class ProductDetailsService {
   constructor(private http: HttpClient) { }
 
   getProductDetails(slug: string): Observable<ProductDetails>{
-      return this.http.get<ProductDetails>("/api/v1/products/" + slug);
+      return this.http.get<ProductDetails>("/api/v1/trips/" + slug);
 
   }
 }

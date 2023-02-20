@@ -1,4 +1,4 @@
-package pl.kosmala.shop.product.model;
+package pl.kosmala.shop.common.model;
 
 public enum ProductCurrency
 {

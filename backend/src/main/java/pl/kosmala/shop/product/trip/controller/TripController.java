@@ -3,11 +3,13 @@ package pl.kosmala.shop.product.trip.controller;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.kosmala.shop.product.trip.controller.dto.TripListDto;
 import pl.kosmala.shop.product.trip.dto.TripDto;
 import pl.kosmala.shop.product.trip.model.Trip;
 import pl.kosmala.shop.product.trip.model.TripDestination;
@@ -32,7 +34,7 @@ public class TripController
     }
 
     @GetMapping("/byFilter")
-    public Page<Trip> getTripsFilter
+    public Page<TripListDto> getTripsFilter
             (
                     @PageableDefault(size = 30) Pageable pageable,
                     @RequestParam(required = false) TripDestination destination,
@@ -45,7 +47,25 @@ public class TripController
             )
     {
 
-        return tripService.getTripsByFilter(pageable, destination, slopNearby, apartment, house, wifi, food, spa);
+        Page<Trip> tripsByFilter = tripService.getTripsByFilter(pageable, destination, slopNearby, apartment, house, wifi, food, spa);
+        List<TripListDto> tripListDtos = tripsByFilter.getContent().stream().map(product ->
+                TripListDto.builder()
+                        .id(product.getId())
+                        .desc(product.getDesc())
+                        .basePrice(product.getBasePrice())
+                        .name(product.getName())
+                        .currency(product.getCurrency())
+                        .destination(product.getDestination())
+                        .slug(product.getSlug())
+                        .apartment(product.getApartment())
+                        .house(product.getHouse())
+                        .wifi(product.getWifi())
+                        .slopNearby(product.getSlopNearby())
+                        .food(product.getFood())
+                        .spa(product.getSpa())
+                        .build()
+        ).toList();
+        return new PageImpl<>(tripListDtos, pageable, tripsByFilter.getTotalElements());
     }
 
     @GetMapping("/{slug}")

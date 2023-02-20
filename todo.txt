@@ -11,6 +11,7 @@ admin
 - listowanie pracowników
 - listowanie pracowników
 - logowanie
+- moderowanie komantarzy
 
 
 customer
@@ -27,6 +28,7 @@ customer
 - moje wyjazdy
 - szczegóły rezerwacji 
 - moje dane 
+- dodawanie komentarzy po kupnie wycieczki
 
 
 guide
