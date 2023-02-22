@@ -6,12 +6,12 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { AdminProductComponent } from 'src/app/modules/admin/admin-product/admin-product.component';
-import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product-update/admin-product-update.component';
+import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product/admin-product-update/admin-product-update.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-add/admin-product-add.component';
-import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product-form/admin-product-form.component';
-import { AdminMessagesComponent } from 'src/app/modules/admin/admin-messages/admin-messages.component';
-import { AdminConfirmDialogComponent } from 'src/app/modules/admin/admin-confirm-dialog/admin-confirm-dialog.component';
+import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product/admin-product-add/admin-product-add.component';
+import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product/admin-product-form/admin-product-form.component';
+import { AdminMessagesComponent } from 'src/app/modules/admin/common/component/admin-messages/admin-messages.component';
+import { AdminConfirmDialogComponent } from 'src/app/modules/admin/common/component/admin-confirm-dialog/admin-confirm-dialog.component';
 import { AdminImageAddComponent } from 'src/app/modules/admin/admin-image-add/admin-image-add.component';
 import { AdminImageComponent } from 'src/app/modules/admin/admin-image/admin-image.component';
 

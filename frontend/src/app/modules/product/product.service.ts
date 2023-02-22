@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from 'src/app/shared/model/page';
 import { Filter } from './filter';
-import { Product } from './model/product';
-import { Trip } from './model/trip';
+import { Product } from '../common/model/product';
+import { Trip } from '../common/model/trip';
 import { HttpParams } from '@angular/common/http';
 
 @Injectable({

@@ -29,6 +29,7 @@ customer
 - szczegóły rezerwacji 
 - moje dane 
 - dodawanie komentarzy po kupnie wycieczki
+- usnięcie sidebara z product details
 
 
 guide

@@ -1,4 +1,4 @@
-package pl.kosmala.shop.product.trip.controller.dto;
+package pl.kosmala.shop.trip.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -7,16 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import pl.kosmala.shop.common.model.ProductCurrency;
-import pl.kosmala.shop.product.trip.model.TripDestination;
+import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.review.dto.ReviewDto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @Builder
-public class TripListDto
+public class TripDto
 {
-    private Long id;
+    @Length(min = 4)
     private String name;
     private String desc;
     @PositiveOrZero
@@ -25,6 +27,7 @@ public class TripListDto
     @Length(min = 4)
     @NotBlank
     private String slug;
+    private String fullDesc;
     private TripDestination destination;
     private Boolean slopNearby;
     private Boolean apartment;
@@ -32,5 +35,7 @@ public class TripListDto
     private Boolean wifi;
     private Boolean food;
     private Boolean spa;
+    private List<ReviewDto> reviews;
+
 
 }

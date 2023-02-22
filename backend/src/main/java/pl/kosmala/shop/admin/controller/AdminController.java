@@ -19,6 +19,8 @@ import pl.kosmala.shop.admin.service.ImageService;
 import javax.validation.Valid;
 import java.io.IOException;
 
+import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
+
 @RestController
 @RequestMapping("api/v1/admin")
 @RequiredArgsConstructor
@@ -112,9 +114,5 @@ public class AdminController
 
 
 
-    private String slugifySlug(String slug)
-    {
-        final Slugify slg = Slugify.builder().customReplacement("_", "-").build();
-        return slg.slugify(slug);
-    }
+
 }

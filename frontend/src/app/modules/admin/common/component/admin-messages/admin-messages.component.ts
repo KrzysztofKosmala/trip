@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AdminMessagesService } from './admin-messages.service';
+import { AdminMessagesService } from '../../service/admin-messages.service';
 
 @Component({
   selector: 'app-admin-messages',

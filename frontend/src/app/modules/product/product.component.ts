@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 import { Page } from 'src/app/shared/model/page';
 import { Filter } from './filter';
-import { Trip } from './model/trip';
+import { Trip } from '../common/model/trip';
 import { ProductService } from './product.service';
 
 @Component({

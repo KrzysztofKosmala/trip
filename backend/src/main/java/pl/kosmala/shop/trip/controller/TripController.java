@@ -1,4 +1,4 @@
-package pl.kosmala.shop.product.trip.controller;
+package pl.kosmala.shop.trip.controller;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -6,14 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.kosmala.shop.product.trip.controller.dto.TripListDto;
-import pl.kosmala.shop.product.trip.dto.TripDto;
-import pl.kosmala.shop.product.trip.model.Trip;
-import pl.kosmala.shop.product.trip.model.TripDestination;
-import pl.kosmala.shop.product.trip.service.TripService;
+import pl.kosmala.shop.common.dto.TripListDto;
+import pl.kosmala.shop.trip.dto.TripDto;
+import pl.kosmala.shop.trip.model.Trip;
+import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.trip.service.TripService;
 
 import javax.validation.constraints.Pattern;
 import java.util.List;

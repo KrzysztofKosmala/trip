@@ -1,15 +1,13 @@
-package pl.kosmala.shop.product.trip.repository;
+package pl.kosmala.shop.trip.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import pl.kosmala.shop.product.trip.model.Trip;
-import pl.kosmala.shop.product.trip.model.TripDestination;
+import pl.kosmala.shop.trip.model.Trip;
+import pl.kosmala.shop.trip.model.TripDestination;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface TripRepository extends JpaRepository<Trip, Long>

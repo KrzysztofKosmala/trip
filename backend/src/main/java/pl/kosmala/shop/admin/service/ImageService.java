@@ -2,7 +2,7 @@ package pl.kosmala.shop.admin.service;
 
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.common.model.Image;
-import pl.kosmala.shop.admin.repository.ImageRepository;
+import pl.kosmala.shop.common.repository.ImageRepository;
 
 
 @Service
