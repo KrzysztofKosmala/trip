@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.trip.dto.TripDto;
 import pl.kosmala.shop.trip.model.Trip;
-import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.trip.repository.TripRepository;
 import pl.kosmala.shop.review.dto.ReviewDto;
 import pl.kosmala.shop.common.model.Review;

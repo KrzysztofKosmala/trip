@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.kosmala.shop.trip.model.Trip;
-import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.TripDestination;
 
 import java.util.Optional;
 

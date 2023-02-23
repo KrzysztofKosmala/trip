@@ -25,6 +25,7 @@ export class AdminProductUpdateComponent implements OnInit {
     private adminImageService: AdminImageService
     ) { }
 
+    
   ngOnInit(): void {
     this.getProduct();
 
@@ -35,9 +36,19 @@ export class AdminProductUpdateComponent implements OnInit {
       basePrice:['', [Validators.required, Validators.min(0)]],
       currency:['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]],
-      fullDesc: ['', [Validators.minLength(4)]]
+      fullDesc: ['', [Validators.minLength(4)]],
+      food:[],
+      apartment:[],
+      slopNearby:[],
+      house:[],
+      spa:[],
+      wifi:[]
     })
   }
+
+  
+
+
 
   submit(){
     let id = Number(this.router.snapshot.params['id']);
@@ -48,7 +59,13 @@ export class AdminProductUpdateComponent implements OnInit {
         basePrice: this.productForm.get('basePrice')?.value,
         currency: this.productForm.get('currency')?.value,
         slug: this.productForm.get('slug')?.value,
-        fullDesc: this.productForm.get('fullDesc')?.value
+        fullDesc: this.productForm.get('fullDesc')?.value,
+        apartment: this.productForm.get('apartment')?.value,
+        food: this.productForm.get('apartfoodent')?.value,
+        slopNearby: this.productForm.get('slopNearby')?.value,
+        spa: this.productForm.get('spa')?.value,
+        house: this.productForm.get('house')?.value,
+        wifi: this.productForm.get('wifi')?.value,
       } as AdminProductUpdate).subscribe
       (
         {
@@ -69,7 +86,13 @@ export class AdminProductUpdateComponent implements OnInit {
       basePrice: product.basePrice,
       currency: product.currency,
       slug: product.slug,
-      fullDesc: product.fullDesc
+      fullDesc: product.fullDesc,
+      apartment: product.apartment,
+      food: product.food,
+      slopNearby: product.slopNearby,
+      spa: product.spa,
+      house: product.house,
+      wifi: product.wifi
     });
   }
 

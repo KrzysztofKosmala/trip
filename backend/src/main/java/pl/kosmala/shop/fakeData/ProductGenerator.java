@@ -5,7 +5,7 @@ import com.github.slugify.Slugify;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.trip.model.Trip;
-import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.model.Review;
 
 import java.math.BigDecimal;

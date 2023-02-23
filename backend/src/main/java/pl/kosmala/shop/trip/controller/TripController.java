@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kosmala.shop.common.dto.TripListDto;
 import pl.kosmala.shop.trip.dto.TripDto;
 import pl.kosmala.shop.trip.model.Trip;
-import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.trip.service.TripService;
 
 import javax.validation.constraints.Pattern;

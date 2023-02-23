@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import pl.kosmala.shop.common.model.ProductCurrency;
-import pl.kosmala.shop.trip.model.TripDestination;
+import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
 

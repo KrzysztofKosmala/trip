@@ -6,7 +6,8 @@ import { AdminConfirmDialogService } from '../common/service/admin-confirm-dialo
 import { AdminProductService } from '../admin-product/admin-product.service';
 import { AdminProduct } from '../admin-product/adminProduct';
 import { AdminImageService } from './admin-image-service';
-import { UploadResponse } from './model/uploadResponse';
+import { Image } from './model/Image';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-image',
@@ -17,12 +18,12 @@ export class AdminImageComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatTable) table!: MatTable<any>;
-  displayedColumns: string[] = ["id", "image", "path"];
+  displayedColumns: string[] = ["data", "name", "desc", "destination", "actions"];
   totalElements: number = 0;
-  dataSource: UploadResponse[] = [];
+  dataSource: Image[] = [];
 
 
-  constructor(private adminImageService: AdminImageService, private dialogService: AdminConfirmDialogService) { }
+  constructor(private sanitizer: DomSanitizer, private adminImageService: AdminImageService, private dialogService: AdminConfirmDialogService) { }
 
   ngAfterViewInit(): void {
     this.paginator.page.pipe(
@@ -36,5 +37,25 @@ export class AdminImageComponent implements AfterViewInit {
     });
   }
 
+  
+  confirmDelete(element: Image){
+    this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć ten produkt?")
+    .afterClosed()
+    .subscribe(result => 
+      {        
+        if(result){
+          this.adminImageService.delete(element.id)
+          .subscribe(() => {
+              this.dataSource.forEach((value, index) => {
+                  if(element == value){
+                    this.dataSource.splice(index, 1);
+                    this.table.renderRows();
+                  }
+              })
+          });
+        }
+      });
+  }
+  
 
 }

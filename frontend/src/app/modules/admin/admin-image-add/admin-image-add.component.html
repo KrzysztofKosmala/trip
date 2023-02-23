@@ -1,4 +1,15 @@
-<form [formGroup]="imageForm" (submit)="uploadFile()" >
+<form fxLayout="column" fxLayoutAlign="center" fxFlex="50" [formGroup]="imageForm" (submit)="uploadFile()" >
     <input type="file" [accept]="requiredFileTypes" (change)="onFileChange($event)">
+    <mat-form-field>
+        <mat-label>Kraj</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let destination of destinations" [value]="destination.value">
+            {{ destination.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="description" placeholder="Krótki opis">
+      </mat-form-field>
 <button mat-flat-button color="basic">Upload</button>
 </form>

@@ -15,9 +15,11 @@ import pl.kosmala.shop.admin.model.AdminTrip;
 import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.admin.service.AdminTripService;
 import pl.kosmala.shop.admin.service.ImageService;
+import pl.kosmala.shop.common.model.TripDestination;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Base64;
 
 import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 
@@ -93,15 +95,28 @@ public class AdminController
         adminTripService.deleteTrip(id);
     }
 
-    @PostMapping("/images/upload-image")
-    public ResponseEntity<UploadResponse> uploadImage(@RequestParam("image") MultipartFile image) {
+    @DeleteMapping("/images/{id}")
+    public void deleteImage(@PathVariable Long id)
+    {
+        imageService.deleteTrip(id);
+    }
 
+    @PostMapping("/images/upload-image")
+    public ResponseEntity<UploadResponse> uploadImage
+            (
+                    @RequestParam("image") MultipartFile image,
+                    @RequestParam("country") String country,
+                    @RequestParam("description") String description
+            )
+    {
         Image model = new Image();
         String name = slugifySlug(image.getOriginalFilename());
         model.setName(name);
+        model.setDesc(description);
+        model.setDestination(TripDestination.valueOf(country));
         model.setType(image.getContentType());
         try {
-            model.setData(image.getBytes());
+            model.setData(Base64.getEncoder().encodeToString(image.getBytes()));
             //imageRepository.save(image);
             imageService.saveFile(model);
             return ResponseEntity.ok(new UploadResponse(name, "Image uploaded successfully"));
@@ -113,6 +128,10 @@ public class AdminController
     }
 
 
-
+    @GetMapping("/images")
+    public Page<Image> getImages(@PageableDefault(size = 30) Pageable pageable)
+    {
+        return imageService.getAllImages(pageable);
+    }
 
 }

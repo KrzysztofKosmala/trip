@@ -1,13 +1,14 @@
 package pl.kosmala.shop.common.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Table(name = "images")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Image
 {
     @Id
@@ -20,8 +21,14 @@ public class Image
     @Column(name = "type")
     private String type;
 
+    @Column(name = "destination")
+    private TripDestination destination;
+
+    @Column(name = "description")
+    private String desc;
+
     @Lob
     @Column(name = "data")
-    private byte[] data;
+    private String data;
 
 }

@@ -15,11 +15,20 @@ export class AdminImageAddComponent implements OnInit {
   requiredFileTypes ="image/jpeg, image/png";
   selectedFile!: File;
   response!: UploadResponse;
+
+  destinations = [
+    { value: 'PL', viewValue: 'Polska' },
+    { value: 'AU', viewValue: 'Austria' },
+    { value: 'FR', viewValue: 'Francja' }
+  ];
+
   constructor(private formBuilder: FormBuilder, private adminImageService: AdminImageService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.imageForm  = this.formBuilder.group({
-      file: ['']
+      file: [''],
+      country: ['', Validators.required],
+      description: ['', Validators.maxLength(255)]
     })
   }
   onFileChange(event: any){
@@ -27,8 +36,12 @@ export class AdminImageAddComponent implements OnInit {
       this.selectedFile = event.target.files[0];
   }
   uploadFile(){
+    const formData = new FormData();
+    formData.append('image', this.selectedFile);
+    formData.append('country', this.imageForm.get('country')!.value);
+    formData.append('description', this.imageForm.get('description')!.value);
 
-    this.adminImageService.uploadFile(this.selectedFile).subscribe(response => {
+    this.adminImageService.uploadFile(formData).subscribe(response => {
       this.response = response;
       this.router.navigate(['admin/images']).then(()=> this.snackBar.open("Obraz został dodany " + response.filename,"", {duration: 3000}));
     }, error => {
