@@ -30,7 +30,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   exports: 
   [
@@ -46,7 +47,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ]
   
 })

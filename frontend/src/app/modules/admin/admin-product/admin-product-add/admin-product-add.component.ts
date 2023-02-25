@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminMessagesService } from '../../common/service/admin-messages.service';
+import { AdminProductPopupImagesListComponent } from '../admin-product-popup-images-list/admin-product-popup-images-list.component';
 import { AdminProductAddService } from './admin-product-add.service';
 
 @Component({
@@ -13,8 +15,30 @@ import { AdminProductAddService } from './admin-product-add.service';
 export class AdminProductAddComponent implements OnInit {
   
   productForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private adminProductAddService: AdminProductAddService, private router: Router, private snackBar: MatSnackBar, private adminMessageService: AdminMessagesService) { }
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private adminProductAddService: AdminProductAddService, private router: Router, private snackBar: MatSnackBar, private adminMessageService: AdminMessagesService) { }
+  showComponent = false;
+  dialogRef: MatDialogRef<AdminProductPopupImagesListComponent> | null = null;
 
+  openPopup() {
+    this.dialogRef = this.dialog.open(AdminProductPopupImagesListComponent, {
+
+maxHeight: '70vh',
+maxWidth: '70vw',
+height: '80vh',
+width:'80vw',
+      autoFocus: false
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('Popup został zamknięty.');
+    });
+  }
+  showImagesPopup() {
+    this.showComponent = true;
+  }
+  closeImagesPopup() {
+    this.showComponent = false;
+  }
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],

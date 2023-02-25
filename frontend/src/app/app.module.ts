@@ -8,6 +8,7 @@ import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminProductPopupImagesListComponent } from './modules/admin/admin-product/admin-product-popup-images-list/admin-product-popup-images-list.component';
 
 @NgModule({
   declarations: [

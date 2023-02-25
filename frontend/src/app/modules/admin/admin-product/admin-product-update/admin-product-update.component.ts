@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AdminImageService } from '../../admin-image/admin-image-service';
 import { AdminMessagesService } from '../../common/service/admin-messages.service';
-import { AdminProductUpdateService } from '../../admin-product-update.service';
+import { AdminProductUpdateService } from './admin-product-update.service';
 import { AdminProductUpdate } from '../model/adminProductUpdate';
 
 @Component({
