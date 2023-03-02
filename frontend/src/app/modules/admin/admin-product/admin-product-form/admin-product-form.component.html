@@ -55,7 +55,6 @@
       <mat-form-field appearance="fill">
         <mat-label>Kraj</mat-label>
         <mat-select formControlName="destination">
-          <mat-option>None</mat-option>
           <mat-option *ngFor="let destination of countries" [value]="destination">{{destination}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -91,7 +90,16 @@
     <mat-checkbox formControlName="house">Domek</mat-checkbox>
     <mat-checkbox formControlName="wifi">wifi</mat-checkbox>
 
+    <mat-table [dataSource]="imagesFromPopup">
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
+            <mat-cell *matCellDef="let image">{{ image.name }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 
+    <button fxFlex="10" mat-raised-button (click)="openPopup()" [disabled]="parentForm.get('destination')?.value === ''" >Dodaj zdjęcia</button>
 
     <div fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10">
         <button mat-flat-button color="primary" [disabled]="!parentForm.valid">Zapisz</button>

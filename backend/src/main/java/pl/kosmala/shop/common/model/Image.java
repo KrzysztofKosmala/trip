@@ -2,6 +2,7 @@ package pl.kosmala.shop.common.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Getter
@@ -24,7 +25,7 @@ public class Image
     @Column(name = "destination")
     private TripDestination destination;
 
-    @Column(name = "description")
+    @Column(name = "desc")
     private String desc;
 
     @Lob

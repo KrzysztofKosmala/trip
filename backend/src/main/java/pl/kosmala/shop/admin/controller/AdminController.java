@@ -133,5 +133,15 @@ public class AdminController
     {
         return imageService.getAllImages(pageable);
     }
-
+    @GetMapping("/imagesByCountry")
+    public Page<Image> getImagesByCountry
+            (
+                    @PageableDefault(size = 30) Pageable pageable,
+                    @RequestParam(required = false) TripDestination country
+            )
+    {
+        int i=0;
+        Page<Image> imagesByDestination = imageService.getImagesByDestination(pageable, country);
+        return imagesByDestination;
+    }
 }
