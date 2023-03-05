@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { Image } from '../../admin-image/model/Image';
 import { AdminProductPopupImagesListComponent } from '../admin-product-popup-images-list/admin-product-popup-images-list.component';
-
 @Component({
   selector: 'app-admin-product-form',
   templateUrl: './admin-product-form.component.html',
@@ -15,35 +15,11 @@ export class AdminProductFormComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef){}
   
   countries: string[] = ['PL', 'AU', 'FR'];
-  imagesFromPopup: Image[] = []; 
-  displayedColumns: string[] = ['name'];
-  openPopup(): void {
-    const dialogRef: MatDialogRef<AdminProductPopupImagesListComponent> = this.dialog.open(
-      AdminProductPopupImagesListComponent,
-      {
-        maxHeight: '70vh',
-        maxWidth: '70vw',
-        height: '80vh',
-        width: '80vw',
-        autoFocus: false
-      }
-    );
-    dialogRef.componentInstance.destination = this.parentForm.get('destination')?.value; 
-    
-    dialogRef.componentInstance.selectedImages.subscribe((selectedImages: Image[]) => {
-      console.log(selectedImages);
-      this.imagesFromPopup = selectedImages;
-      // tutaj możesz przypisać wybrane obrazy do zmiennej w AdminProductFormComponent
-    });
-  }
 
 
-  handleImageSelection(images: Image[]): void {
-    this.imagesFromPopup = images;
-  }
   get name()
   {
     return this.parentForm.get("name");
@@ -56,9 +32,6 @@ export class AdminProductFormComponent implements OnInit {
   {
     return this.parentForm.get("destination");
 
-  }
-  get images(): FormArray {
-    return this.parentForm.get('images') as FormArray;
   }
 
   get basePrice()

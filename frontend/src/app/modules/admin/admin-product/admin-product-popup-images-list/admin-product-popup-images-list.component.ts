@@ -22,9 +22,10 @@ export class AdminProductPopupImagesListComponent implements  AfterViewInit {
 
   constructor(
     private imageService: AdminImageService,
-    private dialogRef: MatDialogRef<AdminProductPopupImagesListComponent>
+    private dialogRef: MatDialogRef<AdminProductPopupImagesListComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    
+    this.selected = this.data.imagesFromPopup.slice();
   }
 
   displayedColumns: string[] = ['select', 'data', 'name', 'desc', 'destination'];
@@ -45,12 +46,7 @@ export class AdminProductPopupImagesListComponent implements  AfterViewInit {
         this.totalElements = data.totalElements;
         this.dataSource = data.content;
         // ustawiamy zaznaczenie dla obrazów, które znajdują się w selectedImages
-        this.dataSource.forEach((selectedImage) => {
-          const image = this.selected.find((image) => image.id === selectedImage.id);
-          if (image) {
-            this.selected.push(image);
-          }
-        });
+     
       });
   }
 
@@ -63,11 +59,12 @@ export class AdminProductPopupImagesListComponent implements  AfterViewInit {
   }
 
   isSelected(image: Image): boolean {
-
-    console.log("image " + image)
-    console.log("selected list: " + this.selected)
-    console.log("is image on selected list? " + this.selected.includes(image))
-    return this.selected.includes(image);
+    if(this.selected.length < 1)
+    {
+      return false;
+    }
+    return this.selected.some(selectedImage => selectedImage.id === image.id);
+    
   }
 
   masterToggle(): void {
@@ -83,7 +80,6 @@ export class AdminProductPopupImagesListComponent implements  AfterViewInit {
   }
 
   onAddClick() {
-    console.log(this.selected);
     this.selectedImages.emit(this.selected);
     this.dialogRef.close();
   }

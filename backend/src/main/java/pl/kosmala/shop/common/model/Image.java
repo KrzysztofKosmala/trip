@@ -25,7 +25,7 @@ public class Image
     @Column(name = "destination")
     private TripDestination destination;
 
-    @Column(name = "desc")
+    @Column(name = "desctiption")
     private String desc;
 
     @Lob

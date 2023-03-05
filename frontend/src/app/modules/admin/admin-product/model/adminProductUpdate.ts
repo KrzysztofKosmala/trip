@@ -12,5 +12,6 @@ export interface AdminProductUpdate{
     house: boolean,
     wifi: boolean,
     food: boolean,
-    spa: boolean
+    spa: boolean,
+    imageIds: number[];
 }
