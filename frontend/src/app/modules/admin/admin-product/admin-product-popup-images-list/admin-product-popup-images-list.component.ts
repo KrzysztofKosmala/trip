@@ -25,7 +25,7 @@ export class AdminProductPopupImagesListComponent implements  AfterViewInit {
     private dialogRef: MatDialogRef<AdminProductPopupImagesListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.selected = this.data.imagesFromPopup.slice();
+    this.selected = this.data.productImages.slice();
   }
 
   displayedColumns: string[] = ['select', 'data', 'name', 'desc', 'destination'];

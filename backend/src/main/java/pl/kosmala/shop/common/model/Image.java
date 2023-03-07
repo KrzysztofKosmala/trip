@@ -1,8 +1,11 @@
 package pl.kosmala.shop.common.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,14 +25,14 @@ public class Image
     @Column(name = "type")
     private String type;
 
-    @Column(name = "destination")
-    private TripDestination destination;
+    @Column(name = "location")
+    private TripDestination location;
 
     @Column(name = "desctiption")
     private String desc;
 
-    @Lob
-    @Column(name = "data")
-    private String data;
+    @JsonBackReference
+    @ManyToMany(mappedBy = "images", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Set<Product> trip;
 
 }

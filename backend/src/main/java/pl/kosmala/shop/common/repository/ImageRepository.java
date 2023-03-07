@@ -11,10 +11,15 @@ import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.trip.model.Trip;
 
+import java.util.List;
+import java.util.Set;
+
 @Repository
 @Transactional
 public interface ImageRepository extends JpaRepository<Image, Long>
 {
-    @Query("SELECT t FROM Image t  WHERE t.destination = :destination")
+    @Query("SELECT t FROM Image t  WHERE t.location = :destination")
     Page<Image> findAllByDestination(Pageable pageable, @Param("destination") TripDestination destination);
+
+    Set<Image> findAllByIdIn(List<Long> ids);
 }

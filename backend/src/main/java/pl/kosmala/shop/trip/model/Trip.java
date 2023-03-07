@@ -2,11 +2,13 @@ package pl.kosmala.shop.trip.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -79,8 +81,8 @@ public class Trip extends Product
 
 
     @Builder
-    public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice) {
-        super(name, desc, currency, slug, fullDesc);
+    public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Set<Image> images) {
+        super(name, desc, currency, slug, fullDesc, images);
         this.destination = destination;
         this.basePrice = basePrice;
     }

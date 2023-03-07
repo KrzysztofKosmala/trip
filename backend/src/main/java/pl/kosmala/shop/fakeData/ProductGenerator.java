@@ -17,14 +17,7 @@ public class ProductGenerator
 
     Faker faker = new Faker();
 
-    public Product generateProduct()
-    {
-        Product product = new Product();
-        product.setName(faker.name().name());
-        product.setDesc(faker.lorem().characters(10, 300));
-        product.setCurrency(ProductCurrency.PLN);
-        return product;
-    }
+
 
     public Review generateReview()
     {
@@ -86,14 +79,5 @@ public class ProductGenerator
     }
 
 
-    public List<Product> products(int howMany)
-    {
-        List<Product> products = new ArrayList<>();
-        for (int i =0; i<howMany; i++)
-        {
-            products.add(this.generateProduct());
-        }
 
-        return products;
-    }
 }

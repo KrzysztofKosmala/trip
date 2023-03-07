@@ -5,6 +5,5 @@ export interface Image{
     name:string,
     type:string,
     destination:string,
-    desc:string,
-    image:Blob,
+    desc:string
 }

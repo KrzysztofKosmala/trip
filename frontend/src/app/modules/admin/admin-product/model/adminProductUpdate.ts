@@ -1,3 +1,5 @@
+import { Image } from "../../admin-image/model/Image";
+
 export interface AdminProductUpdate{
     id: number,
     name: string,
@@ -13,5 +15,5 @@ export interface AdminProductUpdate{
     wifi: boolean,
     food: boolean,
     spa: boolean,
-    imageIds: number[];
+    images: Image[];
 }

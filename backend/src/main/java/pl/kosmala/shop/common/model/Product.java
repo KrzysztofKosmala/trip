@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter
 @NoArgsConstructor
@@ -61,16 +63,23 @@ public class Product
     @JoinColumn(name = "productId")
     private List<Review> reviews;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinTable(
+            name = "product_image",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id"))
+    private Set<Image> images;
 
-    public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc)
+    public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images)
     {
         this.name = name;
         this.desc = desc;
         this.currency = currency;
         this.slug = slug;
         this.fullDesc = fullDesc;
+        this.images = images;
     }
-    public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc)
+    public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc,  Set<Image> images)
     {
         this.id = id;
         this.name = name;
@@ -78,6 +87,7 @@ public class Product
         this.currency = currency;
         this.slug = slug;
         this.fullDesc = fullDesc;
+        this.images = images;
     }
 
 }

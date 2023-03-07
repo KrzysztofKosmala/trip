@@ -18,7 +18,7 @@ export class AdminImageComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatTable) table!: MatTable<any>;
-  displayedColumns: string[] = ["data", "name", "desc", "destination", "actions"];
+  displayedColumns: string[] = [ "name", "desc", "destination", "actions"];
   totalElements: number = 0;
   dataSource: Image[] = [];
 

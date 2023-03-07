@@ -2,11 +2,13 @@ package pl.kosmala.shop.admin.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -79,8 +81,8 @@ public class AdminTrip extends Product
 
 
     @Builder
-    public AdminTrip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa) {
-        super(name, desc, currency, slug, fullDesc);
+    public AdminTrip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa, Set<Image> images) {
+        super(name, desc, currency, slug, fullDesc, images);
         this.destination = destination;
         this.basePrice = basePrice;
         this.food = food;
@@ -89,10 +91,11 @@ public class AdminTrip extends Product
         this.wifi = wifi;
         this.house = house;
         this.apartment = apartment;
+
     }
     @Builder(builderMethodName = "builderWithId", buildMethodName = "buildWithId")
-    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa) {
-        super(id, name, desc, currency, slug, fullDesc);
+    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa, Set<Image> images) {
+        super(id, name, desc, currency, slug, fullDesc, images);
         this.destination = destination;
         this.basePrice = basePrice;
         this.food = food;

@@ -1,10 +1,13 @@
 package pl.kosmala.shop.admin.controller;
 
-import com.github.slugify.Slugify;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResourceLoader;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,15 @@ import pl.kosmala.shop.common.model.TripDestination;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.Set;
 
 import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 
@@ -33,6 +44,7 @@ public class AdminController
 
 
     @GetMapping("/trips")
+
     public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable)
     {
         return adminTripService.getAllAdminTrips(pageable);
@@ -47,7 +59,13 @@ public class AdminController
     @PostMapping("/trips")
     public AdminTrip addTrip(@RequestBody @Valid AdminTripDto adminProductDto)
     {
-        return adminTripService.createTrip(AdminTrip.builder()
+        List<Long> ids = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
+
+        Set<Image> images = imageService.findAllByIds(ids);
+
+
+
+        AdminTrip trip = adminTripService.createTrip(AdminTrip.builder()
                 .name(adminProductDto.getName())
                 .currency(adminProductDto.getCurrency())
                 .basePrice(adminProductDto.getBasePrice())
@@ -61,14 +79,22 @@ public class AdminController
                 .house(adminProductDto.getHouse())
                 .wifi(adminProductDto.getWifi())
                 .apartment(adminProductDto.getApartment())
+                .images(images)
                 .build()
         );
+
+
+        return trip;
 
     }
 
     @PutMapping("/trips/{id}")
     public AdminTrip updateTrip(@RequestBody @Valid AdminTripDto adminProductDto, @PathVariable Long id)
     {
+        List<Long> imagesId = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
+
+        Set<Image> images = imageService.findAllByIds(imagesId);
+
         AdminTrip build = AdminTrip.builderWithId()
                 .id(id)
                 .name(adminProductDto.getName())
@@ -84,6 +110,7 @@ public class AdminController
                 .house(adminProductDto.getHouse())
                 .wifi(adminProductDto.getWifi())
                 .apartment(adminProductDto.getApartment())
+                .images(images)
                 .buildWithId();
 
         return adminTripService.updateTrip(build);
@@ -98,7 +125,7 @@ public class AdminController
     @DeleteMapping("/images/{id}")
     public void deleteImage(@PathVariable Long id)
     {
-        imageService.deleteTrip(id);
+        imageService.deleteImage(id);
     }
 
     @PostMapping("/images/upload-image")
@@ -111,19 +138,26 @@ public class AdminController
     {
         Image model = new Image();
         String name = slugifySlug(image.getOriginalFilename());
+
+        String uploadDir = "./data/productImages/";
+
+
+        Path path = Paths.get(uploadDir).resolve(name);
+
+        try(InputStream inputStream = image.getInputStream())
+        {
+            OutputStream outputStream = Files.newOutputStream(path);
+            inputStream.transferTo(outputStream);
+        }catch (IOException e)  {
+            throw new RuntimeException("Nie można zapisać pliku", e);
+        }
+
         model.setName(name);
         model.setDesc(description);
-        model.setDestination(TripDestination.valueOf(country));
+        model.setLocation(TripDestination.valueOf(country));
         model.setType(image.getContentType());
-        try {
-            model.setData(Base64.getEncoder().encodeToString(image.getBytes()));
-            //imageRepository.save(image);
-            imageService.saveFile(model);
-            return ResponseEntity.ok(new UploadResponse(name, "Image uploaded successfully"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new UploadResponse(name, "Error uploading image"));
-        }
+        imageService.saveFile(model);
+        return ResponseEntity.ok(new UploadResponse(name, "Image uploaded successfully"));
 
     }
 
@@ -143,5 +177,16 @@ public class AdminController
         int i=0;
         Page<Image> imagesByDestination = imageService.getImagesByDestination(pageable, country);
         return imagesByDestination;
+    }
+
+    @GetMapping("/data/productImage/{name}")
+    public ResponseEntity<Resource> serveFile(@PathVariable String name) throws IOException
+    {
+        FileSystemResourceLoader fileSystemResourceLoader = new FileSystemResourceLoader();
+        String uploadDir = "./data/productImages/";
+        Resource resource = fileSystemResourceLoader.getResource(uploadDir + name);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(Path.of(name)))
+                .body(resource);
     }
 }

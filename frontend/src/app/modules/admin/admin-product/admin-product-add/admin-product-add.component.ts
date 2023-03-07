@@ -17,8 +17,7 @@ import { AdminProductAddService } from './admin-product-add.service';
   styleUrls: ['./admin-product-add.component.scss']
 })
 export class AdminProductAddComponent implements OnInit {
-  imagesFromPopup: Image[] = []; 
-  imageIds: number[] = []; 
+  productImages: Image[] = []; 
   displayedColumns: string[] = ['data', 'name', 'desc', 'destination','actions'];
   @Output() imagesFromPopupChange: EventEmitter<Image[]> = new EventEmitter();
   productForm!: FormGroup;
@@ -64,37 +63,32 @@ export class AdminProductAddComponent implements OnInit {
         width: '80vw',
         autoFocus: false,
         data: {
-          imagesFromPopup: this.imagesFromPopup
+          productImages: this.productImages
         }
       }
     );
     dialogRef.componentInstance.destination = this.productForm.get('destination')?.value; 
     dialogRef.componentInstance.selectedImages.subscribe((selectedImages: Image[]) => {
-      this.imagesFromPopup = selectedImages;
-       this.imageIds = this.imagesFromPopup.map(image => image.id);
+      this.productImages = selectedImages;
     });
-
-    
   }
 
   removeImage(image: Image): void {
-    const index = this.imagesFromPopup.indexOf(image);
+    const index = this.productImages.indexOf(image);
     if (index >= 0) {
-        this.imagesFromPopup.splice(index, 1);
+        this.productImages.splice(index, 1);
         this.table?.renderRows(); 
     }
     
-    console.log(this.imagesFromPopup)
+    console.log(this.productImages)
 }
 
 
 
 
   submit(){
-
-    this.imageIds = this.imagesFromPopup.map(image => image.id);
     this.productForm.patchValue({
-      images: this.imageIds.map(id => ({ id: id }))
+      images: this.productImages
     });
     console.log(this.productForm.value
       )

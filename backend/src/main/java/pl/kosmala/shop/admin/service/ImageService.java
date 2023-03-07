@@ -7,6 +7,9 @@ import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.repository.ImageRepository;
 
+import java.util.List;
+import java.util.Set;
+
 
 @Service
 public class ImageService
@@ -18,8 +21,14 @@ public class ImageService
     public ImageService(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
     }
-    public void saveFile(Image image) {
+    public void saveFile(Image image)
+    {
         imageRepository.save(image);
+    }
+
+    public Set<Image> findAllByIds(List<Long> ids)
+    {
+        return imageRepository.findAllByIdIn(ids);
     }
 
     public Page<Image> getAllImages(Pageable pageable)
@@ -32,7 +41,7 @@ public class ImageService
         return imageRepository.findAllByDestination(pageable, destination);
     }
 
-    public void deleteTrip(Long id)
+    public void deleteImage(Long id)
     {
         imageRepository.deleteById(id);
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,10 @@ import { AdminImageService } from '../../admin-image/admin-image-service';
 import { AdminMessagesService } from '../../common/service/admin-messages.service';
 import { AdminProductUpdateService } from './admin-product-update.service';
 import { AdminProductUpdate } from '../model/adminProductUpdate';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AdminProductPopupImagesListComponent } from '../admin-product-popup-images-list/admin-product-popup-images-list.component';
+import { Image } from '../../admin-image/model/Image';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-product-update',
@@ -13,11 +17,14 @@ import { AdminProductUpdate } from '../model/adminProductUpdate';
   styleUrls: ['./admin-product-update.component.scss']
 })
 export class AdminProductUpdateComponent implements OnInit {
-
+  productImages: Image[] = []; 
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  displayedColumns: string[] = ['data', 'name', 'desc', 'destination','actions'];
+  @ViewChild(MatTable) table?: MatTable<any>;
   constructor(
     private router: ActivatedRoute, 
+    public dialog: MatDialog, 
     private adminProductUpdateService: AdminProductUpdateService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
@@ -48,7 +55,15 @@ export class AdminProductUpdateComponent implements OnInit {
 
   
 
-
+  removeImage(image: Image): void {
+    const index = this.productImages.indexOf(image);
+    if (index >= 0) {
+        this.productImages.splice(index, 1);
+        this.table?.renderRows(); 
+    }
+    
+    console.log(this.productImages)
+}
 
   submit(){
     let id = Number(this.router.snapshot.params['id']);
@@ -66,6 +81,7 @@ export class AdminProductUpdateComponent implements OnInit {
         spa: this.productForm.get('spa')?.value,
         house: this.productForm.get('house')?.value,
         wifi: this.productForm.get('wifi')?.value,
+        images: this.productImages
       } as AdminProductUpdate).subscribe
       (
         {
@@ -78,7 +94,32 @@ export class AdminProductUpdateComponent implements OnInit {
         });
   }
 
+
+
+  openPopup(): void {
+    const dialogRef: MatDialogRef<AdminProductPopupImagesListComponent> = this.dialog.open(
+      AdminProductPopupImagesListComponent,
+      {
+        maxHeight: '70vh',
+        maxWidth: '70vw',
+        height: '80vh',
+        width: '80vw',
+        autoFocus: false,
+        data: {
+          productImages: this.productImages
+        }
+      }
+    );
+    dialogRef.componentInstance.destination = this.productForm.get('destination')?.value; 
+    dialogRef.componentInstance.selectedImages.subscribe((selectedImages: Image[]) => {
+      this.productImages = selectedImages;
+    });
+  }
+
+
   private mapFormValues(product: AdminProductUpdate): void {
+
+    this.productImages = product.images;
     return this.productForm.setValue({
       name: product.name,
       desc: product.desc,

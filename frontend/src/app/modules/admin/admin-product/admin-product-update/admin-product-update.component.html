@@ -1,4 +1,45 @@
 <h1>Edutuj produkt</h1>
 <form fxLayout="column" [formGroup]="productForm" (submit)="submit()">
     <app-admin-product-form [parentForm]="productForm"></app-admin-product-form>
+    <div>
+        <mat-table [dataSource]="productImages" fxFlex="100">
+            <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef> Zdjęcie </th>
+                <td mat-cell *matCellDef="let element" fxFlex="100">
+                  <img src="{{'/api/v1/admin/data/productImage/' + element.name}}" width="100" height="100">
+                </td>
+                
+              </ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="name" >
+                  <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="desc" >
+                  <th mat-header-cell *matHeaderCellDef> Opis </th>
+                  <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+                </ng-container>
+            
+                    <!-- Name Column -->
+            <ng-container matColumnDef="destination" >
+                <th mat-header-cell *matHeaderCellDef> Kraj </th>
+                <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Akcje </th>
+                <td mat-cell *matCellDef="let element">                 <button mat-icon-button (click)="removeImage(element)">
+                    <mat-icon>delete</mat-icon>
+                </button></td>
+                
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        
+        <button type='button' mat-raised-button fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10" style="margin: 10px 20px;" (click)="openPopup()" [disabled]="productForm.get('destination')?.value === ''" >Dodaj zdjęcia</button>
+        </div>
 </form>
