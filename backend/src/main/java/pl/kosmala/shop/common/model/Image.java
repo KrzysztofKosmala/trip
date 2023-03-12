@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,6 +14,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Image
 {
     @Id
@@ -32,7 +34,27 @@ public class Image
     private String desc;
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "images", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<Product> trip;
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "images", fetch = FetchType.LAZY)
+    private Set<Product> products;
 
+    public void addProduct(Product product) {
+        if (products == null) {
+            products = new HashSet<>();
+        }
+        products.add(product);
+        if (product.getImages() == null) {
+            product.setImages(new HashSet<>());
+        }
+
+        product.getImages().add(this);
+    }
+    public void removeProduct(Product product) {
+        if (products != null) {
+            products.remove(product);
+            if (product.getImages() != null) {
+                product.getImages().remove(this);
+            }
+        }
+    }
 }

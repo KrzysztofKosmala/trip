@@ -3,6 +3,7 @@ package pl.kosmala.shop.common.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Product
 {
     @Id
@@ -62,7 +64,7 @@ public class Product
     @OneToMany
     @JoinColumn(name = "productId")
     private List<Review> reviews;
-
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(
             name = "product_image",
@@ -89,5 +91,23 @@ public class Product
         this.fullDesc = fullDesc;
         this.images = images;
     }
+    public void addImage(Image image) {
+        if (images == null) {
+            images = new HashSet<>();
+        }
+        images.add(image);
+        if (image.getProducts() == null) {
+            image.setProducts(new HashSet<>());
+        }
+        image.getProducts().add(this);
+    }
 
+    public void removeImage(Image image) {
+        if (images != null) {
+            images.remove(image);
+            if (image.getProducts() != null) {
+                image.getProducts().remove(this);
+            }
+        }
+    }
 }

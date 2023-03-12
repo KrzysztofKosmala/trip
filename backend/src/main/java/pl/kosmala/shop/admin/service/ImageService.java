@@ -8,6 +8,7 @@ import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.repository.ImageRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -43,6 +44,11 @@ public class ImageService
 
     public void deleteImage(Long id)
     {
-        imageRepository.deleteById(id);
+        Optional<Image> image = imageRepository.findById(id);
+        if (image.isPresent())
+        {
+            image.get().getProducts().forEach(product -> product.removeImage(image.get()));
+            imageRepository.deleteById(id);
+        }
     }
 }

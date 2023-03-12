@@ -76,7 +76,7 @@ export class AdminProductUpdateComponent implements OnInit {
         slug: this.productForm.get('slug')?.value,
         fullDesc: this.productForm.get('fullDesc')?.value,
         apartment: this.productForm.get('apartment')?.value,
-        food: this.productForm.get('apartfoodent')?.value,
+        food: this.productForm.get('food')?.value,
         slopNearby: this.productForm.get('slopNearby')?.value,
         spa: this.productForm.get('spa')?.value,
         house: this.productForm.get('house')?.value,

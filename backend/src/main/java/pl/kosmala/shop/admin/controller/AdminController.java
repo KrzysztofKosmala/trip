@@ -64,8 +64,7 @@ public class AdminController
         Set<Image> images = imageService.findAllByIds(ids);
 
 
-
-        AdminTrip trip = adminTripService.createTrip(AdminTrip.builder()
+        AdminTrip adminTrip = AdminTrip.builder()
                 .name(adminProductDto.getName())
                 .currency(adminProductDto.getCurrency())
                 .basePrice(adminProductDto.getBasePrice())
@@ -79,10 +78,13 @@ public class AdminController
                 .house(adminProductDto.getHouse())
                 .wifi(adminProductDto.getWifi())
                 .apartment(adminProductDto.getApartment())
-                .images(images)
-                .build()
-        );
+                .build();
 
+        images.forEach(image -> {
+            image.addProduct(adminTrip);
+        });
+
+        AdminTrip trip = adminTripService.createTrip(adminTrip);
 
         return trip;
 
@@ -91,29 +93,7 @@ public class AdminController
     @PutMapping("/trips/{id}")
     public AdminTrip updateTrip(@RequestBody @Valid AdminTripDto adminProductDto, @PathVariable Long id)
     {
-        List<Long> imagesId = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
-
-        Set<Image> images = imageService.findAllByIds(imagesId);
-
-        AdminTrip build = AdminTrip.builderWithId()
-                .id(id)
-                .name(adminProductDto.getName())
-                .currency(adminProductDto.getCurrency())
-                .basePrice(adminProductDto.getBasePrice())
-                .desc(adminProductDto.getDesc())
-                .destination(adminProductDto.getDestination())
-                .slug(slugifySlug(adminProductDto.getSlug()))
-                .fullDesc(adminProductDto.getFullDesc())
-                .slopNearby(adminProductDto.getSlopNearby())
-                .food(adminProductDto.getFood())
-                .spa(adminProductDto.getSpa())
-                .house(adminProductDto.getHouse())
-                .wifi(adminProductDto.getWifi())
-                .apartment(adminProductDto.getApartment())
-                .images(images)
-                .buildWithId();
-
-        return adminTripService.updateTrip(build);
+        return adminTripService.updateTrip(adminProductDto, id);
     }
 
     @DeleteMapping("/trips/{id}")
