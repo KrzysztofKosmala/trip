@@ -33,6 +33,8 @@ public class Image
     @Column(name = "desctiption")
     private String desc;
 
+    @Column(name = "thumbImage")
+    private String thumbImage;
     @JsonBackReference
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "images", fetch = FetchType.LAZY)

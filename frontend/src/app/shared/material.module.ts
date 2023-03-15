@@ -12,8 +12,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MatOptionModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [],
   imports: [
@@ -31,7 +33,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSliderModule,
+    CarouselModule,
+    NgImageSliderModule
   ],
   exports: 
   [
@@ -48,7 +53,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSliderModule,
+    CarouselModule,
+    NgImageSliderModule
   ]
   
 })

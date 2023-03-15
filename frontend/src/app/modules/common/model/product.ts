@@ -1,3 +1,5 @@
+import { Image } from "../../admin/admin-image/model/Image";
+
 export interface Product 
 {
     name: string,
@@ -5,5 +7,6 @@ export interface Product
     desc: string,
     basePrice: number,
     currency: string,
-    slug: string
+    slug: string,
+    images: Image[]
 }

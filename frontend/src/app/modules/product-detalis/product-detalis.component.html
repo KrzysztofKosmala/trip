@@ -4,9 +4,9 @@
             <img src="/assets/image-placeholder.png" width="350">
         </div>
         <div fxLayout="column" fxFlex>
-            <h1>{{product?.name}}</h1>
+            <h1>{{product.name}}</h1>
             <div class="description">
-                {{product?.desc}}
+                {{product.desc}}
             </div>
             <div *ngIf="product?.apartment">
                 Apartament
@@ -28,7 +28,7 @@
             </div>
             <div fxLayout="row" fxFlexAlign="end">
             </div>
-                <span class="price">{{product?.basePrice}} {{product?.currency}}</span>
+                <span class="price">{{product.basePrice}} {{product.currency}}</span>
             <button mat-flat-button color="warn">Do ulubionych</button>
         </div>
     </div>

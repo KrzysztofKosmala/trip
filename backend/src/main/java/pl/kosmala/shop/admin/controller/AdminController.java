@@ -2,6 +2,7 @@ package pl.kosmala.shop.admin.controller;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -43,6 +43,8 @@ public class AdminController
     private final ImageService imageService;
 
 
+    @Value("${FETCH_IMAGE_URL}")
+    private String FETCH_IMAGE_URL;
     @GetMapping("/trips")
 
     public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable)
@@ -132,6 +134,7 @@ public class AdminController
             throw new RuntimeException("Nie można zapisać pliku", e);
         }
 
+        model.setThumbImage(FETCH_IMAGE_URL+name);
         model.setName(name);
         model.setDesc(description);
         model.setLocation(TripDestination.valueOf(country));

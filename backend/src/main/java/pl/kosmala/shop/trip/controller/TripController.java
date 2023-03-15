@@ -55,6 +55,7 @@ public class TripController
                         .name(product.getName())
                         .currency(product.getCurrency())
                         .destination(product.getDestination())
+                        .images(product.getImages())
                         .slug(product.getSlug())
                         .apartment(product.getApartment())
                         .house(product.getHouse())

@@ -6,10 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import pl.kosmala.shop.common.model.Image;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,6 +27,7 @@ public class TripListDto
     private ProductCurrency currency;
     @Length(min = 4)
     @NotBlank
+    private Set<Image> images;
     private String slug;
     private TripDestination destination;
     private Boolean slopNearby;
