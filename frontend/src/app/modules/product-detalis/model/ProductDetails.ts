@@ -1,3 +1,4 @@
+import { Image } from "../../admin/admin-image/model/Image";
 import { Review } from "./review";
 
 export interface ProductDetails
@@ -15,5 +16,6 @@ export interface ProductDetails
     wifi: boolean;
     food: boolean;
     spa: boolean;
+    images: Image[];
     reviews: Array<Review>
 }

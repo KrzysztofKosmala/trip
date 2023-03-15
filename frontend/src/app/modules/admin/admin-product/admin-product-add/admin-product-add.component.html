@@ -1,7 +1,7 @@
 <h1>Dodaj produkt</h1>
-<form fxLayout="column" [formGroup]="productForm" (submit)="submit()">
+<form  [formGroup]="productForm" (submit)="submit()">
     <app-admin-product-form [parentForm]="productForm"></app-admin-product-form>
-    <div>
+    <div fxLayout="column">
         <mat-table [dataSource]="productImages" fxFlex="100">
             <ng-container matColumnDef="data">
                 <th mat-header-cell *matHeaderCellDef> Zdjęcie </th>

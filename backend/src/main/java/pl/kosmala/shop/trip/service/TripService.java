@@ -46,6 +46,7 @@ public class TripService
                         .wifi(tripBySlug.getWifi())
                         .food(tripBySlug.getFood())
                         .reviews(reviewsDto)
+                        .images(tripBySlug.getImages())
                         .build();
     }
 

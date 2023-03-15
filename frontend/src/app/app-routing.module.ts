@@ -16,17 +16,18 @@ import { ProductComponent } from './modules/product/product.component';
 
 const routes: Routes = [
   {
-    path:'', component: DefaultComponent, children: [
+    path:'', component: FullpageComponent, children: [
       {path: '', component: HomeComponent},
-      {path: 'products', component: ProductComponent},
+      {path: 'login', component: LoginComponent},
       {path: 'products/:slug', component: ProductDetalisComponent},
     ]
   },
   {
-    path:'', component: FullpageComponent, children: [
-      {path: 'login', component: LoginComponent}
+    path:'', component: DefaultComponent, children: [
+      {path: 'products', component: ProductComponent}
     ]
   },
+
   {
     path:'', component: FullpageadminComponent, children: [
       {path: 'admin', component: AdminComponent},

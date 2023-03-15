@@ -1,8 +1,13 @@
 <div fxLayout="column">
-    <div fxLayout="row" fxFlex fxLayoutGap="20">
-        <div>
-            <img src="/assets/image-placeholder.png" width="350">
-        </div>
+    <div fxLayout="column" fxFlex fxLayoutGap="20">
+        <ng-image-slider style="width: 100%; height: 100%; text-align:center;margin:0; padding:0;" #nav 
+        [images]="product.images"
+        [infinite]="false"
+        [autoSlide]="1"
+        [imageSize]="{width: '50%', height: '30%',space: 0}"
+        [imagePopup]="false"
+        slideImage="5">
+      </ng-image-slider>
         <div fxLayout="column" fxFlex>
             <h1>{{product.name}}</h1>
             <div class="description">
@@ -29,7 +34,7 @@
             <div fxLayout="row" fxFlexAlign="end">
             </div>
                 <span class="price">{{product.basePrice}} {{product.currency}}</span>
-            <button mat-flat-button color="warn">Do ulubionych</button>
+            <button mat-flat-button color="warn">Rezerwuj</button>
         </div>
     </div>
 

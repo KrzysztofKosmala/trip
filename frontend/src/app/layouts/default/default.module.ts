@@ -12,7 +12,6 @@ import { ProductDetalisComponent } from 'src/app/modules/product-detalis/product
 @NgModule({
   declarations: [
     DefaultComponent,
-    HomeComponent,
     ProductComponent,
     ProductDetalisComponent
   ],
