@@ -14,19 +14,19 @@ export class AdminImageService {
 
   uploadFile(formData: FormData): Observable<UploadResponse>{
 
-    return this.http.post<UploadResponse>('api/v1/admin/images/upload-image', formData)
+    return this.http.post<UploadResponse>('api/v1/images/upload-image', formData)
     .pipe(map(response => {
       return response;
     }));
   }
 
   delete(id: number): Observable<void>{
-    return this.http.delete<void>('api/v1/admin/images/'+id)
+    return this.http.delete<void>('api/v1/images/'+id)
   }
 
   getImages(page: number, size: number) : Observable<Page<Image>>
   {
-      return this.http.get<Page<Image>>(`api/v1/admin/images?page=${page}&size=${size}`);
+      return this.http.get<Page<Image>>(`api/v1/images?page=${page}&size=${size}`);
   }
 
   getImagesByCountry(page: number, size: number, country: string) : Observable<Page<Image>>
@@ -36,6 +36,6 @@ export class AdminImageService {
     .set('size', size.toString())
     .set('country', country);
 
-      return this.http.get<Page<Image>>(`api/v1/admin/imagesByCountry`, { params });
+      return this.http.get<Page<Image>>(`api/v1/imagesByCountry`, { params });
   }
 }

@@ -2,6 +2,7 @@ package pl.kosmala.shop.common.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kosmala.shop.common.image.model.Image;
 
 import java.util.HashSet;
 import java.util.List;

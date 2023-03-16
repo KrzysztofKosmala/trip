@@ -1,14 +1,17 @@
 package pl.kosmala.shop.admin.service;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.webjars.NotFoundException;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
 import pl.kosmala.shop.admin.model.AdminTrip;
 import pl.kosmala.shop.admin.repository.AdminTripRepository;
-import pl.kosmala.shop.common.model.Image;
+import pl.kosmala.shop.common.image.model.Image;
+import pl.kosmala.shop.common.image.service.ImageService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,39 +45,43 @@ public class AdminTripService
 
     public AdminTrip updateTrip(AdminTripDto adminProductDto, Long id)
     {
-        AdminTrip adminTrip = adminTripRepository.findById(id).orElseThrow();
+        try {
+            AdminTrip adminTrip = adminTripRepository.findById(id)
+                    .orElseThrow(() -> new NotFoundException("AdminTrip not found with id " + id));
 
-        Set<Image> adminTripImages = adminTrip.getImages();
+            adminTrip.setName(adminProductDto.getName());
+            adminTrip.setCurrency(adminProductDto.getCurrency());
+            adminTrip.setBasePrice(adminProductDto.getBasePrice());
+            adminTrip.setDesc(adminProductDto.getDesc());
+            adminTrip.setDestination(adminProductDto.getDestination());
+            adminTrip.setSlug(slugifySlug(adminProductDto.getSlug()));
+            adminTrip.setFullDesc(adminProductDto.getFullDesc());
+            adminTrip.setSlopNearby(adminProductDto.getSlopNearby());
+            adminTrip.setFood(adminProductDto.getFood());
+            adminTrip.setSpa(adminProductDto.getSpa());
+            adminTrip.setHouse(adminProductDto.getHouse());
+            adminTrip.setWifi(adminProductDto.getWifi());
+            adminTrip.setApartment(adminProductDto.getApartment());
 
-        // pobranie zbioru obiektów Image z bazy danych
-        List<Long> imagesId = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
-        Set<Image> images = imageService.findAllByIds(imagesId);
+            List<Long> imagesIdFromRequest = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
 
-        // aktualizacja pól obiektu AdminTrip zgodnie z wartościami z DTO
-        adminTrip.setName(adminProductDto.getName());
-        adminTrip.setCurrency(adminProductDto.getCurrency());
-        adminTrip.setBasePrice(adminProductDto.getBasePrice());
-        adminTrip.setDesc(adminProductDto.getDesc());
-        adminTrip.setDestination(adminProductDto.getDestination());
-        adminTrip.setSlug(slugifySlug(adminProductDto.getSlug()));
-        adminTrip.setFullDesc(adminProductDto.getFullDesc());
-        adminTrip.setSlopNearby(adminProductDto.getSlopNearby());
-        adminTrip.setFood(adminProductDto.getFood());
-        adminTrip.setSpa(adminProductDto.getSpa());
-        adminTrip.setHouse(adminProductDto.getHouse());
-        adminTrip.setWifi(adminProductDto.getWifi());
-        adminTrip.setApartment(adminProductDto.getApartment());
+            adminTrip.getImages().removeIf(imageAttachedToTheTrip -> !imagesIdFromRequest.contains(imageAttachedToTheTrip.getId()));
 
-// aktualizacja powiązań z obiektami Image
-        adminTrip.getImages().removeIf(image -> !images.contains(image));
-        images.forEach(image -> {
-            if (!adminTrip.getImages().contains(image)) {
-                adminTrip.getImages().add(image);
-                image.addProduct(adminTrip);
-            }
-        });
-        // zapis zmodyfikowanego obiektu AdminTrip do bazy danych
-        return adminTripRepository.save(adminTrip);
+            Set<Image> chosenImages = imageService.findAllByIds(imagesIdFromRequest);
+            chosenImages.forEach(image -> {
+                if (!adminTrip.getImages().contains(image)) {
+                    adminTrip.getImages().add(image);
+                    image.addProduct(adminTrip);
+                }
+            });
+
+            // zapis zmodyfikowanego obiektu AdminTrip do bazy danych
+            return adminTripRepository.save(adminTrip);
+
+        } catch (NotFoundException e) {
+            // obsługa wyjątku NotFoundException
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
     public void deleteTrip(Long id)
@@ -82,7 +89,10 @@ public class AdminTripService
         Optional<AdminTrip> trip = adminTripRepository.findById(id);
         if(trip.isPresent())
         {
-            trip.get().getImages().forEach(image -> image.removeProduct(trip.get()));
+            trip.get().getImages().forEach(image -> {
+                image.removeProduct(trip.get());
+                imageService.saveFile(image);
+            });
             adminTripRepository.deleteById(id);
         }
     }

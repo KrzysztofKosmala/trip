@@ -1,9 +1,11 @@
-package pl.kosmala.shop.common.model;
+package pl.kosmala.shop.common.image.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
+import pl.kosmala.shop.common.model.Product;
+import pl.kosmala.shop.common.model.TripDestination;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,9 +56,6 @@ public class Image
     public void removeProduct(Product product) {
         if (products != null) {
             products.remove(product);
-            if (product.getImages() != null) {
-                product.getImages().remove(this);
-            }
         }
     }
 }

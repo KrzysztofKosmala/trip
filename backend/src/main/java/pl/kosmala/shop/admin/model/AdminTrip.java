@@ -2,7 +2,7 @@ package pl.kosmala.shop.admin.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.kosmala.shop.common.model.Image;
+import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;

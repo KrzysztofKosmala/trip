@@ -19,7 +19,7 @@
   <ng-container matColumnDef="data">
     <th mat-header-cell *matHeaderCellDef> Zdjęcie </th>
     <td mat-cell *matCellDef="let element">
-      <img src="{{'/api/v1/admin/data/productImage/' + element.name}}"  width="100" height="100">
+      <img src="{{'/api/v1/data/productImage/' + element.name}}"  width="100" height="100">
     </td>
     
   </ng-container>
@@ -38,7 +38,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="destination" >
             <th mat-header-cell *matHeaderCellDef> Kraj </th>
-            <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
           </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
