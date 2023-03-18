@@ -38,9 +38,36 @@ public class AdminTripService
         return adminTripRepository.findById(id).orElseThrow();
     }
 
-    public AdminTrip createTrip(AdminTrip trip)
+    public AdminTrip createTrip(AdminTripDto adminProductDto)
     {
-        return adminTripRepository.save(trip);
+
+        List<Long> ids = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
+
+        Set<Image> images = imageService.findAllByIds(ids);
+
+
+        AdminTrip adminTrip = AdminTrip.builder()
+                .name(adminProductDto.getName())
+                .currency(adminProductDto.getCurrency())
+                .basePrice(adminProductDto.getBasePrice())
+                .desc(adminProductDto.getDesc())
+                .destination(adminProductDto.getDestination())
+                .slug(slugifySlug(adminProductDto.getSlug()))
+                .fullDesc(adminProductDto.getFullDesc())
+                .slopNearby(adminProductDto.getSlopNearby())
+                .food(adminProductDto.getFood())
+                .spa(adminProductDto.getSpa())
+                .house(adminProductDto.getHouse())
+                .wifi(adminProductDto.getWifi())
+                .apartment(adminProductDto.getApartment())
+                .build();
+
+        images.forEach(image -> {
+            image.addProduct(adminTrip);
+        });
+
+
+        return adminTripRepository.save(adminTrip);
     }
 
     public AdminTrip updateTrip(AdminTripDto adminProductDto, Long id)

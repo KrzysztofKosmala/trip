@@ -30,8 +30,8 @@ import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 @RequiredArgsConstructor
 public class ImageController
 {
-    @Value("${FETCH_IMAGE_URL}")
-    private String FETCH_IMAGE_URL;
+
+
     private final ImageService imageService;
 
 
@@ -49,30 +49,7 @@ public class ImageController
                     @RequestParam("description") String description
             )
     {
-        Image model = new Image();
-        String name = slugifySlug(image.getOriginalFilename());
-
-        String uploadDir = "./data/productImages/";
-
-
-        Path path = Paths.get(uploadDir).resolve(name);
-
-        try(InputStream inputStream = image.getInputStream())
-        {
-            OutputStream outputStream = Files.newOutputStream(path);
-            inputStream.transferTo(outputStream);
-        }catch (IOException e)  {
-            throw new RuntimeException("Nie można zapisać pliku", e);
-        }
-
-        model.setThumbImage(FETCH_IMAGE_URL+name);
-        model.setName(name);
-        model.setDesc(description);
-        model.setLocation(TripDestination.valueOf(country));
-        model.setType(image.getContentType());
-        imageService.saveFile(model);
-        return ResponseEntity.ok(new UploadResponse(name, "Image uploaded successfully"));
-
+        return ResponseEntity.ok(imageService.uploadFile(image, country, description));
     }
 
 
@@ -89,8 +66,7 @@ public class ImageController
             )
     {
         int i=0;
-        Page<Image> imagesByDestination = imageService.getImagesByDestination(pageable, country);
-        return imagesByDestination;
+        return imageService.getImagesByDestination(pageable, country);
     }
 
     @GetMapping("/data/productImage/{name}")

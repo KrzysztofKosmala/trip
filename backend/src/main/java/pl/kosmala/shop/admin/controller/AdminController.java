@@ -24,15 +24,10 @@ import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 public class AdminController
 {
     private final AdminTripService adminTripService;
-    private final ImageService imageService;
-
 
     @GetMapping("/trips")
 
-    public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable)
-    {
-        return adminTripService.getAllAdminTrips(pageable);
-    }
+    public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable) { return adminTripService.getAllAdminTrips(pageable); }
 
     @GetMapping("/trips/{id}")
     public AdminTrip getTrip(@PathVariable Long id)
@@ -41,49 +36,15 @@ public class AdminController
     }
 
     @PostMapping("/trips")
-    public AdminTrip addTrip(@RequestBody @Valid AdminTripDto adminProductDto)
-    {
-        List<Long> ids = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
-
-        Set<Image> images = imageService.findAllByIds(ids);
-
-
-        AdminTrip adminTrip = AdminTrip.builder()
-                .name(adminProductDto.getName())
-                .currency(adminProductDto.getCurrency())
-                .basePrice(adminProductDto.getBasePrice())
-                .desc(adminProductDto.getDesc())
-                .destination(adminProductDto.getDestination())
-                .slug(slugifySlug(adminProductDto.getSlug()))
-                .fullDesc(adminProductDto.getFullDesc())
-                .slopNearby(adminProductDto.getSlopNearby())
-                .food(adminProductDto.getFood())
-                .spa(adminProductDto.getSpa())
-                .house(adminProductDto.getHouse())
-                .wifi(adminProductDto.getWifi())
-                .apartment(adminProductDto.getApartment())
-                .build();
-
-        images.forEach(image -> {
-            image.addProduct(adminTrip);
-        });
-
-        AdminTrip trip = adminTripService.createTrip(adminTrip);
-
-        return trip;
-
-    }
+    public AdminTrip addTrip(@RequestBody @Valid AdminTripDto adminProductDto) { return adminTripService.createTrip(adminProductDto); }
 
     @PutMapping("/trips/{id}")
     public AdminTrip updateTrip(@RequestBody @Valid AdminTripDto adminProductDto, @PathVariable Long id)
-    {
-        return adminTripService.updateTrip(adminProductDto, id);
-    }
+    { return adminTripService.updateTrip(adminProductDto, id); }
 
     @DeleteMapping("/trips/{id}")
     public void deleteTrip(@PathVariable Long id)
     {
         adminTripService.deleteTrip(id);
     }
-
 }
