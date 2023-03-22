@@ -24,6 +24,7 @@ public class TripApplication {
 	{
 		return args ->
 		{
+
 		};
 	}
 

@@ -9,6 +9,11 @@ import pl.kosmala.shop.admin.model.AdminTrip;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.trip.model.Trip;
 
+import java.util.Optional;
+
 public interface AdminTripRepository extends JpaRepository<AdminTrip, Long>
 {
+    @Override
+    @Query("SELECT t FROM AdminTrip t WHERE t.id = :id")
+    Optional<AdminTrip> findById(@Param("id") Long id);
 }
