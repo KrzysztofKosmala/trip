@@ -3,6 +3,7 @@ package pl.kosmala.shop.admin.service;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.common.image.service.ImageService;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -24,29 +26,16 @@ import java.util.Set;
 import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 
 @Service
+@AllArgsConstructor
 public class AdminTripService
 {
-    final
-    AdminTripRepository adminTripRepository;
+    private final AdminTripRepository adminTripRepository;
 
-    final
-    ImageRepository imageRepository;
-
-    public AdminTripService(AdminTripRepository adminTripRepository, ImageRepository imageRepository)
-    {
-        this.adminTripRepository = adminTripRepository;
-        this.imageRepository = imageRepository;
-    }
+    private final ImageRepository imageRepository;
 
     public AdminTrip updateTrip(AdminTripDto adminProductDto, Long id)
     {
 
-
-        List<AdminTrip> all = adminTripRepository.findAll();
-        boolean b = adminTripRepository.existsById(id);
-
-        try {
-            boolean b1 = adminTripRepository.existsById(id);
             AdminTrip adminTrip = adminTripRepository.findById(id)
                     .orElseThrow(() -> new NotFoundException("AdminTrip not found with id " + id));
 
@@ -78,20 +67,15 @@ public class AdminTripService
 
             // zapis zmodyfikowanego obiektu AdminTrip do bazy danych
             return adminTripRepository.save(adminTrip);
-
-        } catch (NotFoundException e) {
-            // obsługa wyjątku NotFoundException
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        }
     }
 
     public AdminTrip createTrip(AdminTripDto adminProductDto)
     {
 
-        List<Long> ids = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
-
-        Set<Image> images = imageRepository.findAllByIdIn(ids);
-
+        if(adminTripRepository.existsByName(adminProductDto.getName()))
+        {
+            throw new IllegalStateException(String.format("Name [%s] is taken", adminProductDto.getName()));
+        }
 
         AdminTrip adminTrip = AdminTrip.builder()
                 .name(adminProductDto.getName())
@@ -109,10 +93,26 @@ public class AdminTripService
                 .apartment(adminProductDto.getApartment())
                 .build();
 
-        images.forEach(image -> {
-            image.addProduct(adminTrip);
-        });
+        List<Long> idsOfImageToBeAdd = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
 
+        if(idsOfImageToBeAdd.size() > 0)
+        {
+            Set<Image> images = imageRepository.findAllByIdIn(idsOfImageToBeAdd);
+            if(adminProductDto.getImages().length != images.size())
+            {
+                throw new DataAccessResourceFailureException
+                        (
+                                String.format
+                                        (
+                                                "Cant add all expected images. You wanted to add [%s] images to the trip [%s] but only [%s] were in database - transaction abandoned!",
+                                                adminProductDto.getImages().length,
+                                                adminProductDto.getName(),
+                                                images.size()
+                                        )
+                        );
+            }
+            images.forEach(image -> image.addProduct(adminTrip));
+        }
 
         return adminTripRepository.save(adminTrip);
     }

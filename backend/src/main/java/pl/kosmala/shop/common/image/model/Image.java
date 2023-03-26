@@ -8,6 +8,7 @@ import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Image
+public class Image implements Comparable<Image>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +58,30 @@ public class Image
         if (products != null) {
             products.remove(product);
         }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Image image = (Image) o;
+        return Objects.equals(id, image.id) &&
+                Objects.equals(name, image.name) &&
+                Objects.equals(type, image.type) &&
+                Objects.equals(location, image.location) &&
+                Objects.equals(desc, image.desc) &&
+                Objects.equals(thumbImage, image.thumbImage);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, location, desc, thumbImage);
+    }
+
+    @Override
+    public int compareTo(Image o)
+    {
+        return this.id.compareTo(o.getId());
     }
 }

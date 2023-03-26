@@ -16,4 +16,7 @@ public interface AdminTripRepository extends JpaRepository<AdminTrip, Long>
     @Override
     @Query("SELECT t FROM AdminTrip t WHERE t.id = :id")
     Optional<AdminTrip> findById(@Param("id") Long id);
+
+
+    boolean existsByName(String name);
 }
