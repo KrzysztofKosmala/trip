@@ -44,6 +44,8 @@ export class AdminProductUpdateComponent implements OnInit {
       currency:['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]],
       fullDesc: ['', [Validators.minLength(4)]],
+      startDate: [''],
+      endDate: [''],
       food:[],
       apartment:[],
       slopNearby:[],
@@ -81,6 +83,8 @@ export class AdminProductUpdateComponent implements OnInit {
         spa: this.productForm.get('spa')?.value,
         house: this.productForm.get('house')?.value,
         wifi: this.productForm.get('wifi')?.value,
+        startDate: this.productForm.get('startDate')?.value,
+        endDate: this.productForm.get('endDate')?.value,
         images: this.productImages
       } as AdminProductUpdate).subscribe
       (
@@ -133,6 +137,8 @@ export class AdminProductUpdateComponent implements OnInit {
       slopNearby: product.slopNearby,
       spa: product.spa,
       house: product.house,
+      startDate: product.startDate,
+      endDate: product.endDate,
       wifi: product.wifi
     });
   }

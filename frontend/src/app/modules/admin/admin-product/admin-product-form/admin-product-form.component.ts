@@ -75,5 +75,13 @@ export class AdminProductFormComponent implements OnInit {
   {
     return this.parentForm.get("wifi");
   }
+  get startDate()
+  {
+    return this.parentForm.get("startDate");
+  }
+  get endDate()
+  {
+    return this.parentForm.get("endDate");
+  }
 
 }

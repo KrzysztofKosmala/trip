@@ -16,6 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgImageSliderModule } from 'ng-image-slider';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,7 +38,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MatDialogModule,
     MatSliderModule,
     CarouselModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: 
   [
@@ -56,7 +60,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MatDialogModule,
     MatSliderModule,
     CarouselModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
   
 })

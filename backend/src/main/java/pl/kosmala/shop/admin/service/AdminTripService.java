@@ -1,23 +1,17 @@
 package pl.kosmala.shop.admin.service;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import org.webjars.NotFoundException;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
 import pl.kosmala.shop.admin.model.AdminTrip;
 import pl.kosmala.shop.admin.repository.AdminTripRepository;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
-import pl.kosmala.shop.common.image.service.ImageService;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +46,8 @@ public class AdminTripService
             adminTrip.setHouse(adminProductDto.getHouse());
             adminTrip.setWifi(adminProductDto.getWifi());
             adminTrip.setApartment(adminProductDto.getApartment());
-
+            adminTrip.setStartDate(adminProductDto.getStartDate());
+            adminTrip.setEndDate(adminProductDto.getEndDate());
             List<Long> imagesIdFromRequest = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
 
             adminTrip.getImages().removeIf(imageAttachedToTheTrip -> !imagesIdFromRequest.contains(imageAttachedToTheTrip.getId()));
@@ -91,6 +86,8 @@ public class AdminTripService
                 .house(adminProductDto.getHouse())
                 .wifi(adminProductDto.getWifi())
                 .apartment(adminProductDto.getApartment())
+                .endDate(adminProductDto.getEndDate())
+                .startDate(adminProductDto.getStartDate())
                 .build();
 
         List<Long> idsOfImageToBeAdd = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();

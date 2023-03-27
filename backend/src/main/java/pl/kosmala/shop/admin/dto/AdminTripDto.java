@@ -10,6 +10,7 @@ import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -33,6 +34,8 @@ public class AdminTripDto
     private Boolean wifi;
     private Boolean food;
     private Boolean spa;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Image[] images;
 
 }

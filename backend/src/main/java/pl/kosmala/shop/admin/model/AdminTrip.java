@@ -8,6 +8,7 @@ import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -79,9 +80,41 @@ public class AdminTrip extends Product
     private Boolean spa;
 
 
+    @Column
+            (
+                    name = "start_date"
+                    //           nullable = false
+            )
+    private LocalDate startDate;
+
+    @Column
+            (
+                    name = "stop_date"
+                    //           nullable = false
+            )
+    private LocalDate endDate;
 
     @Builder
-    public AdminTrip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa, Set<Image> images) {
+    public AdminTrip
+            (
+                    String name,
+                    String desc,
+                    ProductCurrency currency,
+                    String slug,
+                    String fullDesc,
+                    TripDestination destination,
+                    BigDecimal basePrice,
+                    Boolean slopNearby,
+                    Boolean apartment,
+                    Boolean house,
+                    Boolean wifi,
+                    Boolean food,
+                    Boolean spa,
+                    LocalDate startDate,
+                    LocalDate endDate,
+                    Set<Image> images
+            )
+    {
         super(name, desc, currency, slug, fullDesc, images);
         this.destination = destination;
         this.basePrice = basePrice;
@@ -91,10 +124,31 @@ public class AdminTrip extends Product
         this.wifi = wifi;
         this.house = house;
         this.apartment = apartment;
-
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
     @Builder(builderMethodName = "builderWithId", buildMethodName = "buildWithId")
-    public AdminTrip(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Boolean slopNearby, Boolean apartment, Boolean house, Boolean wifi, Boolean food, Boolean spa, Set<Image> images) {
+    public AdminTrip
+            (
+                    Long id,
+                    String name,
+                    String desc,
+                    ProductCurrency currency,
+                    String slug,
+                    String fullDesc,
+                    TripDestination destination,
+                    BigDecimal basePrice,
+                    Boolean slopNearby,
+                    Boolean apartment,
+                    Boolean house,
+                    Boolean wifi,
+                    Boolean food,
+                    Boolean spa,
+                    LocalDate startDate,
+                    LocalDate endDate,
+                    Set<Image> images
+            )
+    {
         super(id, name, desc, currency, slug, fullDesc, images);
         this.destination = destination;
         this.basePrice = basePrice;
@@ -104,6 +158,8 @@ public class AdminTrip extends Product
         this.wifi = wifi;
         this.house = house;
         this.apartment = apartment;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
 

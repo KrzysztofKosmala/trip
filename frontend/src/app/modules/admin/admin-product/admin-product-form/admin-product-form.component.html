@@ -84,6 +84,21 @@
 
         </div>
     </mat-form-field>
+
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Data</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Data rozpoczęcia" formControlName="startDate">
+          <input matEndDate placeholder="Data zakończenia" formControlName="endDate">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+
     <mat-checkbox formControlName="apartment">Apartament</mat-checkbox>
     <mat-checkbox formControlName="food">Opcja wyżywienia</mat-checkbox>
     <mat-checkbox formControlName="slopNearby">Blisko stoku</mat-checkbox>
