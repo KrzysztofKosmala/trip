@@ -25,7 +25,8 @@ public class Product
             (
                     name = "name",
                     nullable = false,
-                    columnDefinition = "TEXT"
+                    columnDefinition = "TEXT",
+                    unique = true
             )
     private String name;
     @Column

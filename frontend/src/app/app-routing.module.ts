@@ -11,6 +11,7 @@ import { AdminProductComponent } from './modules/admin/admin-product/admin-produ
 import { AdminComponent } from './modules/admin/admin.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
+import { OrderComponent } from './modules/order/order.component';
 import { ProductDetalisComponent } from './modules/product-detalis/product-detalis.component';
 import { ProductComponent } from './modules/product/product.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: '', component: HomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'products/:slug', component: ProductDetalisComponent},
+      {path: 'order/:slug', component: OrderComponent}
     ]
   },
   {

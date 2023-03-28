@@ -1,0 +1,88 @@
+<div *ngIf="orderSummary">
+    <div>Nowe zamówienie o numerze: {{orderSummary.id}}</div>
+    <div>Data złożenia: {{orderSummary.placeDate}}</div>
+    <div>Status: {{orderSummary.status}}</div>
+    <div>Wartość: {{orderSummary.grossValue}}</div>
+</div>
+
+<div *ngIf="product">
+    <h2>Rezerwujesz</h2>
+    <div>Nazwa: {{product.name}}</div>
+    <div>slug: {{product.slug}}</div>
+</div>
+
+<form [formGroup]="formGrup" (submit)="submit()">
+    <div fxLayout="column" class="orderForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Imię</mat-label>
+            <input matInput placeholder="Podaj imię" formControlName="firstname">
+            <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
+            <div *ngIf="firstname?.errors?.['required']">
+                Imię jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Ulica</mat-label>
+            <input matInput placeholder="Podaj ulicę" formControlName="street">
+            <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="errorMessage">
+            <div *ngIf="street?.errors?.['required']">
+                Nazwa ulicy jest wymagana
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Kod pocztkowy</mat-label>
+            <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
+            <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
+            <div *ngIf="zipcode?.errors?.['required']">
+                Kod pocztowy jest wymagany
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Miasto</mat-label>
+            <input matInput placeholder="Podaj miasto" formControlName="city">
+            <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="errorMessage">
+            <div *ngIf="city?.errors?.['required']">
+                Miasto jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Podaj email" formControlName="email">
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="errorMessage">
+            <div *ngIf="email?.errors?.['required']">
+                Email jest wymagany
+            </div>
+            <div *ngIf="email?.errors?.['email']">
+                Podaj porawny format email
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Telefon</mat-label>
+            <input matInput placeholder="Podaj telefon" formControlName="phone">
+            <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
+            <div *ngIf="phone?.errors?.['required']">
+                Telefon jest wymagany
+            </div>
+            </div>
+        </mat-form-field>
+    </div>
+    <div>
+    </div>
+    <div fxLayoutAlign="end start">
+        <button mat-flat-button color="accent" class="orderButton">Rezerwuje</button>
+    </div>
+</form>
