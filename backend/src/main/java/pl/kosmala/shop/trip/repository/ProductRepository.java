@@ -1,9 +1,15 @@
 package pl.kosmala.shop.trip.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import pl.kosmala.shop.common.model.Product;
-@Deprecated
-public interface ProductRepository extends CrudRepository<Product, Long>
-{
 
+import java.util.Optional;
+
+@Deprecated
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long>
+{
+    Optional<Product> findBySlug(String slug);
 }

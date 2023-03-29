@@ -20,12 +20,7 @@ import java.util.Set;
 @Table(name = "trip")
 public class Trip extends Product
 {
-    @Column
-            (
-                    name = "base_price"
-         //           nullable = false
-            )
-    private BigDecimal basePrice;
+
 
     @Column
             (
@@ -82,8 +77,8 @@ public class Trip extends Product
 
     @Builder
     public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Set<Image> images) {
-        super(name, desc, currency, slug, fullDesc, images);
+        super(name, desc, currency, slug, fullDesc, images, basePrice);
         this.destination = destination;
-        this.basePrice = basePrice;
+
     }
 }

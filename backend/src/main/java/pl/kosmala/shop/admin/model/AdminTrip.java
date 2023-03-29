@@ -22,13 +22,6 @@ public class AdminTrip extends Product
 
     @Column
             (
-                    name = "base_price"
-                    //           nullable = false
-            )
-    private BigDecimal basePrice;
-
-    @Column
-            (
                     name = "destination",
                     nullable = false,
                     columnDefinition = "TEXT"
@@ -115,9 +108,8 @@ public class AdminTrip extends Product
                     Set<Image> images
             )
     {
-        super(name, desc, currency, slug, fullDesc, images);
+        super(name, desc, currency, slug, fullDesc, images, basePrice);
         this.destination = destination;
-        this.basePrice = basePrice;
         this.food = food;
         this.slopNearby = slopNearby;
         this.spa = spa;
@@ -149,9 +141,8 @@ public class AdminTrip extends Product
                     Set<Image> images
             )
     {
-        super(id, name, desc, currency, slug, fullDesc, images);
+        super(id, name, desc, currency, slug, fullDesc, images, basePrice);
         this.destination = destination;
-        this.basePrice = basePrice;
         this.food = food;
         this.slopNearby = slopNearby;
         this.spa = spa;

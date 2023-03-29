@@ -3,7 +3,10 @@ package pl.kosmala.shop.common.model;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.kosmala.shop.common.image.model.Image;
+import pl.kosmala.shop.order.model.Order;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +64,12 @@ public class Product
                     name = "full_dessc"
             )
     private String fullDesc;
-
+    @Column
+            (
+                    name = "base_price"
+                    //           nullable = false
+            )
+    private BigDecimal basePrice;
 
     @OneToMany
     @JoinColumn(name = "productId")
@@ -74,7 +82,10 @@ public class Product
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Set<Image> images;
 
-    public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images)
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders;
+
+    public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images, BigDecimal basePrice)
     {
         this.name = name;
         this.desc = desc;
@@ -82,8 +93,9 @@ public class Product
         this.slug = slug;
         this.fullDesc = fullDesc;
         this.images = images;
+        this.basePrice = basePrice;
     }
-    public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc,  Set<Image> images)
+    public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc,  Set<Image> images, BigDecimal basePrice)
     {
         this.id = id;
         this.name = name;
@@ -92,6 +104,7 @@ public class Product
         this.slug = slug;
         this.fullDesc = fullDesc;
         this.images = images;
+        this.basePrice = basePrice;
     }
     public void addImage(Image image) {
         if (images == null) {
@@ -111,5 +124,24 @@ public class Product
                 image.getProducts().remove(this);
             }
         }
+    }
+    public void addOrder(Order order) {
+        if (orders == null) {
+            orders = new ArrayList<>();
+        }
+        if (!orders.contains(order)) {
+            orders.add(order);
+
+        }
+    }
+    public void removeOrder(Order order) {
+        orders.removeIf(o -> o.getId().equals(order.getId()));
+        order.setProduct(null);
+    }
+
+    public void detouchAllOrders()
+    {
+        orders.forEach(o -> o.setProduct(null));
+        orders.clear();
     }
 }

@@ -63,8 +63,6 @@ public class AdminTripServiceTest
         for (Image image : images)
             image.setId(atomicLong.getAndIncrement());
 
-
-
         AdminTripDto adminTripDto = generator.generateAdminTripDtp(images);
 
         given(adminTripRepository.existsByName(adminTripDto.getName())).willReturn(false);

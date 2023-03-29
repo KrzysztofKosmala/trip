@@ -5,4 +5,5 @@ import pl.kosmala.shop.order.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long>
 {
+
 }
