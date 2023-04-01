@@ -40,14 +40,31 @@ constructor
     });
   }
 
+  private statuses = new Map<string, string>([
+    ["NEW", "Nowe"]
+  ])
+
 submit()
 {
   this.orderService.placeOrder({
+    firstname: this.formGrup.get('firstname')?.value,
+    lastname: this.formGrup.get('lastname')?.value,
+    street: this.formGrup.get('street')?.value,
+    zipcode: this.formGrup.get('zipcode')?.value,
+    city: this.formGrup.get('city')?.value,
+    email: this.formGrup.get('email')?.value,
+    phone: this.formGrup.get('phone')?.value,
+    productslug: this.product.slug,
+  } as OrderDto).subscribe(orderSummary => {
+    this.orderSummary=orderSummary;
 
-
-  } as OrderDto).subscribe(orderSummary => this.orderSummary=orderSummary)
+  })
 }
 
+getStatus(status: string)
+{
+  return this.statuses.get(status);
+}
 get firstname(){
   return this.formGrup.get("firstname")
 }

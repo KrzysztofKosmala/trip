@@ -129,10 +129,15 @@ public class AdminTripService
         Optional<AdminTrip> trip = adminTripRepository.findById(id);
         if(trip.isPresent())
         {
-            trip.get().getImages().forEach(image -> {
-                image.removeProduct(trip.get());
-                imageRepository.save(image);
-            });
+            if(trip.get().getImages() != null)
+            {
+                trip.get().getImages().forEach(image ->
+                {
+                    image.removeProduct(trip.get());
+                    imageRepository.save(image);
+                });
+            }
+            trip.get().detouchAllOrders();
             adminTripRepository.deleteById(id);
         }
     }

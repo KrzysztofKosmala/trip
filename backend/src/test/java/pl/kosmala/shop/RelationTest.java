@@ -1,4 +1,4 @@
-package pl.kosmala.shop.admin;
+package pl.kosmala.shop;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,10 @@ import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.fakeData.AdminTripDtoGenerator;
 import pl.kosmala.shop.fakeData.ImageGenerator;
+import pl.kosmala.shop.fakeData.OrderGenerator;
 import pl.kosmala.shop.fakeData.ProductGenerator;
+import pl.kosmala.shop.order.model.Order;
+import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.trip.repository.TripRepository;
 
 import java.util.*;
@@ -38,6 +41,8 @@ public class RelationTest
     protected List<Image> imagesFromDb;
     @Autowired
     private TripRepository tripRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @BeforeEach
     public void setup()
@@ -76,6 +81,9 @@ public class RelationTest
                     adminTripRepository.save(trip);
                 }
         );
+        OrderGenerator orderGenerator = new OrderGenerator();
+        List<? extends Order> orders = orderGenerator.generateOrders(trips, 10);
+        orderRepository.saveAll(orders);
         imagesFromDb = imageRepository.findAll();
         tripsFromDb = adminTripRepository.findAll();
     }
@@ -90,22 +98,35 @@ public class RelationTest
         for (AdminTrip trip : tripsFromDb)
         {
             Set<Image> tripImages = trip.getImages();
+            List<Order> orders = trip.getOrders();
             Assertions.assertEquals(2, tripImages.size());
+            Assertions.assertEquals(10, orders.size());
         }
 
     }
 
     @Test
-    void shouldDeleteProductButNotImages()
+    void shouldDeleteOnlyProduct()
     {
         int imageIndex = random.nextInt(tripsFromDb.size());
         Long id = tripsFromDb.get(imageIndex).getId();
         long amountOfImagesBeforeDeleting = imageRepository.count();
         long amountOfTripsBeforeDeleting = adminTripRepository.count();
         Assertions.assertEquals(true, tripRepository.existsById(id));
+        long amountOfOrdersBeforeDeleting = orderRepository.count();
+
+        AdminTrip product = adminTripRepository.findById(id).orElseThrow();
+
+
+        List<Long> orderIds = product.getOrders().stream().map(order -> order.getId()).toList();
 
         adminTripService.deleteTrip(id);
 
+        List<Order> idsOfOrdersThatShouldBeDetachFromProduct = orderRepository.findAllById(orderIds);
+
+
+        idsOfOrdersThatShouldBeDetachFromProduct.forEach( order -> Assertions.assertEquals(null,order.getProduct()));
+        Assertions.assertEquals(amountOfOrdersBeforeDeleting, orderRepository.count());
         Assertions.assertEquals(amountOfImagesBeforeDeleting, imageRepository.count());
         Assertions.assertEquals(amountOfTripsBeforeDeleting - 1, adminTripRepository.count());
         Assertions.assertEquals(false, tripRepository.existsById(id));

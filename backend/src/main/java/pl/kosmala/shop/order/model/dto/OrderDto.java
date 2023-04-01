@@ -23,5 +23,5 @@ public class OrderDto
     @NotBlank
     private String phone;
     @NotBlank
-    private String productSlug;
+    private String productslug;
 }

@@ -32,7 +32,6 @@ public class AdminController
     private final AdminTripService adminTripService;
 
     @GetMapping("/trips")
-
     public Page<AdminTrip> getTrips(@PageableDefault(size = 30) Pageable pageable) { return adminTripService.getAllAdminTrips(pageable); }
 
     @GetMapping("/trips/{id}")

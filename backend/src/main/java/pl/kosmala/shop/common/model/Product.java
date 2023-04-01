@@ -141,7 +141,10 @@ public class Product
 
     public void detouchAllOrders()
     {
-        orders.forEach(o -> o.setProduct(null));
-        orders.clear();
+        if(orders != null)
+        {
+            orders.forEach(o -> o.setProduct(null));
+            orders.clear();
+        }
     }
 }

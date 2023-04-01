@@ -20,12 +20,12 @@ public class OrderService
 {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    //TODO: dodać klienta do zamówienia
     @Transactional
     public OrderSummary placeOrder(OrderDto orderDto)
     {
-        Product product = productRepository.findBySlug(orderDto.getProductSlug()).orElseThrow();
+        Product product = productRepository.findBySlug(orderDto.getProductslug()).orElseThrow();
 
-        // stworzenie zamóweniea z wierszami
         Order order = Order.builder()
                 .firstname(orderDto.getFirstname())
                 .lastname(orderDto.getLastname())
@@ -40,9 +40,15 @@ public class OrderService
                 .grossValue(product.getBasePrice())
                 .build();
 
+        product.addOrder(order);
+
         Order newOrder = orderRepository.save(order);
-        // pobieranie produktu
-        // zapisać zamówienie
-        return null;
+
+        return OrderSummary.builder()
+                .status(newOrder.getOrderStatus())
+                .id(newOrder.getId())
+                .grossValue(newOrder.getGrossValue())
+                .placeDate(newOrder.getPlaceDate())
+                .build();
     }
 }
