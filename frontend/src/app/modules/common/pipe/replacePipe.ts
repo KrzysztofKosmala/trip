@@ -1,6 +1,8 @@
-import { PipeTransform } from "@angular/core";
-import { serialize } from "v8";
+import { Pipe, PipeTransform } from "@angular/core";
 
+@Pipe({
+    name: 'replace'
+})
 export class ReplacePipe implements PipeTransform
 {
     transform(value: string, strToReplace: string, replacementStr: string) {
@@ -8,7 +10,7 @@ export class ReplacePipe implements PipeTransform
         {
             return value;
         }
-        return value.replace(new RegExp(strToReplace, 'g'), replacementStr)
+        return value.replace(new RegExp(strToReplace, 'g'), replacementStr);
     }
 
 }

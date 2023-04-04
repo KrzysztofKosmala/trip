@@ -14,6 +14,7 @@ export class OrderService {
 
   placeOrder(order: OrderDto): Observable<OrderSummary>
   {
+    console.log(order)
     return this.http.post<OrderSummary>("/api/v1/orders", order);
   }
 

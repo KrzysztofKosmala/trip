@@ -56,6 +56,7 @@ public class OrderService
                 .grossValue(newOrder.getGrossValue())
                 .placeDate(newOrder.getPlaceDate())
                 .payment(newOrder.getPayment())
+
                 .build();
     }
 }

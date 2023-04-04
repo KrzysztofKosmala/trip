@@ -8,12 +8,14 @@ import { LoginComponent } from 'src/app/modules/login/login.component';
 import { HomeComponent } from 'src/app/modules/home/home.component';
 import { OrderComponent } from 'src/app/modules/order/order.component';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReplacePipe } from 'src/app/modules/common/pipe/replacePipe';
 @NgModule({
   declarations: [
     FullpageComponent,
     LoginComponent,
     HomeComponent,
-    OrderComponent
+    OrderComponent,
+    ReplacePipe
   ],
   imports: [
     CommonModule,
