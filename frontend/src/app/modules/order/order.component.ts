@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetails } from '../product-detalis/model/ProductDetails';
 import { ProductDetailsService } from '../product-detalis/product-details.service';
+import { InitData } from './model/InitData';
 import { OrderDto } from './model/OrderDto';
 import { OrderSummary } from './model/OrderSummary';
 import { OrderService } from './order.service';
@@ -17,6 +18,7 @@ export class OrderComponent implements OnInit{
 formGrup!: FormGroup;
 orderSummary!: OrderSummary;
 product!: ProductDetails;
+initData!: InitData;
 constructor
   (
     private productDetailsService: ProductDetailsService,
@@ -36,8 +38,10 @@ constructor
       zipcode: [''],
       city: [''],
       email: [''],
-      phone: ['']
+      phone: [''],
+      payment: ['']
     });
+    this.getinitData();
   }
 
   private statuses = new Map<string, string>([
@@ -55,11 +59,25 @@ submit()
     email: this.formGrup.get('email')?.value,
     phone: this.formGrup.get('phone')?.value,
     productslug: this.product.slug,
+    paymentId: Number(this.formGrup.get('payment')?.value.id),
   } as OrderDto).subscribe(orderSummary => {
     this.orderSummary=orderSummary;
 
   })
 }
+
+getinitData()
+{
+  this.orderService.getInitData()
+  .subscribe(initData => {
+    this.initData =initData;
+    console.log(initData)
+    this.setDefaultPayment();
+  })
+}
+  setDefaultPayment() {
+    this.formGrup.patchValue({"payment": this.initData.payments.filter(payment => payment.defaultPayment === true)[0]})
+  }
 
 getStatus(status: string)
 {

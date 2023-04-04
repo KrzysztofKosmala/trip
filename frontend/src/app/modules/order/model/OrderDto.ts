@@ -7,5 +7,6 @@ export interface OrderDto
     city: string,
     email: string,
     phone: string,
-    productslug: string
+    productslug: string,
+    paymentId: number
 }

@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.utils.SlugifyUtils;
+import pl.kosmala.shop.order.model.Payment;
+import pl.kosmala.shop.order.model.PaymentType;
+import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.TripRepository;
 import pl.kosmala.shop.review.repository.ReviewRepository;
@@ -27,12 +30,19 @@ public class TripApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(TripRepository tripRepository, ReviewRepository reviewRepository)
+	CommandLineRunner commandLineRunner(TripRepository tripRepository, ReviewRepository reviewRepository, PaymentRepository paymentRepository)
 	{
 		return args ->
 		{
 			List<Trip> trips = trips(10);
 			tripRepository.saveAll(trips);
+
+			Payment payment = new Payment();
+			payment.setType(PaymentType.BANK_TRANSFER);
+			payment.setDefaultPayment(true);
+			payment.setNote("default payment");
+			payment.setName("Bank transfer");
+			paymentRepository.save(payment);
 		};
 	}
 	public Trip generateTrip()

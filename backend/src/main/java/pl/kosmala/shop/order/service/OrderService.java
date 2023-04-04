@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.OrderStatus;
+import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
+import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 import pl.kosmala.shop.trip.repository.TripRepository;
 
@@ -20,11 +22,14 @@ public class OrderService
 {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final PaymentRepository paymentRepository;
     //TODO: dodać klienta do zamówienia
     @Transactional
     public OrderSummary placeOrder(OrderDto orderDto)
     {
         Product product = productRepository.findBySlug(orderDto.getProductslug()).orElseThrow();
+
+        Payment payment = paymentRepository.findById(orderDto.getPaymentId()).orElseThrow();
 
         Order order = Order.builder()
                 .firstname(orderDto.getFirstname())
@@ -38,6 +43,7 @@ public class OrderService
                 .orderStatus(OrderStatus.NEW)
                 .product(product)
                 .grossValue(product.getBasePrice())
+                .payment(payment)
                 .build();
 
         product.addOrder(order);
@@ -49,6 +55,7 @@ public class OrderService
                 .id(newOrder.getId())
                 .grossValue(newOrder.getGrossValue())
                 .placeDate(newOrder.getPlaceDate())
+                .payment(newOrder.getPayment())
                 .build();
     }
 }

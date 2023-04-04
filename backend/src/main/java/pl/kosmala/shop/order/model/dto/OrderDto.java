@@ -24,4 +24,6 @@ public class OrderDto
     private String phone;
     @NotBlank
     private String productslug;
+    @NotBlank
+    private Long paymentId;
 }

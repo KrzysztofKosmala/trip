@@ -18,6 +18,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,7 +41,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     CarouselModule,
     NgImageSliderModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule
   ],
   exports: 
   [
@@ -62,7 +64,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     CarouselModule,
     NgImageSliderModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule
   ]
   
 })

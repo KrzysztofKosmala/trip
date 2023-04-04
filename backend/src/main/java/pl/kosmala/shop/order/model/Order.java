@@ -39,6 +39,9 @@ public class Order<T extends Product>
     @JoinColumn(name = "product_id")
     private T product;
 
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
     @Override
     public boolean equals(Object o) {

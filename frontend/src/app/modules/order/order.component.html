@@ -3,6 +3,7 @@
     <div>Data złożenia: {{orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
     <div>Status: {{getStatus(orderSummary.status)}}</div>
     <div>Wartość: {{orderSummary.grossValue}} PLN</div>
+    <div *ngIf="orderSummary.payment.note">Płatność: <br>{{orderSummary.payment.note}}</div>
 </div>
 
 <div *ngIf="product && !orderSummary">
@@ -79,6 +80,16 @@
             </div>
             </div>
         </mat-form-field>
+    </div>
+    <div>
+        <h2>Płatność</h2>
+        <mat-radio-group fxLayout="column" formControlName="payment">
+            <mat-radio-button class="paymentRadioButton" *ngFor="let payment of initData?.payments" [value]="payment" [checked]="payment.defaultPayment">
+            {{payment.name}}
+
+            </mat-radio-button>
+
+        </mat-radio-group>
     </div>
     <div>
     </div>
