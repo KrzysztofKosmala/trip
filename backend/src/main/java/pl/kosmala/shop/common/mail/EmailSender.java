@@ -1,6 +1,9 @@
 package pl.kosmala.shop.common.mail;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public interface EmailSender
 {
-    void send(String to, String subject, String message);
+    void send(EmailMessage message);
 }

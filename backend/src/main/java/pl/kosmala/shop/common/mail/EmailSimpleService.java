@@ -11,13 +11,13 @@ public class EmailSimpleService implements EmailSender
 {
     private final JavaMailSender mailSender;
     @Override
-    public void send(String to, String subject, String msg)
+    public void send(EmailMessage message)
     {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("shop <sklep@kosmala.pl>");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(msg);
-        mailSender.send(message);
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("shop <sklep@kosmala.pl>");
+        simpleMailMessage.setTo(message.getTo());
+        simpleMailMessage.setSubject(message.getSubject());
+        simpleMailMessage.setText(message.getBody());
+        mailSender.send(simpleMailMessage);
     }
 }

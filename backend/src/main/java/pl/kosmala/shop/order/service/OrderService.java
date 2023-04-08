@@ -3,10 +3,9 @@ package pl.kosmala.shop.order.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.kosmala.shop.common.mail.EmailClientService;
-import pl.kosmala.shop.common.mail.EmailSender;
-import pl.kosmala.shop.common.mail.EmailSimpleService;
+import pl.kosmala.shop.common.mail.*;
 import pl.kosmala.shop.common.model.Product;
+import pl.kosmala.shop.common.rabbitMq.RabbitMQMessageProducer;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
@@ -28,6 +27,8 @@ public class OrderService
     private final ProductRepository productRepository;
     private final PaymentRepository paymentRepository;
 
+    private final RabbitMQMessageProducer messageProducer;
+    private final EmailConfig emailConfig;
     private final EmailClientService emailClientService;
     //TODO: dodać klienta do zamówienia
     @Transactional
@@ -56,7 +57,21 @@ public class OrderService
 
         Order newOrder = orderRepository.save(order);
 
-        emailClientService.getInstance().send(orderDto.getEmail(), "Twoje zamówienie zostało przyjęte", createEmailMessage(order));
+        EmailMessage message = EmailMessage.builder()
+                .to(orderDto.getEmail())
+                .body(createEmailMessage(order))
+                .subject("Twoje zamówienie zostało przyjęte")
+                .build();
+
+        //emailClientService.getInstance().send(message);
+
+        messageProducer.publish
+                (
+                        message,
+                        emailConfig.getInternalExchange(),
+                        emailConfig.getInternalOrderConfirmationRoutingKey()
+                );
+
         return OrderSummary.builder()
                 .status(newOrder.getOrderStatus())
                 .id(newOrder.getId())

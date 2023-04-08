@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class WebServiceEmailService implements EmailSender
 {
     @Override
-    public void send(String to, String subject, String message)
+    public void send(EmailMessage message)
     {
         throw new RuntimeException("not implemented yet");
     }
