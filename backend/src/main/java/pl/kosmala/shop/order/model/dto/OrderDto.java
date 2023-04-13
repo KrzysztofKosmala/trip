@@ -2,9 +2,11 @@ package pl.kosmala.shop.order.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class OrderDto
 {
     @NotBlank

@@ -1,4 +1,4 @@
-package pl.kosmala.shop.common.mail;
+package pl.kosmala.shop.common.notification.mail;
 
 import org.springframework.stereotype.Service;
 

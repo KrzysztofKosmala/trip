@@ -1,10 +1,9 @@
-package pl.kosmala.shop.common.mail;
+package pl.kosmala.shop.common.notification.mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
