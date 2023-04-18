@@ -15,6 +15,7 @@ import { AdminConfirmDialogComponent } from 'src/app/modules/admin/common/compon
 import { AdminImageAddComponent } from 'src/app/modules/admin/admin-image-add/admin-image-add.component';
 import { AdminImageComponent } from 'src/app/modules/admin/admin-image/admin-image.component';
 import { AdminProductPopupImagesListComponent } from 'src/app/modules/admin/admin-product/admin-product-popup-images-list/admin-product-popup-images-list.component';
+import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-order.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AdminProductPopupImagesListComponent } from 'src/app/modules/admin/admi
     AdminConfirmDialogComponent,
     AdminImageComponent,
     AdminImageAddComponent,
-    AdminProductPopupImagesListComponent
+    AdminProductPopupImagesListComponent,
+    AdminOrderComponent
   ],
   imports: [
     CommonModule,

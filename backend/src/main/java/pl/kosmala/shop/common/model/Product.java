@@ -1,5 +1,6 @@
 package pl.kosmala.shop.common.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.kosmala.shop.common.image.model.Image;
@@ -83,6 +84,7 @@ public class Product
     private Set<Image> images;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<Order> orders;
 
     public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images, BigDecimal basePrice)

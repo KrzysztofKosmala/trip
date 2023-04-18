@@ -5,6 +5,8 @@ import { FullpageComponent } from './layouts/fullpage/fullpage.component';
 import { FullpageadminComponent } from './layouts/fullpageadmin/fullpageadmin.component';
 import { AdminImageAddComponent } from './modules/admin/admin-image-add/admin-image-add.component';
 import { AdminImageComponent } from './modules/admin/admin-image/admin-image.component';
+import { AdminOrderUpdateComponent } from './modules/admin/admin-order/admin-order-update/admin-order-update.component';
+import { AdminOrderComponent } from './modules/admin/admin-order/admin-order.component';
 import { AdminProductAddComponent } from './modules/admin/admin-product/admin-product-add/admin-product-add.component';
 import { AdminProductUpdateComponent } from './modules/admin/admin-product/admin-product-update/admin-product-update.component';
 import { AdminProductComponent } from './modules/admin/admin-product/admin-product.component';
@@ -37,7 +39,9 @@ const routes: Routes = [
       {path: 'admin/products/update/:id', component: AdminProductUpdateComponent},
       {path: 'admin/products/add', component: AdminProductAddComponent},
       {path: 'admin/images', component: AdminImageComponent},
-      {path: 'admin/images/add', component: AdminImageAddComponent}
+      {path: 'admin/images/add', component: AdminImageAddComponent},
+      {path: 'admin/orders', component: AdminOrderComponent},
+      {path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent},
     ]
   }
 ];

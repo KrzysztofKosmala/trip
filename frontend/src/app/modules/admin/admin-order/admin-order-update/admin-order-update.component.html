@@ -1,0 +1,28 @@
+<h1>Edycja zamówienia </h1>
+<div>
+    <h2>Dane zamówienia</h2>
+    Numer zamówienia: {{order?.id}}
+    <br /><br />
+    Data złożenia: {{order?.placeDate }}<br />
+    Płatność: {{order?.payment?.name}}<br /><br />
+    
+    <form fxLayaout="row" fxLayoutAlign="space-between start">
+        <div>Status: {{order?.orderStatus}}</div>
+        <button mat-flat-button color="primary">Zapisz</button>
+    </form>
+</div>
+
+    <div fxLayoutAlign="end end">
+        <b>Wartość: {{order?.grossValue}}</b>
+    </div>
+
+<div>
+    <h2>Dane klienta</h2>
+    <div>Imię: {{order?.firstname}}</div>
+    <div>Nazwisko: {{order?.lastname}}</div>
+    <div>Ulica: {{order?.street}}</div>
+    <div>Kod: {{order?.zipcode}}</div>
+    <div>Miasto: {{order?.city}}</div>
+    <div>Email: {{order?.email}}</div>
+    <div>Tel: {{order?.phone}}</div>
+</div>

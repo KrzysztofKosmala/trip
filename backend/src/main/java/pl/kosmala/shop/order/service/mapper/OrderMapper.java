@@ -44,11 +44,16 @@ public class OrderMapper
 
     public static EmailMessage mapToEmailMassage(Order order)
     {
-        return EmailMessage.builder()
+        EmailMessage message =  new EmailMessage();
+        message.setTo(order.getEmail());
+        message.setBody(mapToString(order));
+        message.setSubject("Twoje zamówienie zostało przyjęte");
+/*        return EmailMessage.builder()
                 .to(order.getEmail())
                 .body(mapToString(order))
                 .subject("Twoje zamówienie zostało przyjęte")
-                .build();
+                .build();*/
+        return message;
     }
     private static String mapToString(Order order)
     {
