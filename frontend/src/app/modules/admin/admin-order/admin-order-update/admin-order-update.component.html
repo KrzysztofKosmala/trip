@@ -6,15 +6,36 @@
     Data złożenia: {{order?.placeDate }}<br />
     Płatność: {{order?.payment?.name}}<br /><br />
     
-    <form fxLayaout="row" fxLayoutAlign="space-between start">
+    <form [formGroup]="formGroup" fxLayaout="row" fxLayoutAlign="space-between start" (submit)="changeStatus()">
         <div>Status: {{order?.orderStatus}}</div>
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="orderStatus">
+                <mat-option *ngFor="let status of statuses | keyvalue" [value]="status.key">{{status.value}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <button mat-flat-button color="primary">Zapisz</button>
     </form>
 </div>
 
+<div>
+    <h2>Produkt</h2>
+    <div fxLayaout="row" fxLayoutAlign="space-between start">
+        <div class="order-hcol-1">
+            Nazwa
+        </div> 
+        <div class="order-hcol-2">Wartość</div>
+    </div>
+    <div fxLayaout="row" fxLayoutAlign="space-between start">
+        <div class="order-col-1">
+            <span >{{order?.product?.name}}</span>
+        </div>
+        <div >{{order?.product?.basePrice}}</div>
+    </div>
     <div fxLayoutAlign="end end">
         <b>Wartość: {{order?.grossValue}}</b>
     </div>
+</div>
 
 <div>
     <h2>Dane klienta</h2>

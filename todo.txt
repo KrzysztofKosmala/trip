@@ -12,6 +12,13 @@ admin
 - listowanie pracowników
 - logowanie
 - moderowanie komantarzy
+- zwracanie do frontendu krajów 
+
+usługa do zwracanie słowników
+- CRUD
+- zwracanie na frontend aktualnych państw
+- zwracanie na fornt aktualnych statusów 
+
 
 
 customer

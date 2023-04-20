@@ -16,6 +16,7 @@ import { AdminImageAddComponent } from 'src/app/modules/admin/admin-image-add/ad
 import { AdminImageComponent } from 'src/app/modules/admin/admin-image/admin-image.component';
 import { AdminProductPopupImagesListComponent } from 'src/app/modules/admin/admin-product/admin-product-popup-images-list/admin-product-popup-images-list.component';
 import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-order.component';
+import { AdminOrderUpdateComponent } from 'src/app/modules/admin/admin-order/admin-order-update/admin-order-update.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-ord
     AdminImageComponent,
     AdminImageAddComponent,
     AdminProductPopupImagesListComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    AdminOrderUpdateComponent
   ],
   imports: [
     CommonModule,
