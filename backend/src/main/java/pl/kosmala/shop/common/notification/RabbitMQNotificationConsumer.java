@@ -20,4 +20,10 @@ public class RabbitMQNotificationConsumer
         log.info("Consumed {} from queue", message);
         emailClientService.getInstance().send(message);
     }
+    @RabbitListener(queues = "${rabbitmq.queue.orderChangeStatus}")
+    public void orderChangeStatusConsumer(EmailMessage message)
+    {
+        log.info("Consumed {} from queue", message);
+        emailClientService.getInstance().send(message);
+    }
 }

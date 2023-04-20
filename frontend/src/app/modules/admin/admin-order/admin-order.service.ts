@@ -23,6 +23,7 @@ export class AdminOrderService {
   }
 
   saveStatus(id: number, value: any): Observable<void> {
+    console.log(id)
     return this.http.patch<void>("/api/v1/admin/orders/" + id, value);
   }
 }

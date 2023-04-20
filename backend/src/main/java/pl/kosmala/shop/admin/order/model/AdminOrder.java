@@ -2,12 +2,14 @@ package pl.kosmala.shop.admin.order.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kosmala.shop.common.log.AdminOrderLog;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 @Entity
 @Table(name = "`order`")
@@ -40,6 +42,10 @@ public class AdminOrder<T extends Product>
     @OneToOne
     @JoinColumn(name = "payment_id")
     private AdminPayment payment;
+
+    @OneToMany
+    @JoinColumn(name = "orderId")
+    private List<AdminOrderLog> orderLogs;
 
     @Override
     public boolean equals(Object o)

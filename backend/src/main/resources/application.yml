@@ -22,6 +22,8 @@ rabbitmq:
   queue:
     orderConfirmation: orderConfirmation.queue
     accountConfirmation: accountConfirmation.queue
+    orderChangeStatus: orderChangeStatus.queue
   routing-keys:
      internal-orderConfirmation: internal.orderConfirmation.routing-key
      internal-accountConfirmation: internal.accountConfirmation.routing-key
+     internal-orderChangeStatus: internal.orderChangeStatus.routing-key

@@ -1,4 +1,5 @@
 import { Product } from "src/app/modules/common/model/product"
+import { AdminOrderLog } from "./adminOrderLog"
 import { AdminPayment } from "./adminPayment"
 
 export interface AdminOrder{
@@ -15,4 +16,5 @@ export interface AdminOrder{
     email: string,
     phone: string,
     payment: AdminPayment
+    orderLogs: Array<AdminOrderLog>
 }
