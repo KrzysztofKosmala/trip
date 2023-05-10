@@ -8,6 +8,7 @@ import { AdminOrder } from './model/adminOrder';
   providedIn: 'root'
 })
 export class AdminOrderService {
+
   getInitData(): Observable<any> {
     return this.http.get<any>("/api/v1/admin/orders/initData")
   }
@@ -25,5 +26,15 @@ export class AdminOrderService {
   saveStatus(id: number, value: any): Observable<void> {
     console.log(id)
     return this.http.patch<void>("/api/v1/admin/orders/" + id, value);
+  }
+
+  exportOrders(from: string, to: string, orderStatus: string): Observable<any> {
+    return this.http.get(`/api/v1/admin/orders/export?from=${from}&to=${to}&orderStatus=${orderStatus}`, 
+    {responseType: 'blob', observe: 'response'})
+  }
+
+  getSalesStatistics(): Observable<any>{
+    
+    return this.http.get("/api/v1/admin/orders/stats");
   }
 }

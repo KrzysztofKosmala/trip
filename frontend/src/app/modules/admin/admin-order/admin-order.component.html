@@ -1,5 +1,6 @@
 <h1>Zamówienia</h1>
-
+<button mat-raised-button color="accent" routerLink="/admin/orders/export">Eksport <mat-icon>Export</mat-icon></button>
+<button mat-raised-button color="accent" routerLink="/admin/orders/stats">Statystyki <mat-icon>Statystyki</mat-icon></button>
 <table mat-table [dataSource]="data">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id </th>

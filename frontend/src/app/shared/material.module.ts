@@ -19,6 +19,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import {MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [],
   imports: [
@@ -42,7 +43,8 @@ import {MatRadioModule} from '@angular/material/radio';
     NgImageSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatMomentDateModule
   ],
   exports: 
   [
@@ -65,8 +67,11 @@ import {MatRadioModule} from '@angular/material/radio';
     NgImageSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatMomentDateModule
+  ],
+  providers: [
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ]
-  
 })
 export class MaterialModule { }

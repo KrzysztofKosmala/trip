@@ -3,7 +3,7 @@
     <h2>Dane zamówienia</h2>
     Numer zamówienia: {{order?.id}}
     <br /><br />
-    Data złożenia: {{order?.placeDate }}<br />
+    Data złożenia: {{order?.placeDate | date : 'yyyy-MM-dd HH:mm'}}  <br />
     Płatność: {{order?.payment?.name}}<br /><br />
     
     <form [formGroup]="formGroup" fxLayaout="row" fxLayoutAlign="space-between start" (submit)="changeStatus()">
@@ -51,7 +51,7 @@
     <h2>Log zdarzeń</h2>
     <div>
         <div *ngFor="let log of order?.orderLogs" class="orderLog">
-        <div>{{log?.created}}</div>
+        <div>{{log?.created | date : 'yyyy-MM-dd HH:mm'}}</div>
         <div>{{log?.note}}</div>
         </div>
 
