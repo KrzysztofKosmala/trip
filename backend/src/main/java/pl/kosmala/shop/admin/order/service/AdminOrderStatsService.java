@@ -6,16 +6,13 @@ import pl.kosmala.shop.admin.order.model.AdminOrder;
 import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
 import pl.kosmala.shop.admin.order.model.dto.AdminOrderStats;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
-import pl.kosmala.shop.order.model.OrderStatus;
-import pl.kosmala.shop.order.repository.OrderRepository;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toMap;
 
 @Service
 @RequiredArgsConstructor

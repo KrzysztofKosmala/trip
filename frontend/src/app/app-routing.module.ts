@@ -18,6 +18,9 @@ import { ProductDetalisComponent } from './modules/product-detalis/product-detal
 import { ProductComponent } from './modules/product/product.component';
 import { AdminOrderExportComponent } from './modules/admin/admin-order/admin-order-export/admin-order-export.component';
 import { AdminOrderStatsComponent } from './modules/admin/admin-order/admin-order-stats/admin-order-stats.component';
+import { AdminLoginComponent } from './modules/admin/admin-login/admin-login.component';
+import { FullpageadminclearComponent } from './layouts/fullpageadminclear/fullpageadminclear.component';
+import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorizeGuard';
 
 const routes: Routes = [
   {
@@ -36,16 +39,23 @@ const routes: Routes = [
 
   {
     path:'', component: FullpageadminComponent, children: [
-      {path: 'admin', component: AdminComponent},
-      {path: 'admin/products', component: AdminProductComponent},
-      {path: 'admin/products/update/:id', component: AdminProductUpdateComponent},
-      {path: 'admin/products/add', component: AdminProductAddComponent},
-      {path: 'admin/images', component: AdminImageComponent},
-      {path: 'admin/images/add', component: AdminImageAddComponent},
-      {path: 'admin/orders', component: AdminOrderComponent},
-      {path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent},
-      {path: 'admin/orders/export', component: AdminOrderExportComponent},
-      {path: 'admin/orders/stats', component: AdminOrderStatsComponent},
+      {path: 'admin', component: AdminComponent , canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products', component: AdminProductComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products/update/:id', component: AdminProductUpdateComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products/add', component: AdminProductAddComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/images', component: AdminImageComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/images/add', component: AdminImageAddComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/orders', component: AdminOrderComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/orders/export', component: AdminOrderExportComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/orders/stats', component: AdminOrderStatsComponent, canActivate: [AdminAuthorizeGuard]}
+    ]
+  },
+
+  {
+    path:'', component: FullpageadminclearComponent, children: [
+
+      {path: 'admin/login', component: AdminLoginComponent}
     ]
   }
 ];

@@ -1,4 +1,5 @@
 admin
+- wysłanie emaila aktywacyjnego
 - dodawanie produktu
 - usuwanie produktu
 - edytowanie produktu

@@ -7,13 +7,14 @@ import { DefaultModule } from './layouts/default/default.module';
 import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { AdminOrderExportComponent } from './modules/admin/admin-order/admin-order-export/admin-order-export.component';
-import { AdminOrderStatsComponent } from './modules/admin/admin-order/admin-order-stats/admin-order-stats.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FullpageadminclearModule } from './layouts/fullpageadminclear/fullpageadminclear.module';
+import { JwtInterceptor } from './modules/admin/common/interceptor/jwt.interceptor';
+import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorizeGuard';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
      ],
   imports: [
     BrowserModule,
@@ -21,10 +22,13 @@ import { AdminOrderStatsComponent } from './modules/admin/admin-order/admin-orde
     DefaultModule,
     FullpageModule,
     FullpageadminModule,
+    FullpageadminclearModule,
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    AdminAuthorizeGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -59,7 +59,10 @@ public class AdminOrderService {
     {
         AdminOrderStatus oldStatus = adminOrder.getOrderStatus();
         adminOrder.setOrderStatus(AdminOrderStatus.valueOf(values.get("orderStatus")));
-        AdminOrderStatus newStatus = adminOrder.getOrderStatus();
+
+            AdminOrderStatus newStatus = adminOrder.getOrderStatus();
+        if(oldStatus == newStatus)
+            return;
         logStatusChange(adminOrder.getId(), oldStatus, newStatus);
         orderRepository.save(adminOrder);
         emailNotificationForStatusChange.sendEmailNotification(newStatus, adminOrder);

@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
@@ -15,6 +16,9 @@ import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
+import pl.kosmala.shop.security.Role;
+import pl.kosmala.shop.security.User;
+import pl.kosmala.shop.security.UserRepository;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 import pl.kosmala.shop.trip.repository.TripRepository;
@@ -43,10 +47,21 @@ public class TripApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(TripRepository tripRepository, OrderRepository orderRepository, PaymentRepository paymentRepository)
+	CommandLineRunner commandLineRunner(TripRepository tripRepository, OrderRepository orderRepository, PaymentRepository paymentRepository, UserRepository userRepository)
 	{
 		return args ->
 		{
+
+/*			User user = User.builder()
+					.email("kkosmi@pl.pl")
+					.firstname("krzys")
+					.role(Role.ROLE_ADMIN)
+					.password(new BCryptPasswordEncoder().encode("password"))
+					.lastname("kosmala")
+					.build();
+
+			userRepository.save(user);*/
+/*
 			List<Trip> trips = trips(10);
 			tripRepository.saveAll(trips);
 
@@ -68,7 +83,7 @@ public class TripApplication {
 				orderRepository.save(order);
 				productRepository.save(trip);
 				paymentRepository.save(payment1);
-			}
+			};*/
 		};
 	}
 
