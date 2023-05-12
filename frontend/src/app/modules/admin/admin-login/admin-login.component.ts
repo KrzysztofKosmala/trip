@@ -14,7 +14,7 @@ export class AdminLoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.formGroup= this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
@@ -35,7 +35,7 @@ export class AdminLoginComponent implements OnInit{
       this.adminLoginService.login(this.formGroup.value).subscribe({
         next: (response) => {
           this.loginError = false;
-          this.jwtService.setToken(response.token);
+          this.jwtService.setToken(response.access_token);
           this.router.navigate(["/admin"])
         },
         error: () => this.loginError = true

@@ -14,6 +14,6 @@ export class AdminLoginService {
 
    login(credential: any): Observable<any>
    {
-    return this.http.post("/api/v1/login", credential)
+    return this.http.post("/api/v1/auth/authenticate", credential)
    }
 }

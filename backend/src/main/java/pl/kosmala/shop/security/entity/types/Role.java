@@ -1,4 +1,4 @@
-package pl.kosmala.shop.security;
+package pl.kosmala.shop.security.entity.types;
 
 public enum Role
 {

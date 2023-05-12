@@ -1,5 +1,9 @@
 admin
+- pokazywanie errorów w logowaniu
 - wysłanie emaila aktywacyjnego
+- wylogowanie
+
+
 - dodawanie produktu
 - usuwanie produktu
 - edytowanie produktu

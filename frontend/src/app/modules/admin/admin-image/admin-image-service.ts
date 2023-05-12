@@ -26,7 +26,7 @@ export class AdminImageService {
 
   getImages(page: number, size: number) : Observable<Page<Image>>
   {
-      return this.http.get<Page<Image>>(`api/v1/images?page=${page}&size=${size}`);
+      return this.http.get<Page<Image>>(`/api/v1/images?page=${page}&size=${size}`);
   }
 
   getImagesByCountry(page: number, size: number, country: string) : Observable<Page<Image>>
@@ -36,6 +36,6 @@ export class AdminImageService {
     .set('size', size.toString())
     .set('country', country);
 
-      return this.http.get<Page<Image>>(`api/v1/imagesByCountry`, { params });
+      return this.http.get<Page<Image>>(`/api/v1/imagesByCountry`, { params });
   }
 }

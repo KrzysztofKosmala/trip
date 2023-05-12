@@ -1,6 +1,7 @@
-package pl.kosmala.shop.security;
+package pl.kosmala.shop.security.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.kosmala.shop.security.entity.User;
 
 import java.util.Optional;
 

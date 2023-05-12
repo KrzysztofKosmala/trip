@@ -1,4 +1,4 @@
-package pl.kosmala.shop.security;
+package pl.kosmala.shop.security.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.kosmala.shop.security.entity.types.Role;
 
 import java.util.Collection;
 import java.util.List;
