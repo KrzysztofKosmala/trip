@@ -11,7 +11,7 @@ constructor(private jwtService: JwtService, private router: Router){
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Promise<boolean | UrlTree> | boolean | UrlTree
     {
-        if(!this.jwtService.isLoggedIn())
+        if(!this.jwtService.isLoggedIn() || !this.jwtService.getAdminAccess())
         {
             this.router.navigate(["/admin/login"])
         }
