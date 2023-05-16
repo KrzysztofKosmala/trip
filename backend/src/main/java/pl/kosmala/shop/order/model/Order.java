@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import pl.kosmala.shop.common.model.Product;
+import pl.kosmala.shop.security.entity.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -42,6 +43,11 @@ public class Order<T extends Product>
     @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     @Override
     public boolean equals(Object o) {

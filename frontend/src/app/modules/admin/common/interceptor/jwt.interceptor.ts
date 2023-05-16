@@ -15,10 +15,12 @@ export class JwtInterceptor implements HttpInterceptor
             (
                  req.url.startsWith("/api/v1/admin")
                  || req.url.startsWith("/api/v1/images")
+                 || req.url.startsWith("/api/v1/orders")
+                 || req.url.startsWith("/api/v1/profiles")
             )
         )
         {
-            
+            console.log("sending token " + token)
             req = req.clone(
                 {
                     headers: req.headers.set("Authorization", "Bearer " + token)

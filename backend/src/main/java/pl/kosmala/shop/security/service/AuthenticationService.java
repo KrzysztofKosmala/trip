@@ -46,16 +46,16 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request)
     {
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow();
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        user.getId(),
                         request.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
-        UserDetails principal = (UserDetails) authenticate.getPrincipal();
-        var jwtToken = jwtService.generateToken(user);
+        User principal = (User) authenticate.getPrincipal();
+        var jwtToken = jwtService.generateToken(principal);
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)

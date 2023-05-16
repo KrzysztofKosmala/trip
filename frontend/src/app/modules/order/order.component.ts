@@ -7,6 +7,7 @@ import { InitData } from './model/InitData';
 import { OrderDto } from './model/OrderDto';
 import { OrderSummary } from './model/OrderSummary';
 import { OrderService } from './order.service';
+import { JwtService } from '../common/service/jwt.service';
 
 @Component({
   selector: 'app-order',
@@ -19,12 +20,14 @@ formGrup!: FormGroup;
 orderSummary!: OrderSummary;
 product!: ProductDetails;
 initData!: InitData;
+isLoggedIn = false;
 constructor
   (
     private productDetailsService: ProductDetailsService,
     private formBuilder: FormBuilder,
     private orderService: OrderService, 
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private jwtService: JwtService
   ){}
 
   ngOnInit(): void 
@@ -42,6 +45,7 @@ constructor
       payment: ['']
     });
     this.getinitData();
+    this.isLoggedIn = this.jwtService.isLoggedIn();
   }
 
   private statuses = new Map<string, string>([

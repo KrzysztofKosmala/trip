@@ -12,6 +12,7 @@ import pl.kosmala.shop.common.utils.SlugifyUtils;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
+import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.security.repository.UserRepository;
@@ -54,7 +55,6 @@ public class TripApplication {
 					.build();
 
 			userRepository.save(user);*/
-/*
 			List<Trip> trips = trips(10);
 			tripRepository.saveAll(trips);
 
@@ -76,7 +76,7 @@ public class TripApplication {
 				orderRepository.save(order);
 				productRepository.save(trip);
 				paymentRepository.save(payment1);
-			};*/
+			};
 		};
 	}
 

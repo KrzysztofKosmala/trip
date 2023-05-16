@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.notification.mail.EmailConfig;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.rabbitMq.RabbitMQMessageProducer;
@@ -23,16 +22,13 @@ import pl.kosmala.shop.order.service.OrderService;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -111,7 +107,7 @@ public class OrderServiceTest
         when(emailConfig.getInternalOrderConfirmationRoutingKey()).thenReturn("rautingKey");
 
 
-        OrderSummary orderSummary = underTest.placeOrder(orderDto);
+        OrderSummary orderSummary = underTest.placeOrder(orderDto, user);
 
 
         // then

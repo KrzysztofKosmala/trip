@@ -7,13 +7,14 @@ import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
+import pl.kosmala.shop.security.entity.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class OrderMapper
 {
-    public static Order<Product> createNewOrder(OrderDto orderDto, Product product, Payment payment)
+    public static Order<Product> createNewOrder(OrderDto orderDto, Product product, Payment payment, User user)
     {
         return Order.builder()
                 .firstname(orderDto.getFirstname())
@@ -28,6 +29,7 @@ public class OrderMapper
                 .product(product)
                 .grossValue(product.getBasePrice())
                 .payment(payment)
+                .user(user)
                 .build();
     }
 
@@ -48,11 +50,7 @@ public class OrderMapper
         message.setTo(order.getEmail());
         message.setBody(mapToString(order));
         message.setSubject("Twoje zamówienie zostało przyjęte");
-/*        return EmailMessage.builder()
-                .to(order.getEmail())
-                .body(mapToString(order))
-                .subject("Twoje zamówienie zostało przyjęte")
-                .build();*/
+
         return message;
     }
     private static String mapToString(Order order)

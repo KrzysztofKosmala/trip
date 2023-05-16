@@ -7,6 +7,7 @@
         Płatność: <br>
         <span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span>
     </div>
+    <div *ngIf="isLoggedIn">Status zamówienia można śledzić na stronie swojego <a routerLink="/profile">profilu</a>/div>
 </div>
 
 <div *ngIf="product && !orderSummary">
@@ -16,6 +17,10 @@
 </div>
 
 <form *ngIf="!orderSummary" [formGroup]="formGrup" (submit)="submit()">
+<div fxLayout="row" fxLayoutGap="15px">
+
+
+
     <div fxLayout="column" class="orderForm">
         <mat-form-field appearance="fill">
             <mat-label>Imię</mat-label>
@@ -84,6 +89,9 @@
             </div>
         </mat-form-field>
     </div>
+
+    <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Zaloguj się</a>, ay śledzić zamówienia</div>
+</div>
     <div>
         <h2>Płatność</h2>
         <mat-radio-group fxLayout="column" formControlName="payment">

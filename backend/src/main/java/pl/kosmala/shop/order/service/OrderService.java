@@ -12,6 +12,7 @@ import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
+import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
 import static pl.kosmala.shop.order.service.mapper.OrderMapper.*;
@@ -26,13 +27,13 @@ public class OrderService
     private final OrderConfirmationEmailService orderConfirmationEmailService;
     //TODO: dodać klienta do zamówienia
     @Transactional
-    public OrderSummary placeOrder(OrderDto orderDto)
+    public OrderSummary placeOrder(OrderDto orderDto, User user)
     {
         Product product = productRepository.findBySlug(orderDto.getProductslug()).orElseThrow();
 
         Payment payment = paymentRepository.findById(orderDto.getPaymentId()).orElseThrow();
 
-        Order order = createNewOrder(orderDto, product, payment);
+        Order order = createNewOrder(orderDto, product, payment, user);
 
         product.addOrder(order);
 
