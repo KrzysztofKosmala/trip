@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(login: any): Observable<any>{
-    return this.http.post("/api/v1/auth/login", login)
+    return this.http.post("/api/v1/auth/authenticate", login)
   }
 
   register(register: any): Observable<any>

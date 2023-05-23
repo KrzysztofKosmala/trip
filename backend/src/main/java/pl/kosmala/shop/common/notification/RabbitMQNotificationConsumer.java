@@ -26,4 +26,10 @@ public class RabbitMQNotificationConsumer
         log.info("Consumed {} from queue", message);
         emailClientService.getInstance().send(message);
     }
+    @RabbitListener(queues = "${rabbitmq.queue.resetPassword}")
+    public void resetPasswordConsumer(EmailMessage message)
+    {
+        log.info("Consumed {} from queue", message);
+        emailClientService.getInstance().send(message);
+    }
 }

@@ -1,13 +1,11 @@
 package pl.kosmala.shop.admin.order.service;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import java.util.List;
 public class AdminExportService
 {
     private AdminOrderRepository orderRepository;
-    public List<AdminOrder> exportOrders(LocalDateTime from, LocalDateTime to, AdminOrderStatus orderStatus)
+    public List<AdminOrder> exportOrders(LocalDateTime from, LocalDateTime to, OrderStatus orderStatus)
     {
         return orderRepository.findAllByPlaceDateIsBetweenAndOrderStatus(from, to, orderStatus);
     }

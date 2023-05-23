@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.security.entity.User;
 

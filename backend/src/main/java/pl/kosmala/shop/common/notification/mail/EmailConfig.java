@@ -15,21 +15,25 @@ public class EmailConfig
 {
     @Value("${rabbitmq.exchanges.internal}")
     private String internalExchange;
-
     @Value("${rabbitmq.queue.orderConfirmation}")
     private String orderConfirmationQueue;
     @Value("${rabbitmq.queue.accountConfirmation}")
     private String accountConfirmationQueue;
-
-    @Value("orderChangeStatus.queue")
+    @Value("${rabbitmq.queue.resetPassword}")
+    private String resetPasswordQueue;
+    @Value("${rabbitmq.queue.orderChangeStatus}")
     private String orderChangeStatusQueue;
+
+
     @Value("${rabbitmq.routing-keys.internal-accountConfirmation}")
     private String internalAccountConfirmationRoutingKey;
     @Value("${rabbitmq.routing-keys.internal-orderConfirmation}")
     private String internalOrderConfirmationRoutingKey;
-
+    @Value("${rabbitmq.routing-keys.internal-resetPassword}")
+    private String internalResetPasswordRoutingKey;
     @Value("${rabbitmq.routing-keys.internal-orderChangeStatus}")
     private String internalOrderChangeStatusRoutingKey;
+
     @Bean
     public TopicExchange internalTopicExchange()
     {
@@ -54,6 +58,11 @@ public class EmailConfig
         return new Queue(this.orderChangeStatusQueue);
     }
     @Bean
+    public Queue resetPasswordQueue()
+    {
+        return new Queue(this.resetPasswordQueue);
+    }
+    @Bean
     public Binding internalOrderConfirmationBinding()
     {
         return BindingBuilder.bind(orderConfirmationQueue()).to(internalTopicExchange()).with(this.internalOrderConfirmationRoutingKey);
@@ -61,12 +70,17 @@ public class EmailConfig
     @Bean
     public Binding orderChangeStatusRoutingKeyBinding()
     {
-        return BindingBuilder.bind(accountConfirmationQueue()).to(internalTopicExchange()).with(this.internalOrderChangeStatusRoutingKey);
+        return BindingBuilder.bind(orderChangeStatusQueue()).to(internalTopicExchange()).with(this.internalOrderChangeStatusRoutingKey);
     }
 
     @Bean
     public Binding internalAccountConfirmationBinding()
     {
         return BindingBuilder.bind(accountConfirmationQueue()).to(internalTopicExchange()).with(this.internalAccountConfirmationRoutingKey);
+    }
+    @Bean
+    public Binding internalResetPasswordBinding()
+    {
+        return BindingBuilder.bind(resetPasswordQueue()).to(internalTopicExchange()).with(this.internalResetPasswordRoutingKey);
     }
 }

@@ -1,9 +1,9 @@
 package pl.kosmala.shop.order.service.mapper;
 
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.order.model.Order;
-import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;

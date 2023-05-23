@@ -3,9 +3,8 @@ package pl.kosmala.shop.admin.order.model;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.kosmala.shop.common.log.AdminOrderLog;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
-import pl.kosmala.shop.order.model.OrderStatus;
-import pl.kosmala.shop.order.model.Payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -26,7 +25,7 @@ public class AdminOrder<T extends Product>
     private Long id;
     private LocalDateTime placeDate;
     @Enumerated(EnumType.STRING)
-    private AdminOrderStatus orderStatus ;
+    private OrderStatus orderStatus ;
     private BigDecimal grossValue;
     private String firstname;
     private String lastname;

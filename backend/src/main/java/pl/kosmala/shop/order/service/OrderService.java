@@ -9,11 +9,14 @@ import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
+import pl.kosmala.shop.order.model.dto.OrderListDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.trip.repository.ProductRepository;
+
+import java.util.List;
 
 import static pl.kosmala.shop.order.service.mapper.OrderMapper.*;
 
@@ -51,4 +54,23 @@ public class OrderService
         return mapToEmailMassage(order);
     }
 
+    public List<OrderListDto> getOrdersForCustomer(User user)
+    {
+        return mapToOrderListDto(orderRepository.findByUserId(user.getId()));
+    }
+
+    private List<OrderListDto> mapToOrderListDto(List<Order> byUserId)
+    {
+        return byUserId.stream()
+                .map
+                        (
+                                order -> OrderListDto.builder()
+                                        .id(order.getId())
+                                        .placeDate(order.getPlaceDate())
+                                        .grossValue(order.getGrossValue())
+                                        .orderStatus(order.getOrderStatus().getValue())
+                                        .build()
+                        )
+                .toList();
+    }
 }

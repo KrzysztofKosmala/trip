@@ -7,7 +7,7 @@
         Płatność: <br>
         <span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span>
     </div>
-    <div *ngIf="isLoggedIn">Status zamówienia można śledzić na stronie swojego <a routerLink="/profile">profilu</a>/div>
+    <div *ngIf="isLoggedIn">Status zamówienia można śledzić na stronie swojego <a routerLink="/profile">profilu</a></div>
 </div>
 
 <div *ngIf="product && !orderSummary">

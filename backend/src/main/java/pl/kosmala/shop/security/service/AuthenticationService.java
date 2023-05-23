@@ -48,6 +48,7 @@ public class AuthenticationService {
     {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
+
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getId(),

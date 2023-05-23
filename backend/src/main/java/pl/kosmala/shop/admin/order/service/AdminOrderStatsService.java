@@ -3,7 +3,7 @@ package pl.kosmala.shop.admin.order.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.model.dto.AdminOrderStats;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
 
@@ -28,7 +28,7 @@ public class AdminOrderStatsService
         List<AdminOrder> orders = adminOrderRepository.findAllByPlaceDateIsBetweenAndOrderStatus(
                 from,
                 to,
-                AdminOrderStatus.COMPLETED
+                OrderStatus.COMPLETED
         );
 
         TreeMap<Integer, AdminOrderStatsValue> result = new TreeMap<>();

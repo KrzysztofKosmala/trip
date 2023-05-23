@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtService } from 'src/app/modules/common/service/jwt.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit 
 {
 
+  isLoggedIn = false;
   title = "Trip";
-  constructor() { }
+  constructor(private jwtService: JwtService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.jwtService.isLoggedIn();
   }
 
 }

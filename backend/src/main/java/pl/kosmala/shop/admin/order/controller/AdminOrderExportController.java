@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.service.AdminExportService;
 
 import java.io.ByteArrayInputStream;
@@ -45,7 +45,7 @@ public class AdminOrderExportController
             (
                     @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDate from,
                     @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDate to,
-                    @RequestParam AdminOrderStatus orderStatus
+                    @RequestParam OrderStatus orderStatus
             )
     {
         System.out.println(LocalDateTime.of(from, LocalTime.of(0,0,0)));

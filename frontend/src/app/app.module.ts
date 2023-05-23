@@ -12,6 +12,7 @@ import { FullpageadminclearModule } from './layouts/fullpageadminclear/fullpagea
 import { JwtInterceptor } from './modules/admin/common/interceptor/jwt.interceptor';
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorizeGuard';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [

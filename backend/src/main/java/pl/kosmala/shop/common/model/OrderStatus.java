@@ -1,11 +1,12 @@
-package pl.kosmala.shop.admin.order.model;
+package pl.kosmala.shop.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum AdminOrderStatus {
+public enum OrderStatus
+{
      NEW("Nowe") , PAID("Opłacone") , PROCESSING("Przetwarzane") , COMPLETED("Zrealizowane") , CANCELED("Anulowane") , REFUND("Zwrócone");
 
      private String value;

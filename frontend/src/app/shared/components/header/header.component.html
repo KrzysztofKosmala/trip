@@ -7,7 +7,7 @@
         <button mat-flat-button color="base" routerLink="">Strona główna</button>
         <button mat-flat-button color="base" routerLink="/products">Produkty</button>
         <span></span>
-        <button mat-flat-button color="base" routerLink="/login">Zaloguj</button>
+        <button mat-flat-button color="base" routerLink="/login"><span *ngIf="!isLoggedIn">Zaloguj</span> <span *ngIf="isLoggedIn">Profil</span></button>
         <mat-icon color="accent" class="star">star</mat-icon>
     </div>
 </header>

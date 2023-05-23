@@ -8,7 +8,7 @@ import pl.kosmala.shop.admin.order.controller.dto.AdminInitDataDto;
 import pl.kosmala.shop.admin.order.controller.dto.AdminOrderDto;
 import pl.kosmala.shop.admin.order.controller.mapper.AdminOrderMapper;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.service.AdminOrderService;
 
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public class AdminOrderController
 
     private Map<String, String> createOrderStatusesMap() {
         Map<String, String> statuses = new HashMap<>();
-        for (AdminOrderStatus status : AdminOrderStatus.values()) {
+        for (OrderStatus status : OrderStatus.values()) {
             statuses.put(status.name(), status.getValue());
         }
         return statuses;

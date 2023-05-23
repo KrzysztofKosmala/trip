@@ -9,13 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
 import pl.kosmala.shop.common.log.AdminOrderLog;
 import pl.kosmala.shop.common.log.LogService;
-import pl.kosmala.shop.common.notification.mail.EmailMessage;
-import pl.kosmala.shop.common.notification.mail.OrderChangeStatusEmailService;
-import pl.kosmala.shop.order.model.Order;
 
 import java.util.Map;
 
@@ -57,10 +54,10 @@ public class AdminOrderService {
 
     private void processOrderStatusChange(AdminOrder adminOrder, Map<String, String> values)
     {
-        AdminOrderStatus oldStatus = adminOrder.getOrderStatus();
-        adminOrder.setOrderStatus(AdminOrderStatus.valueOf(values.get("orderStatus")));
+        OrderStatus oldStatus = adminOrder.getOrderStatus();
+        adminOrder.setOrderStatus(OrderStatus.valueOf(values.get("orderStatus")));
 
-            AdminOrderStatus newStatus = adminOrder.getOrderStatus();
+            OrderStatus newStatus = adminOrder.getOrderStatus();
         if(oldStatus == newStatus)
             return;
         logStatusChange(adminOrder.getId(), oldStatus, newStatus);
@@ -68,7 +65,7 @@ public class AdminOrderService {
         emailNotificationForStatusChange.sendEmailNotification(newStatus, adminOrder);
     }
 
-    private void logStatusChange(Long orderId, AdminOrderStatus oldStatus, AdminOrderStatus newStatus)
+    private void logStatusChange(Long orderId, OrderStatus oldStatus, OrderStatus newStatus)
     {
         logService.saveAdminOrderLog(AdminOrderLog.builder()
                 .orderId(orderId)

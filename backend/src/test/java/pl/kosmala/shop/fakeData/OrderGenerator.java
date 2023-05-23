@@ -1,9 +1,9 @@
 package pl.kosmala.shop.fakeData;
 
 import com.github.javafaker.Faker;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.order.model.Order;
-import pl.kosmala.shop.order.model.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

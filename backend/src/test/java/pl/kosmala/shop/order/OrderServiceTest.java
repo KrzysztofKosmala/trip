@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.notification.mail.EmailConfig;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.rabbitMq.RabbitMQMessageProducer;
 import pl.kosmala.shop.fakeData.ProductGenerator;
+import pl.kosmala.shop.fakeData.UserGenerator;
 import pl.kosmala.shop.order.model.Order;
-import pl.kosmala.shop.order.model.OrderStatus;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.model.dto.OrderDto;
@@ -19,6 +20,7 @@ import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.order.service.OrderService;
+import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
@@ -59,6 +61,7 @@ public class OrderServiceTest
     Faker faker = new Faker();
 
     ProductGenerator productGenerator = new ProductGenerator();
+    UserGenerator userGenerator = new UserGenerator();
 
     @Test
     void shouldPlaceOrder()
@@ -78,7 +81,7 @@ public class OrderServiceTest
                 .build();
 
 
-
+        User user = userGenerator.generateUser();
 
 
         Payment payment = new Payment();
@@ -98,6 +101,7 @@ public class OrderServiceTest
                 .payment(payment)
                 .city(orderDto.getCity())
                 .phone(orderDto.getPhone())
+                .user(user)
                 .build();
 
         when(productRepository.findBySlug(orderDto.getProductslug())).thenReturn(Optional.of(product));

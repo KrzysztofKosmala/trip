@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
-import pl.kosmala.shop.admin.order.model.AdminOrderStatus;
+import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
 
 import java.util.HashMap;
@@ -51,9 +51,9 @@ class AdminOrderServiceTest
     {
         Long orderId = 1L;
         AdminOrder existingOrder =
-                AdminOrder.builder().id(orderId).orderStatus(AdminOrderStatus.NEW).build();
+                AdminOrder.builder().id(orderId).orderStatus(OrderStatus.NEW).build();
         Map<String, String> values = new HashMap<>();
-        values.put("orderStatus", AdminOrderStatus.PAID.name());
+        values.put("orderStatus", OrderStatus.PAID.name());
 
         when(orderRepository.findById(orderId)).thenReturn(Optional.of(existingOrder));
 
@@ -61,7 +61,7 @@ class AdminOrderServiceTest
 
         verify(orderRepository, times(1)).findById(orderId);
         verify(orderRepository, times(1)).save(existingOrder);
-        assertThat(existingOrder.getOrderStatus()).isEqualTo(AdminOrderStatus.PAID);
+        assertThat(existingOrder.getOrderStatus()).isEqualTo(OrderStatus.PAID);
     }
 
     @Test
@@ -71,7 +71,7 @@ class AdminOrderServiceTest
         Long orderId = 1L;
         AdminOrder adminOrder = new AdminOrder();
         adminOrder.setId(orderId);
-        adminOrder.setOrderStatus(AdminOrderStatus.NEW);
+        adminOrder.setOrderStatus(OrderStatus.NEW);
 
         Map<String, String> values = new HashMap<>();
         values.put("orderStatus", "INVALID_STATUS");
@@ -84,6 +84,6 @@ class AdminOrderServiceTest
 
         verify(orderRepository, times(1)).findById(orderId);
         verify(orderRepository, never()).save(adminOrder);
-        assertEquals(AdminOrderStatus.NEW, adminOrder.getOrderStatus());
+        assertEquals(OrderStatus.NEW, adminOrder.getOrderStatus());
     }
 }
