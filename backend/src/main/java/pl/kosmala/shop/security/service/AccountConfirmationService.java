@@ -3,13 +3,12 @@ package pl.kosmala.shop.security.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.kosmala.shop.common.notification.mail.AccountConfirmationEmailService;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
-import pl.kosmala.shop.common.notification.mail.PasswordResetEmailService;
 import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.security.payload.ChangePassword;
-import pl.kosmala.shop.security.payload.ResetPasswordRequest;
+import pl.kosmala.shop.security.payload.ConfirmAccountRequest;
 import pl.kosmala.shop.security.repository.UserRepository;
 import pl.kosmala.shop.security.service.utils.UserHashUtils;
 
@@ -18,20 +17,17 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class ResetPasswordService
+public class AccountConfirmationService
 {
     @Value("${app.frontAddress}")
     private String serviceAddress;
     private final UserRepository userRepository;
-    private final PasswordResetEmailService passwordResetEmailService;
-
-
-    private final PasswordEncoder passwordEncoder;
+    private final AccountConfirmationEmailService accountConfirmationEmailService;
 
     @Transactional
-    public void sendLostPasswordLink(ResetPasswordRequest email)
+    public void sendEmailConfirmationLink(String email)
     {
-        User user = userRepository.findByEmail(email.getEmail())
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Taki email nie istnieje"));
 
         String hash = UserHashUtils.generateHashBasedOnUser(user);
@@ -40,43 +36,36 @@ public class ResetPasswordService
 
         EmailMessage message = new EmailMessage();
 
-        message.setTo(email.getEmail());
-        message.setBody(createMessage(createResetPasswordLink(hash)));
-        message.setSubject("Link do resetowania hasła.");
+        message.setTo(email);
+        message.setBody(createMessage(createAccountConfirmationLink(hash)));
+        message.setSubject("Potwierdź swojego maila.");
 
-        passwordResetEmailService.send(message);
+        accountConfirmationEmailService.send(message);
     }
     @Transactional
-    public void changePassword(ChangePassword changePassword)
+    public void confirmAccount(ConfirmAccountRequest changePassword)
     {
-        if(!Objects.equals(changePassword.getPassword(), changePassword.getRepeatPassword()))
-        {
-            throw new RuntimeException("Hasła nie są takie same");
-        }
+
         User user = userRepository.findByHash(changePassword.getHash())
                 .orElseThrow(() -> new
                         RuntimeException("Nieprawidłowy link"));
         if(user.getHashDate().plusMinutes(10).isAfter(LocalDateTime.now()))
         {
-            user.setPassword(passwordEncoder.encode(changePassword.getPassword()));
+            user.setEnabled(true);
             user.setHash(null);
             user.setHashDate(null);
         } else {
             throw new RuntimeException("Link stracił ważność");
         }
     }
-
-
-    String createResetPasswordLink(String hash)
-    {
-        return  serviceAddress + "/resetPassword/" + hash;
-    }
-
     private String createMessage(String hashLink) {
-        return "Wygenerowaliśmy dla Ciebie link do zmiany hasła" +
-                "\n\nKliknij link, żeby zresetować hasło: " +
+        return "Wygenerowaliśmy dla Ciebie link do potwierdzenia emaila" +
+                "\n\nKliknij link, żeby aktywować konto: " +
                 "\n" + hashLink +
                 "\n\nDziękujemy.";
     }
-
+    private String createAccountConfirmationLink(String hash)
+    {
+        return  serviceAddress + "/confirmAccount/" + hash;
+    }
 }

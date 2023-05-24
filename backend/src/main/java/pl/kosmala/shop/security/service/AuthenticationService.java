@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.security.entity.types.Role;
+import pl.kosmala.shop.security.payload.AuthorizationResponse;
 import pl.kosmala.shop.security.repository.UserRepository;
 import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.security.payload.AuthenticationRequest;
@@ -23,7 +24,9 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request)
+    private final AccountConfirmationService accountConfirmationService;
+
+    public AuthorizationResponse register(RegisterRequest request)
     {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new IllegalStateException("Użytkownik o podanym adresie email już istnieje.");
@@ -37,18 +40,27 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
+                .isEnabled(false)
                 .build();
 
         userRepository.save(user);
-// TODO: can be only registration without authentication. I will change once I add sendig email confirmation
-        return authenticate(AuthenticationRequest.builder().email(request.getEmail()).password(request.getPassword()).build());
+
+        try{
+            accountConfirmationService.sendEmailConfirmationLink(user.getEmail());
+        }catch (RuntimeException ex){
+            return new AuthorizationResponse(ex.getMessage());
+        }
+
+        return new AuthorizationResponse("Mail z linkiem aktywacyjnym został wysłany. Potwirdź swój adres email.");
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request)
     {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
-
+        if (!user.isEnabled()) {
+            throw new IllegalStateException("Konto nie jeste aktywne.");
+        }
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getId(),

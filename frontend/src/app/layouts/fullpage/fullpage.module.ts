@@ -10,6 +10,7 @@ import { OrderComponent } from 'src/app/modules/order/order.component';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ReplacePipe } from 'src/app/modules/common/pipe/replacePipe';
 import { ResetPasswordComponent } from 'src/app/modules/reset-password/reset-password.component';
+import { ConfirmAccountComponent } from 'src/app/modules/confirm-account/confirm-account.component';
 @NgModule({
   declarations: [
     FullpageComponent,
@@ -17,7 +18,8 @@ import { ResetPasswordComponent } from 'src/app/modules/reset-password/reset-pas
     HomeComponent,
     OrderComponent,
     ResetPasswordComponent,
-    ReplacePipe
+    ReplacePipe,
+    ConfirmAccountComponent
   ],
   imports: [
     CommonModule,

@@ -77,7 +77,6 @@ export class LoginComponent implements OnInit {
       {
         this.loginService.register(this.registerForm.value).subscribe({
           next: response => {
-            this.jwtService.setToken(response.access_token)
             
             this.jwtService.setAdminAccess(false);
             this.router.navigate(["/"]).then(() => this.snackBar.open("Konto zostało zarejestrowane","", {duration: 3000}))

@@ -15,6 +15,8 @@ public class EmailConfig
 {
     @Value("${rabbitmq.exchanges.internal}")
     private String internalExchange;
+
+    /*Queues*/
     @Value("${rabbitmq.queue.orderConfirmation}")
     private String orderConfirmationQueue;
     @Value("${rabbitmq.queue.accountConfirmation}")
@@ -24,7 +26,7 @@ public class EmailConfig
     @Value("${rabbitmq.queue.orderChangeStatus}")
     private String orderChangeStatusQueue;
 
-
+    /*Routing keys*/
     @Value("${rabbitmq.routing-keys.internal-accountConfirmation}")
     private String internalAccountConfirmationRoutingKey;
     @Value("${rabbitmq.routing-keys.internal-orderConfirmation}")
@@ -34,12 +36,14 @@ public class EmailConfig
     @Value("${rabbitmq.routing-keys.internal-orderChangeStatus}")
     private String internalOrderChangeStatusRoutingKey;
 
+
     @Bean
     public TopicExchange internalTopicExchange()
     {
         return new TopicExchange(this.internalExchange);
     }
 
+    /*Queues beans*/
     @Bean
     public Queue accountConfirmationQueue()
     {
@@ -62,6 +66,8 @@ public class EmailConfig
     {
         return new Queue(this.resetPasswordQueue);
     }
+
+    /*Binding beans*/
     @Bean
     public Binding internalOrderConfirmationBinding()
     {

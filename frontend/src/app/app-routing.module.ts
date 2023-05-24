@@ -23,6 +23,7 @@ import { FullpageadminclearComponent } from './layouts/fullpageadminclear/fullpa
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorizeGuard';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
+import { ConfirmAccountComponent } from './modules/confirm-account/confirm-account.component';
 
 const routes: Routes = [
   {
@@ -33,8 +34,8 @@ const routes: Routes = [
       {path: 'order/:slug', component: OrderComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'resetPassword', component: ResetPasswordComponent},
-      { path: 'resetPassword/:hash', component: ResetPasswordComponent }
-
+      { path: 'resetPassword/:hash', component: ResetPasswordComponent },
+      { path: 'confirmAccount/:hash', component: ConfirmAccountComponent }
     ]
   },
   {
