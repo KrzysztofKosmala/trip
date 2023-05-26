@@ -54,7 +54,7 @@ public class TripApplication {
 					.lastname("kosmala")
 					.build();
 
-			userRepository.save(user);*/
+			userRepository.save(user);
 			List<Trip> trips = trips(10);
 			tripRepository.saveAll(trips);
 
@@ -76,7 +76,7 @@ public class TripApplication {
 				orderRepository.save(order);
 				productRepository.save(trip);
 				paymentRepository.save(payment1);
-			};
+			};*/
 		};
 	}
 

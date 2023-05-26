@@ -20,7 +20,8 @@ public interface ImageRepository extends JpaRepository<Image, Long>
     @Query("SELECT t FROM Image t  WHERE t.location = :destination")
     Page<Image> findAllByDestination(Pageable pageable, @Param("destination") TripDestination destination);
 
-
+    @Query("SELECT COUNT(t) FROM Image t")
+    long count();
 
     Set<Image> findAllByIdIn(List<Long> ids);
 }

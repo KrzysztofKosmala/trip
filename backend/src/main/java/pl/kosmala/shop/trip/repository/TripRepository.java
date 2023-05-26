@@ -31,4 +31,8 @@ public interface TripRepository extends JpaRepository<Trip, Long>
             @Param("food") Boolean food,
             @Param("spa") Boolean spa
     );
+
+
+    @Query("SELECT COUNT(t) FROM Trip t")
+    long count();
 }
