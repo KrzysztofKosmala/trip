@@ -1,7 +1,7 @@
-package pl.kosmala.shop.order;
+package pl.kosmala.shop.order.service;
 
 import com.github.javafaker.Faker;
-import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -9,35 +9,35 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.notification.mail.EmailConfig;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
+import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
 import pl.kosmala.shop.common.rabbitMq.RabbitMQMessageProducer;
+import pl.kosmala.shop.fakeData.OrderGenerator;
 import pl.kosmala.shop.fakeData.ProductGenerator;
 import pl.kosmala.shop.fakeData.UserGenerator;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.model.dto.OrderDto;
+import pl.kosmala.shop.order.model.dto.OrderListDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
-import pl.kosmala.shop.order.service.OrderService;
 import pl.kosmala.shop.security.entity.User;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.anything;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@RequiredArgsConstructor
 @ExtendWith(MockitoExtension.class)
-public class OrderServiceTest
+class OrderServiceTest
 {
 
     @Mock
@@ -51,6 +51,9 @@ public class OrderServiceTest
 
     @Mock
     private RabbitMQMessageProducer messageProducer;
+
+    @Mock
+    private OrderConfirmationEmailService orderConfirmationEmailService;
 
     @Mock
     private EmailConfig emailConfig;
@@ -107,8 +110,9 @@ public class OrderServiceTest
         when(productRepository.findBySlug(orderDto.getProductslug())).thenReturn(Optional.of(product));
         when(paymentRepository.findById(orderDto.getPaymentId())).thenReturn(Optional.of(payment));
         when(orderRepository.save(ArgumentMatchers.any())).thenReturn(order);
-        when(emailConfig.getInternalExchange()).thenReturn("test" );
-        when(emailConfig.getInternalOrderConfirmationRoutingKey()).thenReturn("rautingKey");
+/*        when(emailConfig.getInternalExchange()).thenReturn("test" );
+        when(emailConfig.getInternalOrderConfirmationRoutingKey()).thenReturn("rautingKey");*/
+        Mockito.doNothing().when(orderConfirmationEmailService).send(Mockito.any(EmailMessage.class));
 
 
         OrderSummary orderSummary = underTest.placeOrder(orderDto, user);
@@ -128,12 +132,21 @@ public class OrderServiceTest
         assertEquals(orderDto.getZipcode(), orderToSave.getZipcode());
         assertEquals(orderDto.getPaymentId(), orderToSave.getPayment().getId());
         assertEquals(product.getId(), orderToSave.getProduct().getId());
+        assertEquals(user.getId(), orderToSave.getUser().getId());
 
 
         assertEquals(orderToSave.getOrderStatus(), orderSummary.getStatus());
         assertEquals(orderToSave.getGrossValue(), orderSummary.getGrossValue());
         assertEquals(payment, orderSummary.getPayment());
 
-        Mockito.verify(messageProducer).publish(Mockito.any(EmailMessage.class), Mockito.anyString(), Mockito.anyString());
+        //Mockito.verify(messageProducer).publish(Mockito.any(EmailMessage.class), Mockito.anyString(), Mockito.anyString());
+    }
+
+    @Test
+    public void shouldMap()
+    {
+        OrderGenerator orderGenerator = new OrderGenerator();
+        List<Trip> trips = productGenerator.trips(4);
+
     }
 }

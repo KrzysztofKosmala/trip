@@ -24,4 +24,9 @@ public interface ImageRepository extends JpaRepository<Image, Long>
     long count();
 
     Set<Image> findAllByIdIn(List<Long> ids);
+    @Query("SELECT DISTINCT i FROM Image i LEFT JOIN FETCH i.products WHERE i.id IN :ids")
+    Set<Image> findAllWithProductsByIds(List<Long> ids);
+
+    @Query("SELECT DISTINCT i FROM Image i LEFT JOIN FETCH i.products")
+    List<Image> findAllWithProducts();
 }

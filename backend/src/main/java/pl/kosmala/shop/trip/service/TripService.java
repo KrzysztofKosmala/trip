@@ -1,5 +1,6 @@
 package pl.kosmala.shop.trip.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +15,11 @@ import pl.kosmala.shop.common.model.Review;
 import java.util.List;
 
 @Service
-public class TripService
+@RequiredArgsConstructor
+public class  TripService
 {
     @Autowired
-    TripRepository tripRepository;
+    private final TripRepository tripRepository;
 
 
     public Page<Trip> getAllTrips(Pageable pageable)

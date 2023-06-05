@@ -1,5 +1,6 @@
 package pl.kosmala.shop.admin.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
@@ -64,6 +65,7 @@ public class AdminTripService
             return adminTripRepository.save(adminTrip);
     }
 
+
     public AdminTrip createTrip(AdminTripDto adminProductDto)
     {
 
@@ -94,7 +96,7 @@ public class AdminTripService
 
         if(idsOfImageToBeAdd.size() > 0)
         {
-            Set<Image> images = imageRepository.findAllByIdIn(idsOfImageToBeAdd);
+            Set<Image> images = imageRepository.findAllWithProductsByIds(idsOfImageToBeAdd);
             if(adminProductDto.getImages().length != images.size())
             {
                 throw new DataAccessResourceFailureException

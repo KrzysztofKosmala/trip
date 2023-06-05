@@ -4,10 +4,12 @@ import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.webjars.NotFoundException;
 import pl.kosmala.shop.admin.dto.AdminTripDto;
@@ -29,7 +31,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-
+@ExtendWith(MockitoExtension.class)
 public class AdminTripServiceTest
 {
     @Mock
@@ -69,7 +71,7 @@ public class AdminTripServiceTest
         Image[] dtoImages = adminTripDto.getImages();
         List<Image> dtoImagesAsList = Arrays.asList(dtoImages);
         Set<Image> dtoImagesAsSet = new HashSet<>(dtoImagesAsList);
-        given(imageRepository.findAllByIdIn(anyList())).willReturn(dtoImagesAsSet);
+        given(imageRepository.findAllWithProductsByIds(anyList())).willReturn(dtoImagesAsSet);
 
         underTest.createTrip(adminTripDto);
 

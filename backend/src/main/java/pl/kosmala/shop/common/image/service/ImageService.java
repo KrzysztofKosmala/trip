@@ -33,6 +33,31 @@ public class ImageService
     private String FETCH_IMAGE_URL;
     private final ImageRepository imageRepository;
 
+    public UploadResponse uploadFile(MultipartFile image, String country, String description)
+    {
+        Image model = new Image();
+        String name = slugifySlug(image.getOriginalFilename());
+
+        Path path = Paths.get(IMAGE_UPLOAD_DIR).resolve(name);
+
+        try(InputStream inputStream = image.getInputStream())
+        {
+            OutputStream outputStream = Files.newOutputStream(path);
+            inputStream.transferTo(outputStream);
+        }catch (IOException e)  {
+            throw new RuntimeException("Nie można zapisać pliku", e);
+        }
+
+        model.setThumbImage(FETCH_IMAGE_URL+name);
+        model.setName(name);
+        model.setDesc(description);
+        model.setLocation(TripDestination.valueOf(country));
+        model.setType(image.getContentType());
+        saveFile(model);
+
+        return new UploadResponse(name, "Image uploaded successfully");
+    }
+
     public ImageService(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
     }
@@ -66,28 +91,5 @@ public class ImageService
         }
     }
 
-    public UploadResponse uploadFile(MultipartFile image, String country, String description)
-    {
-        Image model = new Image();
-        String name = slugifySlug(image.getOriginalFilename());
 
-        Path path = Paths.get(IMAGE_UPLOAD_DIR).resolve(name);
-
-        try(InputStream inputStream = image.getInputStream())
-        {
-            OutputStream outputStream = Files.newOutputStream(path);
-            inputStream.transferTo(outputStream);
-        }catch (IOException e)  {
-            throw new RuntimeException("Nie można zapisać pliku", e);
-        }
-
-        model.setThumbImage(FETCH_IMAGE_URL+name);
-        model.setName(name);
-        model.setDesc(description);
-        model.setLocation(TripDestination.valueOf(country));
-        model.setType(image.getContentType());
-        saveFile(model);
-
-        return new UploadResponse(name, "Image uploaded successfully");
-    }
 }

@@ -37,7 +37,7 @@ public class Order<T extends Product>
     private String city;
     private String email;
     private String phone;
-    @ManyToOne(targetEntity = Product.class, fetch = FetchType.LAZY, cascade = {CascadeType.DETACH})
+    @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER, cascade = {CascadeType.DETACH})
     @JoinColumn(name = "product_id")
     private T product;
 

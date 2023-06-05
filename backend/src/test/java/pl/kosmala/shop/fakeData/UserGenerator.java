@@ -18,12 +18,21 @@ public class UserGenerator
     public User generateUser()
     {
         User user = new User();
-        user.setId(faker.number().randomNumber());
         user.setEmail(faker.internet().emailAddress());
         user.setRole(Role.ROLE_CUSTOMER);
         user.setPassword(faker.internet().password());
         user.setLastname(faker.address().lastName());
         user.setFirstname(faker.address().firstName());
         return user;
+    }
+
+    public List<User> generateUsers(int howMany)
+    {
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < howMany; i++)
+        {
+            users.add(generateUser());
+        }
+        return users;
     }
 }

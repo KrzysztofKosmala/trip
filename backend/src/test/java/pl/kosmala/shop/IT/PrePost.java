@@ -9,11 +9,14 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.Random;
+
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("test")
 public class PrePost
 {
+    protected Random random = new Random();
     @Container
     private static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:14.1")
             .withDatabaseName("test")

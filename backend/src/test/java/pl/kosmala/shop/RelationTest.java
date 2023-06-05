@@ -36,11 +36,11 @@ public class RelationTest
     protected Random random = new Random();
 
     @Autowired
+    private TripRepository tripRepository;
+    @Autowired
     ImageRepository imageRepository;
     protected List<AdminTrip> tripsFromDb;
     protected List<Image> imagesFromDb;
-    @Autowired
-    private TripRepository tripRepository;
     @Autowired
     private OrderRepository orderRepository;
 
@@ -82,8 +82,6 @@ public class RelationTest
                 }
         );
         OrderGenerator orderGenerator = new OrderGenerator();
-        List<? extends Order> orders = orderGenerator.generateOrders(trips, 10);
-        orderRepository.saveAll(orders);
         imagesFromDb = imageRepository.findAll();
         tripsFromDb = adminTripRepository.findAll();
     }
