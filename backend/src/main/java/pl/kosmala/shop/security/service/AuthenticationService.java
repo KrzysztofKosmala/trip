@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.security.entity.types.Role;
+import pl.kosmala.shop.security.exception.RegisterException;
 import pl.kosmala.shop.security.payload.AuthorizationResponse;
 import pl.kosmala.shop.security.repository.UserRepository;
 import pl.kosmala.shop.security.entity.User;
@@ -29,7 +30,7 @@ public class AuthenticationService {
     public AuthorizationResponse register(RegisterRequest request)
     {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalStateException("Użytkownik o podanym adresie email już istnieje.");
+            throw new RegisterException("Użytkownik o podanym adresie email już istnieje.");
         }
         // TODO: not safe - only for now
         Role role = request.getRole() == null ? Role.ROLE_CUSTOMER : request.getRole();
