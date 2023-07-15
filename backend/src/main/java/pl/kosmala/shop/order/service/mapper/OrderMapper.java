@@ -7,7 +7,7 @@ import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -13,7 +13,7 @@ import pl.kosmala.shop.order.model.dto.OrderListDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
 import java.util.List;

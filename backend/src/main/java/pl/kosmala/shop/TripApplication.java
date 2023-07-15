@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
@@ -15,7 +16,9 @@ import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
-import pl.kosmala.shop.security.repository.UserRepository;
+import pl.kosmala.shop.common.user.entity.User;
+import pl.kosmala.shop.common.user.entity.types.Role;
+import pl.kosmala.shop.common.user.repository.UserRepository;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 import pl.kosmala.shop.trip.repository.TripRepository;
@@ -45,7 +48,7 @@ public class TripApplication {
 	{
 		return args ->
 		{
-/*
+
 			User user = User.builder()
 					.email("kkosmi@pl.pl")
 					.firstname("krzys")
@@ -76,7 +79,7 @@ public class TripApplication {
 				orderRepository.save(order);
 				productRepository.save(trip);
 				paymentRepository.save(payment1);
-			};*/
+			};
 		};
 	}
 

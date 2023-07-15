@@ -1,0 +1,23 @@
+<h1>Edutuj profil</h1>
+    <div fxLayout="column">
+        <div [formGroup]="detailsForm" fxLayout="column" fxFlex >
+        <mat-form-field appearance="fill">
+                <mat-label>Imie</mat-label>
+                <input matInput placeholder="Podaj imie" formControlName="firstname">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Podaj email" formControlName="email">
+
+        </mat-form-field>
+        
+        
+            <div fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10">
+                <button mat-flat-button color="primary" [disabled]="!detailsForm.valid" (click)="submit()">Zapisz</button>
+            </div>
+        </div>
+    </div>

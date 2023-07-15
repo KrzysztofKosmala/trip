@@ -1,16 +1,13 @@
 package pl.kosmala.shop.order.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

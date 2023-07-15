@@ -11,9 +11,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FullpageadminclearModule } from './layouts/fullpageadminclear/fullpageadminclear.module';
 import { JwtInterceptor } from './modules/admin/common/interceptor/jwt.interceptor';
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorizeGuard';
-import { ProfileComponent } from './modules/profile/profile.component';
-import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
-import { ConfirmAccountComponent } from './modules/confirm-account/confirm-account.component';
 
 @NgModule({
   declarations: [

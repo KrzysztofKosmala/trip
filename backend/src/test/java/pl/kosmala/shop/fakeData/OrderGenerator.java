@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 import pl.kosmala.shop.common.model.OrderStatus;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.order.model.Order;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

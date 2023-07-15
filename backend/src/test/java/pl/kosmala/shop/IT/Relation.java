@@ -19,14 +19,11 @@ import pl.kosmala.shop.fakeData.ProductGenerator;
 import pl.kosmala.shop.fakeData.UserGenerator;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.repository.OrderRepository;
-import pl.kosmala.shop.security.entity.User;
-import pl.kosmala.shop.security.repository.UserRepository;
-import pl.kosmala.shop.trip.model.Trip;
-import pl.kosmala.shop.trip.repository.TripRepository;
+import pl.kosmala.shop.common.user.entity.User;
+import pl.kosmala.shop.common.user.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Relation extends PrePost

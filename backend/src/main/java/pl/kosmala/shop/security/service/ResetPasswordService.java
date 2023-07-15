@@ -7,10 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.notification.mail.PasswordResetEmailService;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.security.payload.ChangePassword;
 import pl.kosmala.shop.security.payload.ResetPasswordRequest;
-import pl.kosmala.shop.security.repository.UserRepository;
+import pl.kosmala.shop.common.user.repository.UserRepository;
 import pl.kosmala.shop.security.service.utils.UserHashUtils;
 
 import java.time.LocalDateTime;

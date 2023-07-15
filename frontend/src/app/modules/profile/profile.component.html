@@ -1,3 +1,12 @@
+<div>
+    <h2> Dane </h2>
+    <p> Imię: {{details.firstname}} </p>
+    <p> Nazwisko: {{details.lastname}} </p>
+    <p> Email: {{details.email}} </p>
+  </div>
+  <button mat-icon-button [routerLink]="['/profile/update']">
+    <mat-icon color="primary">edit</mat-icon>
+  </button>
 Rezerwacje
 <table mat-table [dataSource]="orders">
     <ng-container matColumnDef="id">

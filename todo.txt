@@ -1,47 +1,14 @@
-admin
-- pokazywanie errorów w logowaniu
-- wysłanie emaila aktywacyjnego
-- wylogowanie
-
-
-- dodawanie produktu
-- usuwanie produktu
-- edytowanie produktu
-- dodawanie pracownika 
-- dodawanie zdjec
-- przypisywanie pracownika do wycieczki
-- dodawanie miejscowości
-- dodawanie hotelu 
-- listowanie produktów
-- listowanie pracowników
-- listowanie pracowników
-- logowanie
-- moderowanie komantarzy
-- zwracanie do frontendu krajów 
-
-usługa do zwracanie słowników
-- CRUD
-- zwracanie na frontend aktualnych państw
-- zwracanie na fornt aktualnych statusów 
+- dane szczegolowe uzytkownika
+- dodawanie kolegów do pokoju
+- polecane wyjazdy
+- wysyłanie powiadomień do wszystkich uczestników wycieczki
+- promocje
+- kody rabatowe
+- filtrowanie po dacie
+- listowanie użytkowników przypisanych do wycieczki
+- maksymalna pojemność wycieczki
 
 
 
-customer
-- listowanie prodoków wszystkich
-- listowanie prodoków po dacie
-- listowanie prodoków po kraju
-- dodawanie do ulubionych 
-- zamawianie produktu
-- uzupełnianie danych do produktu
-- sortowanie po atrybutach(filtry)
-- logowanie
-- przypomnienie hasła
-- strina główna 
-- moje wyjazdy
-- szczegóły rezerwacji 
-- moje dane 
-- dodawanie komentarzy po kupnie wycieczki
-- usnięcie sidebara z product details
-
-
-guide
+- zmiana detali wycieczki
+- 

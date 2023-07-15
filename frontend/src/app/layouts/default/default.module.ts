@@ -9,13 +9,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductDetalisComponent } from 'src/app/modules/product-detalis/product-detalis.component';
 import { ProfileComponent } from 'src/app/modules/profile/profile.component';
+import { UpdateProfileComponent } from 'src/app/modules/profile/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     ProductComponent,
     ProductDetalisComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdateProfileComponent
   ],
   imports: [
     CommonModule,

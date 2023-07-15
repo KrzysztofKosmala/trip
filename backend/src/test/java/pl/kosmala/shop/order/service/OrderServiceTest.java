@@ -1,7 +1,6 @@
 package pl.kosmala.shop.order.service;
 
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -18,16 +17,14 @@ import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.PaymentType;
 import pl.kosmala.shop.order.model.dto.OrderDto;
-import pl.kosmala.shop.order.model.dto.OrderListDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

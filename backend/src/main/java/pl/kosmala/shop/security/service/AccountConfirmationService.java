@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.common.notification.mail.AccountConfirmationEmailService;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
-import pl.kosmala.shop.security.entity.User;
-import pl.kosmala.shop.security.payload.ChangePassword;
+import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.security.payload.ConfirmAccountRequest;
-import pl.kosmala.shop.security.repository.UserRepository;
+import pl.kosmala.shop.common.user.repository.UserRepository;
 import pl.kosmala.shop.security.service.utils.UserHashUtils;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor

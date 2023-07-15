@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReplacePipe } from 'src/app/modules/common/pipe/replacePipe';
 import { ResetPasswordComponent } from 'src/app/modules/reset-password/reset-password.component';
 import { ConfirmAccountComponent } from 'src/app/modules/confirm-account/confirm-account.component';
+import { ProfileComponent } from 'src/app/modules/profile/profile.component';
+import { UpdateProfileComponent } from 'src/app/modules/profile/update-profile/update-profile.component';
 @NgModule({
   declarations: [
     FullpageComponent,
@@ -19,7 +21,8 @@ import { ConfirmAccountComponent } from 'src/app/modules/confirm-account/confirm
     OrderComponent,
     ResetPasswordComponent,
     ReplacePipe,
-    ConfirmAccountComponent
+    ConfirmAccountComponent,
+
   ],
   imports: [
     CommonModule,

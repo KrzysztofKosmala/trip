@@ -1,9 +1,8 @@
 package pl.kosmala.shop.fakeData;
 
 import com.github.javafaker.Faker;
-import pl.kosmala.shop.common.model.Review;
-import pl.kosmala.shop.security.entity.User;
-import pl.kosmala.shop.security.entity.types.Role;
+import pl.kosmala.shop.common.user.entity.User;
+import pl.kosmala.shop.common.user.entity.types.Role;
 
 import java.util.ArrayList;
 import java.util.List;

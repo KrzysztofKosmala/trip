@@ -1,8 +1,7 @@
 package pl.kosmala.shop.security.service.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Value;
-import pl.kosmala.shop.security.entity.User;
+import pl.kosmala.shop.common.user.entity.User;
 
 import java.time.LocalDateTime;
 

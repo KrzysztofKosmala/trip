@@ -24,6 +24,7 @@ import { AdminAuthorizeGuard } from './modules/admin/common/guard/AdminAuthorize
 import { ProfileComponent } from './modules/profile/profile.component';
 import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 import { ConfirmAccountComponent } from './modules/confirm-account/confirm-account.component';
+import { UpdateProfileComponent } from './modules/profile/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
       {path: 'profile', component: ProfileComponent},
       {path: 'resetPassword', component: ResetPasswordComponent},
       { path: 'resetPassword/:hash', component: ResetPasswordComponent },
-      { path: 'confirmAccount/:hash', component: ConfirmAccountComponent }
+      { path: 'confirmAccount/:hash', component: ConfirmAccountComponent },
+      { path: 'profile/update', component: UpdateProfileComponent }
     ]
   },
   {

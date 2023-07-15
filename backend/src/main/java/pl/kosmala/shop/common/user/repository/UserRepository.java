@@ -1,10 +1,12 @@
-package pl.kosmala.shop.security.repository;
+package pl.kosmala.shop.common.user.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.kosmala.shop.security.entity.User;
+import org.springframework.stereotype.Repository;
+import pl.kosmala.shop.common.user.entity.User;
 
 import java.util.Optional;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long>
 {
     Optional<User> findByEmail(String email);
