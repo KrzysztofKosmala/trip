@@ -11,7 +11,7 @@ export class AdminProductUpdateService {
 
 
   savePost(id: number, value: any) {
-    return this.http.put<AdminProductUpdate>('api/v1/admin/trips/' + id, value)
+    return this.http.put<AdminProductUpdate>('/api/v1/admin/trips/' + id, value)
   }
 
   constructor(private http: HttpClient) { }

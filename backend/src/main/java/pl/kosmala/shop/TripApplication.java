@@ -54,6 +54,7 @@ public class TripApplication {
 					.firstname("krzys")
 					.role(Role.ROLE_ADMIN)
 					.password(new BCryptPasswordEncoder().encode("password"))
+					.isEnabled(true)
 					.lastname("kosmala")
 					.build();
 

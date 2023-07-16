@@ -6,6 +6,7 @@ export interface Product
     destination: string,
     desc: string,
     basePrice: number,
+    salePrice: number,
     currency: string,
     slug: string,
     images: Image[]

@@ -25,6 +25,8 @@ public class TripDto
     private String desc;
     @PositiveOrZero
     private BigDecimal basePrice;
+    @PositiveOrZero
+    private BigDecimal salePrice;
     private ProductCurrency currency;
     @Length(min = 4)
     @NotBlank

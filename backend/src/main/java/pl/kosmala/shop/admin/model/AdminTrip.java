@@ -97,6 +97,7 @@ public class AdminTrip extends Product
                     String fullDesc,
                     TripDestination destination,
                     BigDecimal basePrice,
+                    BigDecimal salePrice,
                     Boolean slopNearby,
                     Boolean apartment,
                     Boolean house,
@@ -108,7 +109,7 @@ public class AdminTrip extends Product
                     Set<Image> images
             )
     {
-        super(name, desc, currency, slug, fullDesc, images, basePrice);
+        super(name, desc, currency, slug, fullDesc, images, basePrice, salePrice);
         this.destination = destination;
         this.food = food;
         this.slopNearby = slopNearby;
@@ -130,6 +131,7 @@ public class AdminTrip extends Product
                     String fullDesc,
                     TripDestination destination,
                     BigDecimal basePrice,
+                    BigDecimal salePrice,
                     Boolean slopNearby,
                     Boolean apartment,
                     Boolean house,
@@ -141,7 +143,7 @@ public class AdminTrip extends Product
                     Set<Image> images
             )
     {
-        super(id, name, desc, currency, slug, fullDesc, images, basePrice);
+        super(id, name, desc, currency, slug, fullDesc, images, basePrice, salePrice);
         this.destination = destination;
         this.food = food;
         this.slopNearby = slopNearby;

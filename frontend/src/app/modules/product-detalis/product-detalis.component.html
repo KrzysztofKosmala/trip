@@ -32,8 +32,10 @@
                 Spa
             </div>
             <div fxLayout="row" fxFlexAlign="end">
+                <div class="productPrice" [ngClass]="{'productPriceDisable': product.salePrice}" >{{product.basePrice}} {{product.currency}}</div>
+                <div class="productSalePrice" *ngIf="product.salePrice">{{product.salePrice}} {{product.currency}} </div>
             </div>
-                <span class="price">{{product.basePrice}} {{product.currency}}</span>
+                
                 <div fxLayoutAlign="end start">
                     <button type="button" mat-flat-button color="accent" [routerLink]="['/order', product.slug]">Zarezerwuj</button>
                 </div>

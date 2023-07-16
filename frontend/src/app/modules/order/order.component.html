@@ -14,6 +14,8 @@
     <h2>Rezerwujesz</h2>
     <div>Nazwa: {{product.name}}</div>
     <div>slug: {{product.slug}}</div>
+    <div *ngIf="product.basePrice && !product.salePrice">cena: {{product.basePrice}}</div>
+    <div *ngIf="product.salePrice">cena: {{product.salePrice}}</div>
 </div>
 
 <form *ngIf="!orderSummary" [formGroup]="formGrup" (submit)="submit()">
@@ -51,7 +53,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Kod pocztkowy</mat-label>
-            <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
+            <input matInput placeholder="Podaj kod pocztowy" formControlName="zipcode">
             <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
             <div *ngIf="zipcode?.errors?.['required']">
                 Kod pocztowy jest wymagany
@@ -90,7 +92,7 @@
         </mat-form-field>
     </div>
 
-    <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Zaloguj się</a>, ay śledzić zamówienia</div>
+    <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Zaloguj się</a>, aby śledzić zamówienia</div>
 </div>
     <div>
         <h2>Płatność</h2>

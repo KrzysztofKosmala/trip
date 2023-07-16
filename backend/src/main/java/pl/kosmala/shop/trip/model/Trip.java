@@ -76,8 +76,8 @@ public class Trip extends Product
 
 
     @Builder
-    public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Set<Image> images) {
-        super(name, desc, currency, slug, fullDesc, images, basePrice);
+    public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Set<Image> images, BigDecimal salePrice) {
+        super(name, desc, currency, slug, fullDesc, images, basePrice, salePrice);
         this.destination = destination;
 
     }

@@ -39,6 +39,7 @@ public class  TripService
                         .destination(tripBySlug.getDestination())
                         .desc(tripBySlug.getDesc())
                         .basePrice(tripBySlug.getBasePrice())
+                        .salePrice(tripBySlug.getSalePrice())
                         .currency(tripBySlug.getCurrency())
                         .slug(tripBySlug.getSlug())
                         .fullDesc(tripBySlug.getFullDesc())

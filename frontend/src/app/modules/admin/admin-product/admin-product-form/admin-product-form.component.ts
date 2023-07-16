@@ -38,6 +38,11 @@ export class AdminProductFormComponent implements OnInit {
   {
     return this.parentForm.get("basePrice");
   }
+
+  get salePrice()
+  {
+    return this.parentForm.get("salePrice");
+  }
   get currency()
   {
     return this.parentForm.get("currency");

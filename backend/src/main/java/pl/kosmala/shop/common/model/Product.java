@@ -72,6 +72,13 @@ import java.util.Set;
                 )
         private BigDecimal basePrice;
 
+        @Column
+                (
+                        name = "sale_price"
+                        //           nullable = false
+                )
+        private BigDecimal salePrice;
+
         @OneToMany
         @JoinColumn(name = "productId")
         private List<Review> reviews;
@@ -87,7 +94,7 @@ import java.util.Set;
         @JsonBackReference
         private List<Order> orders;
 
-        public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images, BigDecimal basePrice)
+        public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images, BigDecimal basePrice, BigDecimal salePrice)
         {
             this.name = name;
             this.desc = desc;
@@ -96,8 +103,9 @@ import java.util.Set;
             this.fullDesc = fullDesc;
             this.images = images;
             this.basePrice = basePrice;
+            this.salePrice = salePrice;
         }
-        public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc,  Set<Image> images, BigDecimal basePrice)
+        public Product(Long id, String name, String desc, ProductCurrency currency, String slug, String fullDesc,  Set<Image> images, BigDecimal basePrice, BigDecimal salePrice)
         {
             this.id = id;
             this.name = name;
@@ -107,6 +115,7 @@ import java.util.Set;
             this.fullDesc = fullDesc;
             this.images = images;
             this.basePrice = basePrice;
+            this.salePrice = salePrice;
         }
         public void addImage(Image image) {
             if (images == null) {

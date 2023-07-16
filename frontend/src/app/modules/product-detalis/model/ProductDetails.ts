@@ -7,6 +7,7 @@ export interface ProductDetails
     category: string,
     desc: string,
     basePrice: number,
+    salePrice: number,
     currency: string,
     slug: string,
     destination: string,

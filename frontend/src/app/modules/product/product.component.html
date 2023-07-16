@@ -24,7 +24,10 @@
         <mat-list>
           <mat-list-item>{{product.name}}</mat-list-item>
           <mat-list-item>{{product.desc}}</mat-list-item>
-          <mat-list-item fxLayoutAlign="end">{{product.basePrice}} {{product.currency}}</mat-list-item>
+          <mat-list-item fxLayoutAlign="end">
+            <div class="productPrice" [ngClass]="{'productPriceDisable': product.salePrice}" >{{product.basePrice}} {{product.currency}}</div>
+            <div class="productSalePrice" *ngIf="product.salePrice">{{product.salePrice}} {{product.currency}} </div>
+          </mat-list-item>
         </mat-list>
       </mat-card-content>
     

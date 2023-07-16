@@ -40,6 +40,7 @@ export class AdminProductAddComponent implements OnInit {
       desc:['', [Validators.required, Validators.minLength(4)]],
       destination:[''],
       basePrice:['', [Validators.required, Validators.min(0)]],
+      salePrice:['', [Validators.min(0)]],
       currency:['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]],
       fullDesc: ['', [Validators.minLength(4)]],

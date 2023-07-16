@@ -13,4 +13,15 @@ mat-card {
     border-radius: 0 0 10px 10px;
 }
 
+.productSalePrice{
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 20px; 
+  color: green;
+}
+.productPriceDisable{
+  color: lightgray;
+  text-decoration: line-through;
+  font-size: 22px;
+}
 

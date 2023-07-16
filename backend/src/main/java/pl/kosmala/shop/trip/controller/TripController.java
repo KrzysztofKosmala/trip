@@ -52,6 +52,7 @@ public class TripController
                         .id(product.getId())
                         .desc(product.getDesc())
                         .basePrice(product.getBasePrice())
+                        .salePrice(product.getSalePrice())
                         .name(product.getName())
                         .currency(product.getCurrency())
                         .destination(product.getDestination())

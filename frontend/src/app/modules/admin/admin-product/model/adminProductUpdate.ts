@@ -6,6 +6,7 @@ export interface AdminProductUpdate{
     desc: string,
     destination: string,
     basePrice: number,
+    salePrice: number,
     currency: string,
     slug: string
     fullDesc: string

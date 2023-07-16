@@ -9,6 +9,7 @@ import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.common.user.entity.User;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +17,14 @@ public class OrderMapper
 {
     public static Order<Product> createNewOrder(OrderDto orderDto, Product product, Payment payment, User user)
     {
+
+        BigDecimal grossValue;
+
+        if(product.getSalePrice() != null)
+            grossValue = product.getSalePrice();
+        else
+            grossValue = product.getBasePrice();
+
         return Order.builder()
                 .firstname(orderDto.getFirstname())
                 .lastname(orderDto.getLastname())
@@ -27,7 +36,7 @@ public class OrderMapper
                 .placeDate(LocalDateTime.now())
                 .orderStatus(OrderStatus.NEW)
                 .product(product)
-                .grossValue(product.getBasePrice())
+                .grossValue(grossValue)
                 .payment(payment)
                 .user(user)
                 .build();

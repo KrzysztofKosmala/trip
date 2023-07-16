@@ -75,6 +75,19 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+        <mat-label>Cena promocyjna</mat-label>
+        <input matInput placeholder="Podaj cene promocyjną" formControlName="salePrice">
+        <div *ngIf="salePrice?.invalid && (salePrice?.dirty || salePrice?.touched)" class="errorMessages">
+            <div *ngIf="basePrice?.errors?.['required']">
+                    Cena jest wymagana
+            </div>
+            <div *ngIf="basePrice?.errors?.['min']">
+                Nazwa musi być większa od 0
+        </div>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Waluta</mat-label>
         <input matInput placeholder="Podaj waluta" value="PLN" formControlName="currency">
         <div *ngIf="currency?.invalid && (currency?.dirty || currency?.touched)" class="errorMessages">

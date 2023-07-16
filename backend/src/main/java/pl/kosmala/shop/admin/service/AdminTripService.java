@@ -37,6 +37,7 @@ public class AdminTripService
             adminTrip.setName(adminProductDto.getName());
             adminTrip.setCurrency(adminProductDto.getCurrency());
             adminTrip.setBasePrice(adminProductDto.getBasePrice());
+            adminTrip.setSalePrice(adminProductDto.getSalePrice());
             adminTrip.setDesc(adminProductDto.getDesc());
             adminTrip.setDestination(adminProductDto.getDestination());
             adminTrip.setSlug(slugifySlug(adminProductDto.getSlug()));
@@ -78,6 +79,7 @@ public class AdminTripService
                 .name(adminProductDto.getName())
                 .currency(adminProductDto.getCurrency())
                 .basePrice(adminProductDto.getBasePrice())
+                .salePrice(adminProductDto.getSalePrice())
                 .desc(adminProductDto.getDesc())
                 .destination(adminProductDto.getDestination())
                 .slug(slugifySlug(adminProductDto.getSlug()))
