@@ -21,8 +21,7 @@ import { UpdateProfileComponent } from 'src/app/modules/profile/update-profile/u
     OrderComponent,
     ResetPasswordComponent,
     ReplacePipe,
-    ConfirmAccountComponent,
-
+    ConfirmAccountComponent
   ],
   imports: [
     CommonModule,

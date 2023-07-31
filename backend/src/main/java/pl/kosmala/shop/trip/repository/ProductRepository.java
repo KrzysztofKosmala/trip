@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pl.kosmala.shop.common.model.Product;
 
+import java.util.List;
 import java.util.Optional;
 
 @Deprecated
@@ -12,4 +13,6 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long>
 {
     Optional<Product> findBySlug(String slug);
+
+    List<Product> findTop5BySalePriceIsNotNull();
 }

@@ -41,8 +41,9 @@ public class TripApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TripApplication.class, args);
-	}
+	}}
 
+/*
 	@Bean
 	CommandLineRunner commandLineRunner(TripRepository tripRepository, OrderRepository orderRepository, PaymentRepository paymentRepository, UserRepository userRepository)
 	{
@@ -142,3 +143,4 @@ public class TripApplication {
 		return trips;
 	}
 }
+*/

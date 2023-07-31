@@ -1,1 +1,36 @@
-<p>home works!</p>
+
+<h1>promowane rodukty</h1>
+
+
+<mat-card *ngFor="let product of homePageData.products" style="width: 100%; height: 400px">
+
+  <div class="card-slider" style=" width: 100% ">
+    <ng-image-slider style="object-fit: contain" #nav 
+      [images]="product.images"
+      [infinite]="false"
+      [autoSlide]="1"
+      [imageSize]="{width: '100%' , space: 0}"
+      [imagePopup]="false"
+
+      slideImage="5">
+    </ng-image-slider>
+
+  </div>
+
+    <div class="card-content">
+        <a routerLink="{{'/products/' + product.slug}}">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>{{product.name}}</mat-list-item>
+          <mat-list-item>{{product.desc}}</mat-list-item>
+          <mat-list-item fxLayoutAlign="end">
+            <div class="productPrice" [ngClass]="{'productPriceDisable': product.salePrice}" >{{product.basePrice}} {{product.currency}}</div>
+            <div class="productSalePrice" *ngIf="product.salePrice">{{product.salePrice}} {{product.currency}} </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    
+    </a>
+
+</div>
+</mat-card>
