@@ -1,15 +1,12 @@
 package pl.kosmala.shop.fakeData;
 
 import com.github.javafaker.Faker;
-import com.github.slugify.Slugify;
-import pl.kosmala.shop.admin.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
 import pl.kosmala.shop.common.image.model.Image;
-import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.utils.SlugifyUtils;
 import pl.kosmala.shop.trip.model.Trip;
 import pl.kosmala.shop.common.model.TripDestination;
-import pl.kosmala.shop.common.model.Review;
 
 import java.math.BigDecimal;
 import java.util.*;

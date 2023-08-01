@@ -1,15 +1,14 @@
-package pl.kosmala.shop.admin.service;
+package pl.kosmala.shop.admin.trip.service;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
-import pl.kosmala.shop.admin.dto.AdminTripDto;
-import pl.kosmala.shop.admin.model.AdminTrip;
-import pl.kosmala.shop.admin.repository.AdminTripRepository;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 

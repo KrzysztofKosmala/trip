@@ -44,7 +44,8 @@ public class AdminOrderController
     {
         return new AdminInitDataDto(createOrderStatusesMap());
     }
-
+    /*TODO:
+     *  retrive it from repo*/
     private Map<String, String> createOrderStatusesMap() {
         Map<String, String> statuses = new HashMap<>();
         for (OrderStatus status : OrderStatus.values()) {

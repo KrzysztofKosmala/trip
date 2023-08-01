@@ -1,6 +1,5 @@
 package pl.kosmala.shop.admin;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +11,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.webjars.NotFoundException;
-import pl.kosmala.shop.admin.dto.AdminTripDto;
-import pl.kosmala.shop.admin.model.AdminTrip;
-import pl.kosmala.shop.admin.repository.AdminTripRepository;
-import pl.kosmala.shop.admin.service.AdminTripService;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
+import pl.kosmala.shop.admin.trip.service.AdminTripService;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.fakeData.AdminTripDtoGenerator;
@@ -25,7 +24,6 @@ import pl.kosmala.shop.fakeData.ProductGenerator;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;

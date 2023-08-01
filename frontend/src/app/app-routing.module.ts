@@ -25,6 +25,7 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 import { ConfirmAccountComponent } from './modules/confirm-account/confirm-account.component';
 import { UpdateProfileComponent } from './modules/profile/update-profile/update-profile.component';
+import { AdminHomeComponent } from './modules/admin/admin-home/admin-home.component';
 
 const routes: Routes = [
   {
@@ -58,7 +59,8 @@ const routes: Routes = [
       {path: 'admin/orders', component: AdminOrderComponent, canActivate: [AdminAuthorizeGuard]},
       {path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent, canActivate: [AdminAuthorizeGuard]},
       {path: 'admin/orders/export', component: AdminOrderExportComponent, canActivate: [AdminAuthorizeGuard]},
-      {path: 'admin/orders/stats', component: AdminOrderStatsComponent, canActivate: [AdminAuthorizeGuard]}
+      {path: 'admin/orders/stats', component: AdminOrderStatsComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/home', component: AdminHomeComponent, canActivate: [AdminAuthorizeGuard]}
     ]
   },
 

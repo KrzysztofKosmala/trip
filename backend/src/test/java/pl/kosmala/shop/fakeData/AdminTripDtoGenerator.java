@@ -1,13 +1,11 @@
 package pl.kosmala.shop.fakeData;
 
 import com.github.javafaker.Faker;
-import org.springframework.beans.factory.annotation.Value;
-import pl.kosmala.shop.admin.dto.AdminTripDto;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.utils.SlugifyUtils;
-import pl.kosmala.shop.trip.model.Trip;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

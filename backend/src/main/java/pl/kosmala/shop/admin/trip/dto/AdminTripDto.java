@@ -1,4 +1,4 @@
-package pl.kosmala.shop.admin.dto;
+package pl.kosmala.shop.admin.trip.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;

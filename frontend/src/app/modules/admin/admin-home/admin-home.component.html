@@ -1,0 +1,14 @@
+<h1>Edycja strony głownej</h1>
+<div>
+    
+    <form [formGroup]="formGroup" fxLayaout="row" fxLayoutAlign="space-between start" (submit)="changeSettings()">
+        <div>Strategia wyświetlania produktów: {{homePageSettings?.productStrategy}}</div>
+        <mat-form-field>
+            <mat-label>Strategia</mat-label>
+            <mat-select formControlName="productStrategy">
+                <mat-option *ngFor="let productStrategy of productStrategies | keyvalue" [value]="productStrategy.key">{{productStrategy.value}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary">Zapisz</button>
+    </form>
+</div>

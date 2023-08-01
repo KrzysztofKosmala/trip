@@ -1,4 +1,4 @@
-package pl.kosmala.shop.admin.controller;
+package pl.kosmala.shop.admin.trip.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -6,23 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.function.EntityResponse;
 import org.webjars.NotFoundException;
-import pl.kosmala.shop.admin.dto.AdminTripDto;
-import pl.kosmala.shop.admin.model.AdminTrip;
-import pl.kosmala.shop.common.image.model.Image;
-import pl.kosmala.shop.admin.service.AdminTripService;
-import pl.kosmala.shop.common.image.service.ImageService;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.service.AdminTripService;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 
 @RestController
 @RequestMapping("api/v1/admin")

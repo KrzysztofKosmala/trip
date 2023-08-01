@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pl.kosmala.shop.admin.dto.UploadResponse;
+import pl.kosmala.shop.common.dto.UploadResponse;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.common.image.repository.ImageRepository;

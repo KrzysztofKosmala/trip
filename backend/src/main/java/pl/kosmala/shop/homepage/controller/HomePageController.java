@@ -17,6 +17,8 @@ public class HomePageController
 {
     private final HomePageService homePageService;
 
+
+
     @GetMapping
     public HomePageDto getHomePage()
     {

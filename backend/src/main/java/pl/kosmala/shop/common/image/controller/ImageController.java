@@ -1,7 +1,6 @@
 package pl.kosmala.shop.common.image.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -11,19 +10,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.kosmala.shop.admin.dto.UploadResponse;
+import pl.kosmala.shop.common.dto.UploadResponse;
 import pl.kosmala.shop.common.image.service.ImageService;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.model.TripDestination;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
 
 @RestController
 @RequestMapping("api/v1/")
