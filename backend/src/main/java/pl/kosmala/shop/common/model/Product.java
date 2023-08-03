@@ -93,7 +93,7 @@ import java.util.Set;
         @OneToMany(mappedBy = "product")
         @JsonBackReference
         private List<Order> orders;
-
+        
         public Product(String name, String desc, ProductCurrency currency, String slug, String fullDesc, Set<Image> images, BigDecimal basePrice, BigDecimal salePrice)
         {
             this.name = name;

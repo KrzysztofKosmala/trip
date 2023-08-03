@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.homepage.model.HomePageProductStrategy;
 import pl.kosmala.shop.admin.homepage.model.HomePageSettings;
 import pl.kosmala.shop.admin.homepage.model.dto.AdminHomePageInitData;
+import pl.kosmala.shop.admin.homepage.model.dto.HomePageSettingsDto;
 import pl.kosmala.shop.admin.homepage.repository.AdminHomePageSettingsRepository;
 
 import java.util.HashMap;
@@ -30,9 +31,30 @@ public class AdminHomePageService
         return strategies;
     }
 
-    public HomePageSettings getHomePageSettings()
+    public HomePageSettingsDto getHomePageSettings()
     {
         HomePageSettings homePageSettings = adminHomePageSettingsRepository.findById(1L).orElseThrow();
-        return homePageSettings;
+        HomePageSettingsDto homePageSettingsDto = new HomePageSettingsDto();
+        homePageSettingsDto.setProductStrategy(homePageSettings.getProductStrategy().name());
+        return homePageSettingsDto;
+    }
+
+    public void patchHomePageSettings(HomePageSettingsDto homePageSettings)
+    {
+
+        try {
+            HomePageProductStrategy strategy = HomePageProductStrategy.valueOf(homePageSettings.getProductStrategy());
+
+            HomePageSettings settingsToPatch = adminHomePageSettingsRepository.findById(1L).orElseThrow();
+
+            settingsToPatch.setProductStrategy(strategy);
+
+            adminHomePageSettingsRepository.save(settingsToPatch);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Nieprawidłowy String dla enuma HomePageProductStrategy.");
+        }
+
+        //settingsToPatch.setProductStrategy();
     }
 }

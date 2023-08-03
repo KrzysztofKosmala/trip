@@ -48,6 +48,18 @@ export class AdminHomeComponent implements OnInit
 
   changeSettings()
   {
+    console.log(this.formGroup.get('productStrategy')?.value)
+        const settings: HomePageSettings = {
+          productStrategy: this.formGroup.get('productStrategy')?.value
+        };
 
+        this.adminHomeService.saveStatus(settings).subscribe(
+          (response) => {
+            console.log('Sukces:', response);
+          },
+          (error) => {
+            console.error('Błąd:', error);
+          }
+        );
   }
 }

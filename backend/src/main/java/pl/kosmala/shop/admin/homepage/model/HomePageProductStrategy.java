@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HomePageProductStrategy
 {
-    BASIC("Predefiniowane");
+    BASIC("Predefiniowane"), MARKED("Zaznaczone") ;
     private String value;
 }
