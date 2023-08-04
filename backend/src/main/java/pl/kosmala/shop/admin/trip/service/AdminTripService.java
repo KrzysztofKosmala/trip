@@ -49,6 +49,7 @@ public class AdminTripService
             adminTrip.setApartment(adminProductDto.getApartment());
             adminTrip.setStartDate(adminProductDto.getStartDate());
             adminTrip.setEndDate(adminProductDto.getEndDate());
+            adminTrip.setShowOnHomePage(adminProductDto.getShowOnHomePage());
             List<Long> imagesIdFromRequest = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
 
             adminTrip.getImages().removeIf(imageAttachedToTheTrip -> !imagesIdFromRequest.contains(imageAttachedToTheTrip.getId()));
@@ -92,6 +93,8 @@ public class AdminTripService
                 .endDate(adminProductDto.getEndDate())
                 .startDate(adminProductDto.getStartDate())
                 .build();
+
+        adminTrip.setShowOnHomePage(adminTrip.getShowOnHomePage());
 
         List<Long> idsOfImageToBeAdd = Arrays.stream(adminProductDto.getImages()).map(Image::getId).toList();
 

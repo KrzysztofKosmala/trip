@@ -89,4 +89,8 @@ export class AdminProductFormComponent implements OnInit {
     return this.parentForm.get("endDate");
   }
 
+  get showOnHomePage()
+  {
+    return this.parentForm.get("showOnHomePage");
+  }
 }

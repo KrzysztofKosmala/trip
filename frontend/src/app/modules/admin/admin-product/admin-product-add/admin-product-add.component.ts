@@ -50,6 +50,7 @@ export class AdminProductAddComponent implements OnInit {
       house:[false],
       spa:[false],
       wifi:[false],
+      showOnHomePage:[false],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       images: [[]] 

@@ -1,28 +1,21 @@
 package pl.kosmala.shop.homepage.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.common.model.Product;
-import pl.kosmala.shop.homepage.HomePageStrategy;
+import pl.kosmala.shop.homepage.service.displayProduct.HomePageProductStrategyService;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class HomePageService
 {
-    private HomePageStrategy strategy;
+    private final HomePageProductStrategyService strategy;
 
-    @Autowired
-    public HomePageService(@Qualifier("simple") HomePageStrategy strategy)
-        {
-            this.strategy = strategy;
-        }
-
-        public List<Product> getProducts()
+    public List<Product> getProducts()
             {
-                //logika wybrania strategii
-                return strategy.generateHomePageProducts();
+                return strategy.getInstance().generateHomePageProducts();
             }
 
 }

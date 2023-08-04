@@ -16,6 +16,7 @@ export interface AdminProductUpdate{
     wifi: boolean,
     food: boolean,
     spa: boolean,
+    showOnHomePage: boolean,
     startDate: Date,
     endDate: Date,
     images: Image[]

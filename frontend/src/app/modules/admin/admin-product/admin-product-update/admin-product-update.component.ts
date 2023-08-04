@@ -52,7 +52,8 @@ export class AdminProductUpdateComponent implements OnInit {
       slopNearby:[],
       house:[],
       spa:[],
-      wifi:[]
+      wifi:[],
+      showOnHomePage:[]
     })
   }
 
@@ -85,6 +86,7 @@ export class AdminProductUpdateComponent implements OnInit {
         spa: this.productForm.get('spa')?.value,
         house: this.productForm.get('house')?.value,
         wifi: this.productForm.get('wifi')?.value,
+        showOnHomePage: this.productForm.get('showOnHomePage')?.value,
         startDate: this.productForm.get('startDate')?.value,
         endDate: this.productForm.get('endDate')?.value,
         images: this.productImages
@@ -142,7 +144,8 @@ export class AdminProductUpdateComponent implements OnInit {
       house: product.house,
       startDate: product.startDate,
       endDate: product.endDate,
-      wifi: product.wifi
+      wifi: product.wifi,
+      showOnHomePage: product.showOnHomePage
     });
   }
 

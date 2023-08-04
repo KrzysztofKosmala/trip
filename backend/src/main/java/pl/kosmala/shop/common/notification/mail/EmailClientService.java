@@ -17,7 +17,7 @@ public class EmailClientService
     public EmailSender getInstance()
     {
         if(isFakeProp.equals("fakeEmailService"))
-        return senderMap.get("fakeEmailService");
+            return senderMap.get("fakeEmailService");
 
         return senderMap.get("emailSimpleService");
     }

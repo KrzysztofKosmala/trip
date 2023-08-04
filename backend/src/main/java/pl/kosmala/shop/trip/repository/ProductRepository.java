@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>
     Optional<Product> findBySlug(String slug);
 
     List<Product> findTop5BySalePriceIsNotNull();
+
+    List<Product> findTop5ByShowOnHomePageIsTrue();
 }

@@ -1,6 +1,7 @@
 package pl.kosmala.shop.admin.homepage.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.homepage.model.HomePageProductStrategy;
 import pl.kosmala.shop.admin.homepage.model.HomePageSettings;

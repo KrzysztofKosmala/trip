@@ -38,6 +38,7 @@ public class AdminTripDto
     private Boolean spa;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Boolean showOnHomePage;
     private Image[] images;
 
 }
