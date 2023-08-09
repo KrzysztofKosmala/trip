@@ -1,14 +1,12 @@
-- dane szczegolowe uzytkownika
+- rezerwacja tylko dla zarejestrowanych
 - dodawanie kolegów do pokoju
-- polecane wyjazdy
+- testy dla wyswietlania produktow
+- testy dla dodawania do pokoju
 - wysyłanie powiadomień do wszystkich uczestników wycieczki
-- promocje
+- wyjątki refactor
 - kody rabatowe
 - filtrowanie po dacie
 - listowanie użytkowników przypisanych do wycieczki
 - maksymalna pojemność wycieczki
 
 
-
-- zmiana detali wycieczki
-- 

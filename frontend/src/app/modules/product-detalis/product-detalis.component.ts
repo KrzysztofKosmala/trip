@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetails } from './model/ProductDetails';
 import { ProductDetailsService } from './product-details.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { JwtService } from '../common/service/jwt.service';
 @Component({
   selector: 'app-product-detalis',
   templateUrl: './product-detalis.component.html',
@@ -14,7 +16,7 @@ export class ProductDetalisComponent implements OnInit {
   product!: ProductDetails;
   reviewForm!: FormGroup;
 
-  constructor(private productDetailsService: ProductDetailsService, private router: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private jwtService: JwtService, private routerNavigation: Router, private snackBar: MatSnackBar, private productDetailsService: ProductDetailsService, private router: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getProductDetails();
@@ -28,9 +30,15 @@ export class ProductDetalisComponent implements OnInit {
     let slug = this.router.snapshot.params["slug"];
     this.productDetailsService.getProductDetails(slug).subscribe(product => this.product = product);
   }
+  
   submit()
   {
-
+    if(this.jwtService.isLoggedIn())
+    {
+      this.routerNavigation.navigate(['/order', this.product.slug]);
+    }else{
+      this.routerNavigation.navigate(['/login']).then(()=> this.snackBar.open("Zaloguj sie aby zarezerwować." ,"", {duration: 3000}));
+    }
   }
 
   get authorName()

@@ -37,7 +37,7 @@
             </div>
                 
                 <div fxLayoutAlign="end start">
-                    <button type="button" mat-flat-button color="accent" [routerLink]="['/order', product.slug]">Zarezerwuj</button>
+                    <button type="button" mat-flat-button color="accent" (click)="submit()">Zarezerwuj</button>
                 </div>
         </div>
     </div>
