@@ -43,4 +43,13 @@ public class OrderController
         }
         return orderService.getOrdersForCustomer(user);
     }
+
+    @GetMapping(params = "id")
+    public OrderDto getOrderById(@RequestParam Long id, @AuthenticationPrincipal User user)
+    {
+        if(user == null){
+            throw new IllegalArgumentException("Brak użytkownika!");
+        }
+        return orderService.getOrderById(id, user);
+    }
 }

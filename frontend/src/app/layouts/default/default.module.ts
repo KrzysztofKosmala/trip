@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductDetalisComponent } from 'src/app/modules/product-detalis/product-detalis.component';
 import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 import { UpdateProfileComponent } from 'src/app/modules/profile/update-profile/update-profile.component';
+import { UpdateOrderComponent } from 'src/app/modules/order/update-order/update-order.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UpdateProfileComponent } from 'src/app/modules/profile/update-profile/u
     ProductComponent,
     ProductDetalisComponent,
     ProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    UpdateOrderComponent
   ],
   imports: [
     CommonModule,

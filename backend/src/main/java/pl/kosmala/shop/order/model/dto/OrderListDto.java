@@ -15,4 +15,5 @@ public class OrderListDto
     private LocalDateTime placeDate;
     private String orderStatus;
     private BigDecimal grossValue;
+    private String productName;
 }

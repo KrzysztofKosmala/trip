@@ -42,6 +42,19 @@ public class OrderMapper
                 .build();
     }
 
+    public static OrderDto mapToOrderDto(Order order)
+    {
+        return OrderDto.builder()
+                .city(order.getCity())
+                .email(order.getEmail())
+                .street(order.getStreet())
+                .zipcode(order.getZipcode())
+                .firstname(order.getFirstname())
+                .lastname(order.getLastname())
+                .paymentId(order.getPayment().getId())
+                .phone(order.getPhone())
+                .build();
+    }
     public static OrderSummary mapToOrderSummary(Order newOrder)
     {
         return OrderSummary.builder()

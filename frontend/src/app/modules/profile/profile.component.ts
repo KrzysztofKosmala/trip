@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit{
 
   orders!: Array<OrderListDto>
   details!: UserDetails
-  displayedColumns = ["id", "placeDate", "orderStatus", "grossValue"]
+  displayedColumns = ["name","placeDate", "orderStatus", "grossValue", "actions"]
 
   ngOnInit(): void {
     if(!this.jwtService.isLoggedIn())
@@ -26,13 +26,12 @@ export class ProfileComponent implements OnInit{
     }
     this.getDetails();
     this.getOrders();
-    console.log(this.orders)
   }
 
   getOrders(){
-    this.profileService.getOrders().subscribe(orders => this.orders =orders)
+    this.profileService.getOrders().subscribe(orders => {console.log(orders[0].id); this.orders =orders})
   }
   getDetails(){
-    this.profileService.getDetails().subscribe(details => {console.log( details); this.details = details})
+    this.profileService.getDetails().subscribe(details => { this.details = details})
   }
 }

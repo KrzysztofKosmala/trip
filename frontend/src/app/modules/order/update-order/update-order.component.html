@@ -1,0 +1,68 @@
+<form [formGroup]="formGrup" (submit)="submit()" fxLayout="column">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Imię</mat-label>
+            <input matInput placeholder="Podaj imię" formControlName="firstname">
+            <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
+            <div *ngIf="firstname?.errors?.['required']">
+                Imię jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Ulica" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+            <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+                Nazwisko jest wymagane
+            </div>
+            </div>
+        </mat-form-field>
+
+</form>
+   

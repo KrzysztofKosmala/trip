@@ -74,6 +74,11 @@ public class Trip extends Product
             )
     private Boolean spa;
 
+    @Column
+            (
+                    name = "max_capacity"
+            )
+    private Integer maxCapacity;
 
     @Builder
     public Trip(String name, String desc, ProductCurrency currency, String slug, String fullDesc, TripDestination destination, BigDecimal basePrice, Set<Image> images, BigDecimal salePrice) {

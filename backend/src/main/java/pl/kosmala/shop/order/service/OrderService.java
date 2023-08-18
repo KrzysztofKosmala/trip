@@ -69,8 +69,21 @@ public class OrderService
                                         .placeDate(order.getPlaceDate())
                                         .grossValue(order.getGrossValue())
                                         .orderStatus(order.getOrderStatus().getValue())
+                                        .productName(order.getProduct().getName())
                                         .build()
                         )
                 .toList();
+    }
+
+    public OrderDto getOrderById(Long id, User user)
+    {
+
+        Order order = orderRepository.findById(id).orElseThrow();
+
+        //throw sprawdzenie czy order nalezy do usera
+        order.getUser().getId().equals(user.getId());
+
+        return mapToOrderDto(order);
+
     }
 }

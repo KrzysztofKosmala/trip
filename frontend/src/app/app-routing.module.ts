@@ -26,6 +26,7 @@ import { ResetPasswordComponent } from './modules/reset-password/reset-password.
 import { ConfirmAccountComponent } from './modules/confirm-account/confirm-account.component';
 import { UpdateProfileComponent } from './modules/profile/update-profile/update-profile.component';
 import { AdminHomeComponent } from './modules/admin/admin-home/admin-home.component';
+import { UpdateOrderComponent } from './modules/order/update-order/update-order.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
       {path: 'resetPassword', component: ResetPasswordComponent},
       { path: 'resetPassword/:hash', component: ResetPasswordComponent },
       { path: 'confirmAccount/:hash', component: ConfirmAccountComponent },
-      { path: 'profile/update', component: UpdateProfileComponent }
+      { path: 'profile/update', component: UpdateProfileComponent },
+      { path: 'orders/update/:id', component: UpdateOrderComponent }
     ]
   },
   {
