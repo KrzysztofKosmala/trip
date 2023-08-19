@@ -1,4 +1,5 @@
 <h1>Edutuj profil</h1>
+<h2>Dane podstawowe</h2>
     <div fxLayout="column">
         <div [formGroup]="detailsForm" fxLayout="column" fxFlex >
         <mat-form-field appearance="fill">
@@ -12,10 +13,34 @@
         <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Podaj email" formControlName="email">
-
         </mat-form-field>
-        
-        
+        <h2>Dane potrzebne do dokonania rezerwacji</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Telefon</mat-label>
+            <input matInput placeholder="Podaj nr telefonu" formControlName="phone">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Pesel</mat-label>
+        <input matInput placeholder="Podaj pesel" formControlName="pesel">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Płeć</mat-label>
+    <mat-select formControlName="gender">
+        <mat-option *ngFor="let gender of genders | keyvalue" [value]="gender.key">{{gender.key}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Adres</mat-label>
+    <input matInput placeholder="Podaj adres" formControlName="address">
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Kod pocztowy</mat-label>
+    <input matInput placeholder="Podaj kod pocztowy" formControlName="postal">
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Miejscowość</mat-label>
+    <input matInput placeholder="Podaj miejscowość" formControlName="city">
+</mat-form-field>
             <div fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10">
                 <button mat-flat-button color="primary" [disabled]="!detailsForm.valid" (click)="submit()">Zapisz</button>
             </div>

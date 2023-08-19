@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetails } from '../product-detalis/model/ProductDetails';
 import { ProductDetailsService } from '../product-detalis/product-details.service';
 import { InitData } from './model/InitData';
@@ -8,6 +8,9 @@ import { OrderDto } from './model/OrderDto';
 import { OrderSummary } from './model/OrderSummary';
 import { OrderService } from './order.service';
 import { JwtService } from '../common/service/jwt.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProfileService } from '../profile/profile.service';
+import { UserDetails } from '../profile/model/userDetails';
 
 @Component({
   selector: 'app-order',
@@ -19,6 +22,7 @@ export class OrderComponent implements OnInit{
 formGrup!: FormGroup;
 orderSummary!: OrderSummary;
 product!: ProductDetails;
+userDetails!: UserDetails;
 initData!: InitData;
 isLoggedIn = false;
 constructor
@@ -27,25 +31,40 @@ constructor
     private formBuilder: FormBuilder,
     private orderService: OrderService, 
     private router: ActivatedRoute,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private routerNavigation: Router,
+    private snackBar: MatSnackBar,
+    private profileService: ProfileService
   ){}
 
   ngOnInit(): void 
   {
-    const slug = this.router.snapshot.params['slug'];
-    this.productDetailsService.getProductDetails(slug).subscribe(product => this.product = product);
-    this.formGrup = this.formBuilder.group({
-      firstname: [''],
-      lastname: [''],
-      street: [''],
-      zipcode: [''],
-      city: [''],
-      email: [''],
-      phone: [''],
-      payment: ['']
+    this.productDetailsService.canUserOrder().subscribe(result => {
+      console.log(result)
+      if(!result)
+      {
+        this.routerNavigation.navigate(['/profile/update']).then(()=> this.snackBar.open("Uzupełnij dane aby zarezerwować." ,"", {duration: 3000}));
+      }
     });
-    this.getinitData();
-    this.isLoggedIn = this.jwtService.isLoggedIn();
+
+    this.profileService.getDetails().subscribe(details => this.userDetails = details);
+
+      const slug = this.router.snapshot.params['slug'];
+      this.productDetailsService.getProductDetails(slug).subscribe(product => this.product = product);
+      this.formGrup = this.formBuilder.group({
+        firstname: [''],
+        lastname: [''],
+        street: [''],
+        zipcode: [''],
+        city: [''],
+        email: [''],
+        phone: [''],
+        payment: ['']
+      });
+      this.getinitData();
+      this.isLoggedIn = this.jwtService.isLoggedIn();
+    
+
   }
 
   private statuses = new Map<string, string>([

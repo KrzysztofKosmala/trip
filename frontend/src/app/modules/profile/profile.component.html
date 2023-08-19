@@ -1,14 +1,27 @@
 <div>
-    <h2> Dane     <button mat-icon-button [routerLink]="['/profile/update']">
+    <h1> Profil użytkownika   <button mat-icon-button [routerLink]="['/profile/update']">
         <mat-icon color="primary">edit</mat-icon>
-      </button></h2>  
+    </button></h1>  
+    
+    <h2> Dane podstawowe   </h2>
+      
 
-    <p> Imię: {{details.firstname}} </p>
-    <p> Nazwisko: {{details.lastname}} </p>
+    <p> Imię i nazwisko: {{details.firstname}} <span></span> {{details.lastname}} </p>
     <p> Email: {{details.email}} </p>
-  </div>
 
-Rezerwacje
+
+  <h2> Dane konieczne do rezerwacji wyjazdu </h2>
+      
+
+  <p> Telefon: {{details.phone}} </p>
+  <p> PESEL: {{details.pesel}} </p>
+  <p> Płeć: {{ details.gender}} </p>
+  <p> Adres: {{details.address}} </p>
+  <p> Kod pocztowy: {{details.postal}} </p>
+  <p> Miejscowość: {{details.city}} </p>
+</div>
+
+<h3>Rezerwacje</h3>
 <table mat-table [dataSource]="orders">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nazwa produktu </th>

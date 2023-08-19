@@ -13,18 +13,32 @@ export class UpdateProfileComponent implements OnInit  {
 
   constructor(private service: ProfileService, private formBuilder: FormBuilder,private snackBar: MatSnackBar,){}
   detailsForm!: FormGroup;
+  details!: UserDetails;
+  genders = new Map<string, string>([
+    ["Mężczyzna", "MALE"],
+    ["Kobieta", "FEMALE"]
+  ])
+
   ngOnInit(): void {
     this.getProfile();
     this.detailsForm = this.formBuilder.group({
       firstname: [],
       lastname: [],
-      email: []
+      email: [],
+      phone: [],
+      pesel: [],
+      gender: [],
+      address: [],
+      postal: [],
+      city: []
     })
   }
 
   getProfile()
   {
-    this.service.getDetails().subscribe(details => this.mapFormValues(details))
+    this.service.getDetails().subscribe(details => {
+      this.mapFormValues(details);
+    })
   }
 
   mapFormValues(details: UserDetails): void {
@@ -32,7 +46,13 @@ export class UpdateProfileComponent implements OnInit  {
       {
         firstname: details.firstname,
         lastname: details.lastname,
-        email: details.email
+        email: details.email,
+        phone: details.phone,
+        pesel: details.pesel,
+        gender: details.gender,
+        address: details.address,
+        postal: details.postal,
+        city: details.city
       }
     )
   }
@@ -46,6 +66,13 @@ export class UpdateProfileComponent implements OnInit  {
         firstname: this.detailsForm.get('firstname')?.value,
         lastname: this.detailsForm.get('lastname')?.value,
         email: this.detailsForm.get('email')?.value,
+
+        phone: this.detailsForm.get('phone')?.value,
+        pesel: this.detailsForm.get('pesel')?.value,
+        gender: this.genders.get(this.detailsForm.get('gender')?.value),
+        address: this.detailsForm.get('address')?.value,
+        postal: this.detailsForm.get('postal')?.value,
+        city: this.detailsForm.get('city')?.value,
       } as UserDetails
     ).subscribe
     (

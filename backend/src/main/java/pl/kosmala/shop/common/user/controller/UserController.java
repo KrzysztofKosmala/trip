@@ -36,4 +36,14 @@ public class UserController
         }
         return userService.updateDetails(user, details);
     }
+
+    @GetMapping("/checkIfCanOrder")
+    public boolean checkIfCanOrder(@AuthenticationPrincipal User user)
+    {
+        if(user == null){
+            throw new IllegalArgumentException("Brak użytkownika!");
+        }
+        return userService.checkIfUserCanOrder(user);
+    }
+
 }
