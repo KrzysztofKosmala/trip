@@ -16,7 +16,7 @@ public class UserDto
     private String phone;
     private String pesel;
     private String gender;
-    private String address;
+    private String street;
     private String postal;
     private String city;
 }

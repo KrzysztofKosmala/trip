@@ -28,7 +28,7 @@ export class UpdateProfileComponent implements OnInit  {
       phone: [],
       pesel: [],
       gender: [],
-      address: [],
+      street: [],
       postal: [],
       city: []
     })
@@ -50,7 +50,7 @@ export class UpdateProfileComponent implements OnInit  {
         phone: details.phone,
         pesel: details.pesel,
         gender: details.gender,
-        address: details.address,
+        street: details.street,
         postal: details.postal,
         city: details.city
       }
@@ -60,6 +60,7 @@ export class UpdateProfileComponent implements OnInit  {
   submit()
   {
     console.log(this.detailsForm)
+
     this.service.updateDetails
     (
       {
@@ -70,18 +71,19 @@ export class UpdateProfileComponent implements OnInit  {
         phone: this.detailsForm.get('phone')?.value,
         pesel: this.detailsForm.get('pesel')?.value,
         gender: this.genders.get(this.detailsForm.get('gender')?.value),
-        address: this.detailsForm.get('address')?.value,
+        street: this.detailsForm.get('street')?.value,
         postal: this.detailsForm.get('postal')?.value,
         city: this.detailsForm.get('city')?.value,
       } as UserDetails
     ).subscribe
     (
-      {
-        next: details =>
+      details =>
         {
           this.mapFormValues(details)
           this.snackBar.open("Twoje dane zostały zapisane", '', {duration: 3000})
         }
+      , error =>{
+          console.log(error.error.message)
       }
     )
   }

@@ -30,7 +30,7 @@ public class Order<T extends Product>
     private String firstname;
     private String lastname;
     private String street;
-    private String zipcode;
+    private String postal;
     private String city;
     private String email;
     private String phone;
@@ -55,7 +55,7 @@ public class Order<T extends Product>
         return  Objects.equals(email, order.email) &&
                 Objects.equals(city, order.city) &&
                 Objects.equals(street, order.street) &&
-                Objects.equals(zipcode, order.zipcode) &&
+                Objects.equals(postal, order.postal) &&
                 Objects.equals(grossValue, order.grossValue) &&
                 Objects.equals(firstname, order.firstname) &&
                 Objects.equals(lastname, order.lastname) &&
@@ -65,6 +65,6 @@ public class Order<T extends Product>
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, city, street, zipcode, grossValue, firstname, lastname, placeDate, orderStatus);
+        return Objects.hash(email, city, street, postal, grossValue, firstname, lastname, placeDate, orderStatus);
     }
 }

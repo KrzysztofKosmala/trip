@@ -41,7 +41,7 @@ public class User implements UserDetails
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String address;
+    private String street;
     private String postal;
     private String city;
 

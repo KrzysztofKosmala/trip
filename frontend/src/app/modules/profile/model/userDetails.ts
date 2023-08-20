@@ -7,7 +7,7 @@ export interface UserDetails
     phone: string,
     pesel: string,
     gender: string,
-    address: string,
+    street: string,
     postal: string,
     city: string
 }

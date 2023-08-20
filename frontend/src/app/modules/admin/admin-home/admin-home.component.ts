@@ -31,7 +31,7 @@ export class AdminHomeComponent implements OnInit
   getInitData()
   {
     this.adminHomeService.getInitData()
-    .subscribe(data => this.productStrategies = data.productStrategies)
+    .subscribe(data => { console.log(data.productStrategies); this.productStrategies = data.productStrategies})
   }
 
   getSettings()

@@ -30,7 +30,7 @@ public class SecurityConfig
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/v1/password/**","/api/v1/auth/**","/api/v1/trips/**", "/api/v1/homePage/**"
+                        "/api/v1/password/**","/api/v1/auth/**","/api/v1/trips/**", "/api/v1/homePage/**", "/error/**"
                 )
                 .permitAll()
                 .requestMatchers("/api/v1/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.name())

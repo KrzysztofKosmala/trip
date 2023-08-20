@@ -10,6 +10,7 @@ import pl.kosmala.shop.order.model.dto.OrderSummary;
 import pl.kosmala.shop.order.service.OrderService;
 import pl.kosmala.shop.order.service.PaymentService;
 import pl.kosmala.shop.common.user.entity.User;
+import pl.kosmala.shop.order.service.TransportService;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class OrderController
 {
     private final OrderService orderService;
     private final PaymentService paymentService;
+    private final TransportService transportService;
     @PostMapping
     public OrderSummary placeOrder(@RequestBody OrderDto orderDto, @AuthenticationPrincipal User user)
     {
@@ -32,6 +34,7 @@ public class OrderController
 
         return InitOrder.builder()
                 .payments(paymentService.getPayments())
+                .transports(transportService.getTransports())
                 .build();
     }
 

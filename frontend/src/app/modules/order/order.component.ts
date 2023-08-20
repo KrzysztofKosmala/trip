@@ -52,43 +52,44 @@ constructor
       const slug = this.router.snapshot.params['slug'];
       this.productDetailsService.getProductDetails(slug).subscribe(product => this.product = product);
       this.formGrup = this.formBuilder.group({
-        firstname: [''],
-        lastname: [''],
-        street: [''],
-        zipcode: [''],
-        city: [''],
-        email: [''],
-        phone: [''],
-        payment: ['']
+        payment: [''],
+        transport: ['']
       });
       this.getinitData();
       this.isLoggedIn = this.jwtService.isLoggedIn();
     
 
   }
-
-  private statuses = new Map<string, string>([
+  statuses = new Map<string, string>([
     ["NEW", "Nowe"]
   ])
-
+  cities = new Map<string, string>([
+    ["NEW", "Nowe"]
+  ])
+  transports = new Map<string, string>([
+    ["NEW", "Nowe"]
+  ])
 submit()
 {
   this.orderService.placeOrder({
-    firstname: this.formGrup.get('firstname')?.value,
-    lastname: this.formGrup.get('lastname')?.value,
-    street: this.formGrup.get('street')?.value,
-    zipcode: this.formGrup.get('zipcode')?.value,
-    city: this.formGrup.get('city')?.value,
-    email: this.formGrup.get('email')?.value,
-    phone: this.formGrup.get('phone')?.value,
+    firstname: this.userDetails.firstname,
+    lastname: this.userDetails.lastname,
+    street: this.userDetails.street,
+    postal: this.userDetails.postal,
+    city: this.userDetails.city,
+    email: this.userDetails.email,
+    phone: this.userDetails.phone,
     productslug: this.product.slug,
+    transport: this.formGrup.get('transport')?.value.id,
+    //departureCity: this.formGrup.get('departureCity')?.value,
     paymentId: Number(this.formGrup.get('payment')?.value.id),
   } as OrderDto).subscribe(orderSummary => {
     this.orderSummary=orderSummary;
 
+  }, error => {
+    console.log(error.error.message)
   })
 }
-
 getinitData()
 {
   this.orderService.getInitData()
@@ -96,10 +97,17 @@ getinitData()
     this.initData =initData;
     console.log(initData)
     this.setDefaultPayment();
+    this.setDefaultTransport();
   })
 }
   setDefaultPayment() {
     this.formGrup.patchValue({"payment": this.initData.payments.filter(payment => payment.defaultPayment === true)[0]})
+  }
+  setDefaultTransport() {
+    console.log(this.initData.transports[0].name)
+    //this.formGrup.get("transport")?.setValue(this.initData.transports[0])
+    //this.formGrup.patchValue({transport: this.initData.transports[0].name})
+    this.formGrup.patchValue({transport: this.initData.transports.filter(transport => transport.defaultTransport === true)[0]})
   }
 
 getStatus(status: string)

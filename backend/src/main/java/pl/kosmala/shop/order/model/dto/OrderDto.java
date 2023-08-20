@@ -16,7 +16,7 @@ public class OrderDto
     @NotBlank
     private String street;
     @NotBlank
-    private String zipcode;
+    private String postal;
     @NotBlank
     private String city;
     @NotBlank

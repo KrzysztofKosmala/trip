@@ -1,7 +1,9 @@
-- rezerwacja tylko dla zarejestrowanych
+
 - dodawanie kolegów do pokoju
-- testy dla wyswietlania produktow
+- testy dla strategii wyswietlania produktow
 - testy dla dodawania do pokoju
+- testy składania zamówienia
+-testy user service
 - wysyłanie powiadomień do wszystkich uczestników wycieczki
 - wyjątki refactor
 - kody rabatowe

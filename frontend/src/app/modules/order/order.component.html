@@ -27,7 +27,7 @@
     <div>Telefon: {{userDetails.phone}}</div>
     <div>Pesel: {{userDetails.pesel}}</div>
     <div>Płeć: {{userDetails.gender}}</div>
-    <div>Adres: {{userDetails.address}}</div>
+    <div>Ulica: {{userDetails.street}}</div>
     <div>Kod pocztowy: {{userDetails.postal}}</div>
     <div>Miejscowość: {{userDetails.city}}</div>
 </div>
@@ -35,25 +35,16 @@
 <form *ngIf="!orderSummary" [formGroup]="formGrup" (submit)="submit()" fxLayout="column">
 
 
+
         <mat-form-field appearance="fill">
-            <mat-label>Telefon</mat-label>
-            <input matInput placeholder="Rodzaj transportu" formControlName="phone">
-            <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
-            <div *ngIf="phone?.errors?.['required']">
-                Telefon jest wymagany
-            </div>
-            </div>
+            <mat-label>Rodzaj transportu</mat-label>
+            <mat-select [(value)]="initData.transports[0].name" formControlName="transport">
+                <mat-option *ngFor="let transport of initData.transports" [value]="transport">{{transport.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
+
         <h3>Nie jedziesz sam? Dodaj uczestników z którymi chcesz mieszkać</h3>
-        <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="phone">
-            <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
-            <div *ngIf="phone?.errors?.['required']">
-                Telefon jest wymagany
-            </div>
-            </div>
-        </mat-form-field>
+
 
     <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Zaloguj się</a>, aby śledzić zamówienia</div>
 
