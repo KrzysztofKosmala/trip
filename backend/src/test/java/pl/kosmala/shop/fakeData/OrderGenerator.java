@@ -24,7 +24,7 @@ public class OrderGenerator
                 .city(faker.address().city())
                 .placeDate(LocalDateTime.now())
                 .street(faker.address().streetAddress())
-                .zipcode(faker.address().zipCode())
+                .postal(faker.address().zipCode())
                 .grossValue(product.getBasePrice())
                 .firstname(faker.name().firstName())
                 .lastname(faker.name().lastName())

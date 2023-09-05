@@ -28,7 +28,7 @@ public class OrderService
     private final ProductRepository productRepository;
     private final PaymentRepository paymentRepository;
     private final OrderConfirmationEmailService orderConfirmationEmailService;
-    //TODO: dodać klienta do zamówienia
+    //TODO: sprawdzic czy uzutkownik juz zarezerwowal te wycieczke, dodac znajomych
     @Transactional
     public OrderSummary placeOrder(OrderDto orderDto, User user)
     {
@@ -57,6 +57,11 @@ public class OrderService
     public List<OrderListDto> getOrdersForCustomer(User user)
     {
         return mapToOrderListDto(orderRepository.findByUserId(user.getId()));
+    }
+
+    public boolean hasUserPaidForProduct(String userEmail, Long productId)
+    {
+        return orderRepository.hasUserPaidForProduct(userEmail, productId);
     }
 
     private List<OrderListDto> mapToOrderListDto(List<Order> byUserId)

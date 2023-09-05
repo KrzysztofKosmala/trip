@@ -2,6 +2,7 @@ package pl.kosmala.shop.admin.trip.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kosmala.shop.admin.room.model.Room;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.model.ProductCurrency;
@@ -9,6 +10,9 @@ import pl.kosmala.shop.common.model.TripDestination;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -86,6 +90,9 @@ public class AdminTrip extends Product
                     //           nullable = false
             )
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms = new LinkedList<>();
 
     @Builder
     public AdminTrip

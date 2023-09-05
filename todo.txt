@@ -3,12 +3,13 @@
 - testy dla strategii wyswietlania produktow
 - testy dla dodawania do pokoju
 - testy składania zamówienia
--testy user service
+- testy user service
 - wysyłanie powiadomień do wszystkich uczestników wycieczki
 - wyjątki refactor
 - kody rabatowe
 - filtrowanie po dacie
 - listowanie użytkowników przypisanych do wycieczki
 - maksymalna pojemność wycieczki
-
+- strategia po zapełnieniu wycieczki
+- zamknięcie wycieczki
 

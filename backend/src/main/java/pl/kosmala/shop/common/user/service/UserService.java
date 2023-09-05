@@ -33,7 +33,15 @@ public class UserService
 
         return build;
     }
+    public User getUserByEmail(String email)
+    {
+        return userRepository.findByEmail(email).orElseThrow();
+    }
 
+    public boolean checkIfUserExists(String email)
+    {
+        return userRepository.existsByEmail(email);
+    }
     public UserDto updateDetails(User user, UserDto details)
     {
         User userFromRepo = userRepository.findByEmail(user.getEmail()).orElseThrow();

@@ -15,5 +15,8 @@ public interface AdminTripRepository extends JpaRepository<AdminTrip, Long>
 
     @Query("SELECT DISTINCT i FROM AdminTrip i LEFT JOIN FETCH i.images WHERE i.id = :id")
     Optional<AdminTrip>  findByIdWithImages(@Param("id") Long id);
+
+    @Query("SELECT COUNT(r) FROM Room r WHERE r.trip.id = :tripId")
+    Long countRoomsByAdminTripId(@Param("tripId") Long tripId);
     boolean existsByName(String name);
 }

@@ -72,7 +72,7 @@ class OrderServiceTest
                 .firstname(faker.name().firstName())
                 .lastname(faker.name().lastName())
                 .city(faker.address().city())
-                .zipcode(faker.address().zipCode())
+                .postal(faker.address().zipCode())
                 .email(faker.internet().emailAddress())
                 .paymentId(1L)
                 .phone(faker.phoneNumber().cellPhone())
@@ -126,7 +126,7 @@ class OrderServiceTest
         assertEquals(orderDto.getLastname(), orderToSave.getLastname());
         assertEquals(orderDto.getStreet(), orderToSave.getStreet());
         assertEquals(orderDto.getCity(), orderToSave.getCity());
-        assertEquals(orderDto.getZipcode(), orderToSave.getZipcode());
+        assertEquals(orderDto.getPostal(), orderToSave.getPostal());
         assertEquals(orderDto.getPaymentId(), orderToSave.getPayment().getId());
         assertEquals(product.getId(), orderToSave.getProduct().getId());
         assertEquals(user.getId(), orderToSave.getUser().getId());

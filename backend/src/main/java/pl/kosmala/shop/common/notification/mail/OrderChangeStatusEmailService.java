@@ -19,7 +19,7 @@ public class OrderChangeStatusEmailService extends AbstractEmailService
                 (
                     message,
                     emailConfig.getInternalExchange(),
-                    emailConfig.getInternalOrderConfirmationRoutingKey()
+                    emailConfig.getInternalOrderChangeStatusRoutingKey()
                 );
     }
 }

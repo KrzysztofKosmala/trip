@@ -34,6 +34,7 @@ public class SecurityConfig
                 )
                 .permitAll()
                 .requestMatchers("/api/v1/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.name())
+                .requestMatchers("/api/v1/**").hasAnyAuthority(Role.ROLE_CUSTOMER.name())
 
 /*
                    .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())

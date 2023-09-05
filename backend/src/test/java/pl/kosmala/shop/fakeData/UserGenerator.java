@@ -1,6 +1,7 @@
 package pl.kosmala.shop.fakeData;
 
 import com.github.javafaker.Faker;
+import pl.kosmala.shop.common.user.entity.Gender;
 import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.common.user.entity.types.Role;
 
@@ -22,6 +23,7 @@ public class UserGenerator
         user.setPassword(faker.internet().password());
         user.setLastname(faker.address().lastName());
         user.setFirstname(faker.address().firstName());
+        user.setGender(Gender.MALE);
         return user;
     }
 
