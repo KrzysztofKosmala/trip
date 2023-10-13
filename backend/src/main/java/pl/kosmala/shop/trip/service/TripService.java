@@ -24,7 +24,7 @@ public class  TripService
 
     public Page<Trip> getAllTrips(Pageable pageable)
     {
-        return tripRepository.findAll(pageable);
+        return tripRepository.findAllActive(pageable);
     }
 
     public TripDto getTripBySlug(String slug)

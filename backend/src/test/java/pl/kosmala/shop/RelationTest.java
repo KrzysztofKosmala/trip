@@ -118,7 +118,7 @@ public class RelationTest
 
         List<Long> orderIds = product.getOrders().stream().map(order -> order.getId()).toList();
 
-        adminTripService.deleteTrip(id);
+        adminTripService.deactivateTrip(id);
 
         List<Order> idsOfOrdersThatShouldBeDetachFromProduct = orderRepository.findAllById(orderIds);
 

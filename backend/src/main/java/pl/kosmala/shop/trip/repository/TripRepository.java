@@ -33,6 +33,9 @@ public interface TripRepository extends JpaRepository<Trip, Long>
     );
 
 
+    @Query("SELECT t FROM Trip t WHERE (t.isActive = true or t.isActive = null ) ")
+    Page<Trip> findAllActive(Pageable pageable);
+
     @Query("SELECT COUNT(t) FROM Trip t")
     long count();
 }

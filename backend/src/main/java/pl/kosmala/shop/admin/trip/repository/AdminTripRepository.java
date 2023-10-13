@@ -1,9 +1,12 @@
 package pl.kosmala.shop.admin.trip.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.trip.model.Trip;
 
 import java.util.Optional;
 
@@ -18,5 +21,8 @@ public interface AdminTripRepository extends JpaRepository<AdminTrip, Long>
 
     @Query("SELECT COUNT(r) FROM Room r WHERE r.trip.id = :tripId")
     Long countRoomsByAdminTripId(@Param("tripId") Long tripId);
+
+    @Query("SELECT t FROM Trip t WHERE (t.isActive = true or t.isActive = null ) ")
+    Page<AdminTrip> findAllActive(Pageable pageable);
     boolean existsByName(String name);
 }

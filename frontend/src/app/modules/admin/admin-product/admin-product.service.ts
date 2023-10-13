@@ -17,7 +17,7 @@ export class AdminProductService {
       return this.http.get<Page<AdminProduct>>(`/api/v1/admin/trips?page=${page}&size=${size}`);
   }
 
-  delete(id: number): Observable<void>{
-    return this.http.delete<void>('/api/v1/admin/trips/'+id)
+  deactivateTrip(id: number): Observable<AdminProduct>{
+    return this.http.put<AdminProduct>('/api/v1/admin/trips/deactivate/'+id, {})
   }
 }

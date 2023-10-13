@@ -3,14 +3,11 @@ package pl.kosmala.shop.IT;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
 import pl.kosmala.shop.admin.trip.model.AdminTrip;
-import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.admin.trip.service.AdminTripService;
 import pl.kosmala.shop.common.image.model.Image;
-import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.common.model.ProductCurrency;
 import pl.kosmala.shop.common.model.TripDestination;
 import pl.kosmala.shop.fakeData.ImageGenerator;
@@ -18,9 +15,7 @@ import pl.kosmala.shop.fakeData.OrderGenerator;
 import pl.kosmala.shop.fakeData.ProductGenerator;
 import pl.kosmala.shop.fakeData.UserGenerator;
 import pl.kosmala.shop.order.model.Order;
-import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.common.user.entity.User;
-import pl.kosmala.shop.common.user.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -113,7 +108,7 @@ public class Relation extends PrePost
         }
         //Long roomsInTrip = adminTripRepository.countRoomsByAdminTripId(id);
 
-        adminTripService.deleteTrip(id);
+        adminTripService.deactivateTrip(id);
 
 
         Assertions.assertEquals(ordersCount, orderRepository.count());

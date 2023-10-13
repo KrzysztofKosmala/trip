@@ -36,13 +36,13 @@ export class AdminProductComponent implements  AfterViewInit {
   }
 
 
-  confirmDelete(element: AdminProduct){
-    this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć ten produkt?")
+  confirmDeactivation(element: AdminProduct){
+    this.dialogService.openConfirmDialog("Czy na pewno chcesz deaktuwować ten produkt?")
     .afterClosed()
     .subscribe(result => 
       {
         if(result){
-          this.adminProductService.delete(element.id)
+          this.adminProductService.deactivateTrip(element.id)
           .subscribe(() => {
               this.dataSource.forEach((value, index) => {
                   if(element == value){

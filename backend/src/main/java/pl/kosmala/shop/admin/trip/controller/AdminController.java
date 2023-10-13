@@ -56,9 +56,9 @@ public class AdminController
         }
     }
 
-    @DeleteMapping("/trips/{id}")
-    public void deleteTrip(@PathVariable Long id)
+    @PutMapping("/trips/deactivate/{id}")
+    public AdminTrip deactivateTrip(@PathVariable Long id)
     {
-        adminTripService.deleteTrip(id);
+       return adminTripService.deactivateTrip(id);
     }
 }

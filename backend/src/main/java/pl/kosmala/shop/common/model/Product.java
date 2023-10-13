@@ -79,6 +79,12 @@ import java.util.Set;
                 )
         private BigDecimal salePrice;
 
+        @Column
+                (
+                        name = "active"
+                )
+        private Boolean isActive;
+
         @OneToMany
         @JoinColumn(name = "productId")
         private List<Review> reviews;
@@ -90,7 +96,7 @@ import java.util.Set;
                 inverseJoinColumns = @JoinColumn(name = "image_id"))
         private Set<Image> images;
 
-        @OneToMany(mappedBy = "product", cascade = CascadeType.DETACH )
+        @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true )
         @JsonBackReference
         private List<Order> orders;
         @Column

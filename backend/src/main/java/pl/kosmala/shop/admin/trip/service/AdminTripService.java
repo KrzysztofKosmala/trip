@@ -11,11 +11,9 @@ import pl.kosmala.shop.admin.trip.model.AdminTrip;
 import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
-import pl.kosmala.shop.trip.model.Trip;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
@@ -127,7 +125,7 @@ public class AdminTripService
 
     public Page<AdminTrip> getAllAdminTrips(Pageable pageable)
     {
-        return adminTripRepository.findAll(pageable);
+        return adminTripRepository.findAllActive(pageable);
     }
 
     public AdminTrip getProduct(Long id)
@@ -152,10 +150,12 @@ public class AdminTripService
             adminTripRepository.deleteById(id);
         }
     }*/
-public void deleteTrip(Long id)
-{
+    public AdminTrip deactivateTrip(Long id)
+    {
+        AdminTrip adminTrip = adminTripRepository.findById(id).orElseThrow();
 
-        adminTripRepository.deleteById(id);
+        adminTrip.setIsActive(false);
 
-}
+        return adminTripRepository.save(adminTrip);
+    }
 }
