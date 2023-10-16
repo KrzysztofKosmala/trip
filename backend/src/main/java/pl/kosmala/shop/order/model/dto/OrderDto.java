@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @Builder
 public class OrderDto
@@ -28,4 +30,5 @@ public class OrderDto
     private String productslug;
     @NotBlank
     private Long paymentId;
+    private List<String> friendEmails;
 }

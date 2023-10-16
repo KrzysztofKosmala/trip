@@ -36,7 +36,7 @@ public class User implements UserDetails
     @Column
             (
                     name = "gender",
-                    nullable = false,
+                    nullable = true,
                     columnDefinition = "TEXT"
 
             )

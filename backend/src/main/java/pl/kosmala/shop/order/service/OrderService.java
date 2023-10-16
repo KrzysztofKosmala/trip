@@ -3,6 +3,7 @@ package pl.kosmala.shop.order.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.kosmala.shop.admin.room.service.RoomService;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
@@ -27,6 +28,7 @@ public class OrderService
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final PaymentRepository paymentRepository;
+    private final RoomService roomService;
     private final OrderConfirmationEmailService orderConfirmationEmailService;
     //TODO: sprawdzic czy uzutkownik juz zarezerwowal te wycieczke, dodac znajomych
     @Transactional
@@ -39,6 +41,8 @@ public class OrderService
         Order order = createNewOrder(orderDto, product, payment, user);
 
         product.addOrder(order);
+
+        roomService.addRoomMates(user, orderDto.getFriendEmails(), orderDto.getProductslug());
 
         Order newOrder = orderRepository.save(order);
 
@@ -59,10 +63,6 @@ public class OrderService
         return mapToOrderListDto(orderRepository.findByUserId(user.getId()));
     }
 
-    public boolean hasUserPaidForProduct(String userEmail, Long productId)
-    {
-        return orderRepository.hasUserPaidForProduct(userEmail, productId);
-    }
 
     private List<OrderListDto> mapToOrderListDto(List<Order> byUserId)
     {

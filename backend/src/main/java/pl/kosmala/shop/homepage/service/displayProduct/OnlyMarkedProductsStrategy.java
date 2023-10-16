@@ -15,6 +15,6 @@ public class OnlyMarkedProductsStrategy implements HomePageProductStrategy
     @Override
     public List<Product> generateHomePageProducts()
     {
-        return productRepository.findTop5ByShowOnHomePageIsTrue();
+        return productRepository.findTop5ByShowOnHomePageIsTrueAndIsActiveIsNullOrIsActiveIsTrue();
     }
 }

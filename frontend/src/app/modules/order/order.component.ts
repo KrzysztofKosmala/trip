@@ -25,6 +25,8 @@ product!: ProductDetails;
 userDetails!: UserDetails;
 initData!: InitData;
 isLoggedIn = false;
+friends: string[] = [];
+slug!: string;
 constructor
   (
     private productDetailsService: ProductDetailsService,
@@ -49,8 +51,8 @@ constructor
 
     this.profileService.getDetails().subscribe(details => this.userDetails = details);
 
-      const slug = this.router.snapshot.params['slug'];
-      this.productDetailsService.getProductDetails(slug).subscribe(product => this.product = product);
+      this.slug = this.router.snapshot.params['slug'];
+      this.productDetailsService.getProductDetails(this.slug).subscribe(product => this.product = product);
       this.formGrup = this.formBuilder.group({
         payment: [''],
         transport: ['']
@@ -81,6 +83,7 @@ submit()
     phone: this.userDetails.phone,
     productslug: this.product.slug,
     transport: this.formGrup.get('transport')?.value.id,
+    friendEmails: this.friends,
     //departureCity: this.formGrup.get('departureCity')?.value,
     paymentId: Number(this.formGrup.get('payment')?.value.id),
   } as OrderDto).subscribe(orderSummary => {
@@ -109,6 +112,24 @@ getinitData()
     //this.formGrup.patchValue({transport: this.initData.transports[0].name})
     this.formGrup.patchValue({transport: this.initData.transports.filter(transport => transport.defaultTransport === true)[0]})
   }
+
+
+addFriend(email: string)
+{
+  console.log('Dodaj uczestnika z adresem e-mail: ' + email);
+  
+if(this.friends.length<6)
+ { this.orderService.getRoomMate(email, this.slug).subscribe(response => {
+    console.error(response)
+    this.friends.push(response.email)
+  }, error => {
+    console.log(error);
+    this.snackBar.open("Nie można dodać znajomego", error, {duration: 3000})
+  });
+ }else{
+  this.snackBar.open("Można dodać maksymalnie 6 znajomych.", "", {duration: 3000})
+ }
+}
 
 getStatus(status: string)
 {

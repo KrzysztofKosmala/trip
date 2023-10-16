@@ -6,5 +6,6 @@ export interface OrderSummary
     placeDate: Date,
     status: string,
     grossValue: number,
-    payment: Payment
+    payment: Payment,
+    friendEmails: string[]
 }

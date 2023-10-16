@@ -7,9 +7,9 @@ import lombok.Getter;
 public class RoomMate
 {
     private int numberOfRoomMates;
-    private String friendEmail;
-    public RoomMate(String friendEmail)
+    private String email;
+    public RoomMate(String email)
     {
-        this.friendEmail = friendEmail;
+        this.email = email;
     }
 }

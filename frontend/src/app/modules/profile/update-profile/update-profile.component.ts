@@ -83,7 +83,8 @@ export class UpdateProfileComponent implements OnInit  {
           this.snackBar.open("Twoje dane zostały zapisane", '', {duration: 3000})
         }
       , error =>{
-          console.log(error.error.message)
+        this.snackBar.open(error.error.message, '', {duration: 3000})
+
       }
     )
   }

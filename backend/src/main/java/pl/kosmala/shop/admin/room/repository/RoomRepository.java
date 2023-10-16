@@ -11,11 +11,11 @@ import java.util.Optional;
 public interface RoomRepository extends JpaRepository<Room, Long>
 {
 
-    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Room r JOIN r.users u WHERE u.email = :email AND r.trip.id = :tripId")
-    boolean doesUserBelongToRoomInTrip(@Param("email") String email, @Param("tripId") Long tripId);
+    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Room r JOIN r.users u WHERE u.email = :email AND r.trip.slug = :slug")
+    boolean doesUserBelongToRoomInTrip(@Param("email") String email, @Param("slug") String slug);
 
-    @Query("SELECT r FROM Room r JOIN r.users u WHERE u.email = :email AND r.trip.id = :tripId")
-    Optional<Room> findRoomByUserEmailAndTripId(@Param("email") String email, @Param("tripId") Long tripId);
+    @Query("SELECT r FROM Room r JOIN r.users u WHERE u.email = :email AND r.trip.slug= :slug")
+    Optional<Room> findRoomByUserEmailAndTripId(@Param("email") String email, @Param("slug") String slug);
 
 
 }

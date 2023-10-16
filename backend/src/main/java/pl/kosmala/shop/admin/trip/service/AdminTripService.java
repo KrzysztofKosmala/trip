@@ -14,6 +14,7 @@ import pl.kosmala.shop.common.image.repository.ImageRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static pl.kosmala.shop.common.utils.SlugifyUtils.slugifySlug;
@@ -25,9 +26,11 @@ public class AdminTripService
     private final AdminTripRepository adminTripRepository;
 
     private final ImageRepository imageRepository;
-    public AdminTrip getTripById(Long id)
+    public AdminTrip getAdminTripBySlug(String slug)
     {
-        return adminTripRepository.findById(id).orElseThrow();
+        Optional<AdminTrip> bySlug = adminTripRepository.findAdminTripBySlug(slug);
+
+        return bySlug.orElseThrow();
     }
 
     public AdminTrip updateTrip(AdminTripDto adminProductDto, Long id)

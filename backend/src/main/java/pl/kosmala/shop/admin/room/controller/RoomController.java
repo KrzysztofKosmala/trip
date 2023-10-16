@@ -10,7 +10,7 @@ import pl.kosmala.shop.common.user.entity.User;
 
 
 @RestController
-@RequestMapping("api/v1/rooms")
+@RequestMapping("/api/v1/rooms")
 @RequiredArgsConstructor
 public class RoomController
 {
@@ -21,20 +21,20 @@ public class RoomController
     public RoomMate getRoomMate
             (
                     @AuthenticationPrincipal User user,
-                    @RequestParam(name = "friendEmail") String friendEmail,
-                    @RequestParam(name = "tripId") Long tripId
+                    @RequestParam(name = "slug") String slug,
+                    @RequestParam(name = "email") String email
             )
     {
-        return roomService.getRoomMate(friendEmail, tripId);
+        return roomService.getRoomMate(email, slug);
     }
 
-    @PostMapping("/roomMate")
+/*    @PostMapping("/roomMate")
     public void addRoomMates
             (
                     @AuthenticationPrincipal User user,
                     @RequestBody RoomMatesDto roomMates
             )
     {
-        roomService.addRoomMates(user, roomMates.getFriendEmails(), roomMates.getTripId());
-    }
+        roomService.addRoomMates(user, roomMates.getFriendEmails(), roomMates.());
+    }*/
 }

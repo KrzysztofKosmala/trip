@@ -44,7 +44,18 @@
         </mat-form-field>
 
         <h3>Nie jedziesz sam? Dodaj uczestników z którymi chcesz mieszkać</h3>
-
+        <div>
+            <mat-form-field appearance="fill">
+                <input #emailInput matInput placeholder="Wprowadź adres e-mail uczestnika" />
+            </mat-form-field>
+            <button type="button"  mat-flat-button color="primary" (click)="addFriend(emailInput.value)">Dodaj uczestnika</button>
+        </div>
+        <div *ngIf="friends.length > 0">
+            <h4>Lista uczestników:</h4>
+            <ul>
+                <li *ngFor="let friend of friends">{{friend}}</li>
+            </ul>
+        </div>
 
     <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Zaloguj się</a>, aby śledzić zamówienia</div>
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { InitData } from './model/InitData';
 import { OrderDto } from './model/OrderDto';
 import { OrderSummary } from './model/OrderSummary';
+import { RoomMate } from './model/RoomMate';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,11 @@ export class OrderService {
     let params = new HttpParams().set('id', id);
     
     return this.http.get<OrderDto>("/api/v1/orders", { params })
+  }
+
+  getRoomMate(email: string, slug: string): Observable<RoomMate>
+  {
+    let params = new HttpParams().set('slug', slug).set('email', email);
+    return this.http.get<RoomMate>("/api/v1/rooms/roomMate", { params });
   }
 }

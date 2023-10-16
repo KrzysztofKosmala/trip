@@ -18,6 +18,7 @@ export class JwtInterceptor implements HttpInterceptor
                  || req.url.startsWith("/api/v1/orders")
                  || req.url.startsWith("/api/v1/profiles")
                  || req.url.startsWith("/api/v1/users")
+                 || req.url.startsWith("/api/v1/rooms")
             )
         )
         {

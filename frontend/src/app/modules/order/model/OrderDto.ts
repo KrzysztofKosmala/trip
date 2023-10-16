@@ -10,5 +10,6 @@ export interface OrderDto
     transport: string,
     departureCity: string,
     productslug: string,
-    paymentId: number
+    paymentId: number,
+    friendEmails: string[] 
 }

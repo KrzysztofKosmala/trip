@@ -46,12 +46,17 @@ public class UserService
     {
         User userFromRepo = userRepository.findByEmail(user.getEmail()).orElseThrow();
 
+        if(details.getFirstname() != null)
         userFromRepo.setFirstname(details.getFirstname());
+        if(details.getLastname() != null)
         userFromRepo.setLastname(details.getLastname());
+        if(details.getEmail() != null)
         userFromRepo.setEmail(details.getEmail());
-
+        if(details.getStreet() != null)
         userFromRepo.setStreet(details.getStreet());
+        if(details.getCity() != null)
         userFromRepo.setCity(details.getCity());
+        if(details.getGender() != null)
         userFromRepo.setGender(Gender.valueOf(details.getGender()));
 
         if (!validatePesel( details.getPesel())) {
