@@ -37,6 +37,7 @@ public class UserController
         return userService.updateDetails(user, details);
     }
 
+    /*todo: przeniesc do order*/
     @GetMapping("/checkIfCanOrder")
     public boolean checkIfCanOrder(@AuthenticationPrincipal User user)
     {

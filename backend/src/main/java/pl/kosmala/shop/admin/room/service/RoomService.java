@@ -40,9 +40,10 @@ public class RoomService
         return new RoomMate(email);
     }
 
+
     public void addRoomMates(User user, List<String> friendEmails, String slug)
     {
-        boolean hasFriendRoom = false;
+/*        boolean hasFriendRoom = false;
         Room existingRoom = null;
         for (String friendEmail : friendEmails) {
             if (roomRepository.doesUserBelongToRoomInTrip(friendEmail, slug)) {
@@ -77,6 +78,16 @@ public class RoomService
             }
             newRoom.getUsers().add(user);
             roomRepository.save(newRoom);
+        }*/
+        Room newRoom = new Room();
+        AdminTrip tripBySlug = tripService.getAdminTripBySlug(slug);
+
+        newRoom.setTrip(tripBySlug);
+        for (String friendEmail : friendEmails) {
+            User friend = userService.getUserByEmail(friendEmail);
+            newRoom.getUsers().add(friend);
         }
+        newRoom.getUsers().add(user);
+        roomRepository.save(newRoom);
     }
 }

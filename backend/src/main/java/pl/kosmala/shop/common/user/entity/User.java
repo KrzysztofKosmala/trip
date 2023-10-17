@@ -11,12 +11,12 @@ import pl.kosmala.shop.common.user.entity.types.Role;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Setter
+@Getter
 @Table(name = "_user")
 public class User implements UserDetails
 {
@@ -54,12 +54,15 @@ public class User implements UserDetails
     private boolean isEnabled;
 
     @ManyToMany(mappedBy = "users")
-    private Set<Room> rooms = new HashSet<>();
+    private List<Room> rooms = new LinkedList<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
+
+
+
     private String hash;
     private LocalDateTime HashDate;
     @Override

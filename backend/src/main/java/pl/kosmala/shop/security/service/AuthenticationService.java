@@ -40,7 +40,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
-                .isEnabled(false)
+                .isEnabled(true)
                 .build();
 
         userRepository.save(user);

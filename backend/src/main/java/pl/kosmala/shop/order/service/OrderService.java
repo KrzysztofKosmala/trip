@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.room.service.RoomService;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
@@ -27,24 +29,25 @@ public class OrderService
 {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final AdminTripRepository adminTripRepository;
     private final PaymentRepository paymentRepository;
     private final RoomService roomService;
     private final OrderConfirmationEmailService orderConfirmationEmailService;
     //TODO: sprawdzic czy uzutkownik juz zarezerwowal te wycieczke, dodac znajomych
     @Transactional
-    public OrderSummary placeOrder(OrderDto orderDto, User user)
+    public OrderSummary placeTripOrder(OrderDto orderDto, User user)
     {
-        Product product = productRepository.findBySlug(orderDto.getProductslug()).orElseThrow();
+        AdminTrip product = adminTripRepository.findAdminTripBySlug(orderDto.getProductslug()).orElseThrow();
 
         Payment payment = paymentRepository.findById(orderDto.getPaymentId()).orElseThrow();
 
-        Order order = createNewOrder(orderDto, product, payment, user);
+        Order<Product> order = createNewOrder(orderDto, product, payment, user);
 
         product.addOrder(order);
+        if(!orderDto.getFriendEmails().isEmpty())
+            roomService.addRoomMates(user, orderDto.getFriendEmails(), orderDto.getProductslug());
 
-        roomService.addRoomMates(user, orderDto.getFriendEmails(), orderDto.getProductslug());
-
-        Order newOrder = orderRepository.save(order);
+        Order<Product> newOrder = orderRepository.save(order);
 
         EmailMessage message = createNewOrderConfirmationEmail(newOrder);
 

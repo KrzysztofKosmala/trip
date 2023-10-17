@@ -1,24 +1,16 @@
 package pl.kosmala.shop.IT;
 
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
-import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
-import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.trilead.ssh2.Session;
-import org.testcontainers.utility.MountableFile;
 import pl.kosmala.shop.admin.order.model.AdminOrder;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
-import pl.kosmala.shop.admin.order.service.AdminOrderService;
 import pl.kosmala.shop.admin.room.repository.RoomRepository;
 import pl.kosmala.shop.admin.room.service.RoomService;
 import pl.kosmala.shop.admin.trip.model.AdminTrip;
@@ -27,18 +19,14 @@ import pl.kosmala.shop.admin.trip.service.AdminTripService;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.common.model.OrderStatus;
-import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
-import pl.kosmala.shop.common.rabbitMq.RabbitMQMessageProducer;
 import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.common.user.repository.UserRepository;
 import pl.kosmala.shop.fakeData.*;
-import pl.kosmala.shop.order.model.dto.OrderDto;
 import pl.kosmala.shop.order.repository.OrderRepository;
 import pl.kosmala.shop.order.repository.PaymentRepository;
 import pl.kosmala.shop.order.service.OrderService;
 import pl.kosmala.shop.trip.repository.ProductRepository;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -129,7 +117,7 @@ public class PrePost
 
     private void makeOrders(List<User> users, List<AdminTrip> trips)
     {
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                     orderDtoGenerator.generateOrderDto
                             (
@@ -138,7 +126,7 @@ public class PrePost
                             ),
                             users.stream().filter(user -> user.getId().equals(1L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -147,7 +135,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(2L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -156,7 +144,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(3L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -165,7 +153,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(4L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -174,7 +162,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(5L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -183,7 +171,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(6L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -192,7 +180,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(7L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -201,7 +189,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(8L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
@@ -210,7 +198,7 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(9L)).findFirst().get()
                 );
-        orderService.placeOrder
+        orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (

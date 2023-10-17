@@ -23,7 +23,7 @@ public class Room
     @JoinColumn(name = "trip_id")
     private AdminTrip trip;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE})
     @JoinTable
             (
                     name = "rooms_users",

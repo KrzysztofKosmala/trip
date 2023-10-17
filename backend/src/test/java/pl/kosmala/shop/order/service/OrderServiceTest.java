@@ -112,7 +112,7 @@ class OrderServiceTest
         Mockito.doNothing().when(orderConfirmationEmailService).send(Mockito.any(EmailMessage.class));
 
 
-        OrderSummary orderSummary = underTest.placeOrder(orderDto, user);
+        OrderSummary orderSummary = underTest.placeTripOrder(orderDto, user);
 
 
         // then

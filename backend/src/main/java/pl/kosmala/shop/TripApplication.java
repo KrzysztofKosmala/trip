@@ -7,6 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
+import pl.kosmala.shop.admin.trip.model.AdminTrip;
+import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
+import pl.kosmala.shop.admin.trip.service.AdminTripService;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.common.model.OrderStatus;
@@ -51,7 +55,7 @@ public class TripApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(AuthenticationService authenticationService, ImageRepository imageRepository, TripRepository tripRepository, OrderRepository orderRepository, PaymentRepository paymentRepository, UserRepository userRepository)
+	CommandLineRunner commandLineRunner(AdminTripService adminTripService, AuthenticationService authenticationService, ImageRepository imageRepository, AdminTripRepository adminTripRepository, TripRepository tripRepository, OrderRepository orderRepository, PaymentRepository paymentRepository, UserRepository userRepository)
 	{
 		return args ->
 		{
@@ -88,15 +92,62 @@ public class TripApplication {
 			authenticationService.register(request1);
 			authenticationService.register(request2);
 			authenticationService.register(request3);
-			authenticationService.register(request4);*/
-
-
+			authenticationService.register(request4);
 			List<Image> images = generateImages(10);
 			imageRepository.saveAll(images);
+
 			List<Image> imagesFromRepo = imageRepository.findAll();
+			//trips
+			for(int i = 0; i < 5; i++)
+			{
+				adminTripService.createTrip(generateAdminTripDtp(imagesFromRepo));
+			}
 
-
+			RegisterRequest request5 = RegisterRequest.builder()
+					.firstname("user1")
+					.lastname("user1")
+					.role(Role.ROLE_ADMIN)
+					.email("kosmi@pl.pl")
+					.password("password")
+					.build();
+			authenticationService.register(request5);*/
 		};
+	}
+	public AdminTripDto generateAdminTripDtp(List<Image> allImages)
+	{
+		List<Image> copyOf = new ArrayList<Image>(allImages);
+
+		AdminTripDto trip = new AdminTripDto();
+
+		trip.setDestination(TripDestination.AU);
+		trip.setBasePrice(BigDecimal.valueOf(faker.number().numberBetween(700, 25000)));
+		String name = faker.name().name();
+		trip.setName(name);
+		trip.setDesc(faker.lorem().sentence( 30));
+		trip.setSlug(SlugifyUtils.slugifySlug(name));
+		trip.setFullDesc(faker.lorem().sentence(20));
+		trip.setCurrency(ProductCurrency.PLN);
+		trip.setHouse(faker.bool().bool());
+		trip.setSpa(faker.bool().bool());
+		trip.setFood(faker.bool().bool());
+		trip.setSlopNearby(faker.bool().bool());
+		trip.setWifi(faker.bool().bool());
+		trip.setApartment(faker.bool().bool());
+
+
+		int howMany = random.nextInt(1,4);
+
+		Image[] randomIds = new Image[howMany];
+		for (int i = 0; i < howMany; i++)
+		{
+			int i1 = random.nextInt(copyOf.size());
+			Image image = new Image();
+			image.setId(copyOf.get(i1).getId());
+			randomIds[i] = image;
+			copyOf.remove(copyOf.get(i1));
+		}
+		trip.setImages(randomIds);
+		return trip;
 	}
 	@Value("${FETCH_IMAGE_URL}")
 	private String fetchImage;

@@ -25,7 +25,7 @@ public class OrderController
     @PostMapping
     public OrderSummary placeOrder(@RequestBody OrderDto orderDto, @AuthenticationPrincipal User user)
     {
-        return orderService.placeOrder(orderDto, user);
+        return orderService.placeTripOrder(orderDto, user);
     }
 
     @GetMapping("/initData")
