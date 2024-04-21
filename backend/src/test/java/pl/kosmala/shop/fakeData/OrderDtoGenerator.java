@@ -26,6 +26,22 @@ public class OrderDtoGenerator
                 .street(user.getStreet())
                 .lastname(user.getLastname())
                 .firstname(user.getFirstname())
+                .friendEmails(new ArrayList<>())
+                .build();
+    }
+    public OrderDto generateOrderDto(AdminTrip trip, User user ,List<String> friendsEmail)
+    {
+        return OrderDto.builder()
+                .postal(user.getPostal())
+                .productslug(trip.getSlug())
+                .email(user.getEmail())
+                .city(user.getCity())
+                .phone(user.getPhone())
+                .paymentId(1L)
+                .street(user.getStreet())
+                .lastname(user.getLastname())
+                .firstname(user.getFirstname())
+                .friendEmails(friendsEmail)
                 .build();
     }
 

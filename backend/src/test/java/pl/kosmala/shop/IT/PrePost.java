@@ -13,12 +13,14 @@ import pl.kosmala.shop.admin.order.model.AdminOrder;
 import pl.kosmala.shop.admin.order.repository.AdminOrderRepository;
 import pl.kosmala.shop.admin.room.repository.RoomRepository;
 import pl.kosmala.shop.admin.room.service.RoomService;
+import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
 import pl.kosmala.shop.admin.trip.model.AdminTrip;
 import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.admin.trip.service.AdminTripService;
 import pl.kosmala.shop.common.image.model.Image;
 import pl.kosmala.shop.common.image.repository.ImageRepository;
 import pl.kosmala.shop.common.model.OrderStatus;
+import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.user.entity.User;
 import pl.kosmala.shop.common.user.repository.UserRepository;
 import pl.kosmala.shop.fakeData.*;
@@ -97,10 +99,7 @@ public class PrePost
         //users
         UserGenerator userGenerator = new UserGenerator();
         List<User> users = userGenerator.generateUsers(HOW_MANY_USERS);
-
-        List<User> saved = userRepository.saveAll(users);
-        Map<Long, String> idEmail = saved.stream()
-                .collect(Collectors.toMap(User::getId, User::getEmail));
+;
         //orders
         List<AdminTrip> tripsForPlacingOrders = adminTripRepository.findAll();
         List<User> usersForPlacingOrders = userRepository.findAll();
@@ -110,28 +109,29 @@ public class PrePost
             adminOrder.setOrderStatus(OrderStatus.PAID);
         });
         adminOrderRepository.saveAll(adminOrdersFromRepo);
-        //rooms
-
-        //assignRoomMates(idEmail);
     }
 
     private void makeOrders(List<User> users, List<AdminTrip> trips)
     {
+        User user2 = users.stream().filter(user -> user.getId().equals(2L)).findFirst().get();
+        User user1 = users.stream().filter(user -> user.getId().equals(1L)).findFirst().get();
+
         orderService.placeTripOrder
                 (
                     orderDtoGenerator.generateOrderDto
                             (
                                     trips.stream().filter(trip -> trip.getId().equals(1L)).findFirst().get(),
-                                    users.stream().filter(user -> user.getId().equals(1L)).findFirst().get()
+                                    user1
                             ),
-                            users.stream().filter(user -> user.getId().equals(1L)).findFirst().get()
+                        user1
                 );
         orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
                                         trips.stream().filter(trip -> trip.getId().equals(1L)).findFirst().get(),
-                                        users.stream().filter(user -> user.getId().equals(2L)).findFirst().get()
+                                        user2,
+                                        Arrays.asList(user1.getEmail())
                                 ),
                         users.stream().filter(user -> user.getId().equals(2L)).findFirst().get()
                 );
@@ -180,62 +180,37 @@ public class PrePost
                                 ),
                         users.stream().filter(user -> user.getId().equals(7L)).findFirst().get()
                 );
+        User user8 = users.stream().filter(user -> user.getId().equals(8L)).findFirst().get();
         orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
                                         trips.stream().filter(trip -> trip.getId().equals(5L)).findFirst().get(),
-                                        users.stream().filter(user -> user.getId().equals(8L)).findFirst().get()
+                                        user8
                                 ),
-                        users.stream().filter(user -> user.getId().equals(8L)).findFirst().get()
+                        user8
                 );
+        User user9 = users.stream().filter(user -> user.getId().equals(9L)).findFirst().get();
         orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
                                         trips.stream().filter(trip -> trip.getId().equals(5L)).findFirst().get(),
-                                        users.stream().filter(user -> user.getId().equals(9L)).findFirst().get()
+                                        user9
                                 ),
-                        users.stream().filter(user -> user.getId().equals(9L)).findFirst().get()
+                        user9
                 );
+        User user10 = users.stream().filter(user -> user.getId().equals(10L)).findFirst().get();
         orderService.placeTripOrder
                 (
                         orderDtoGenerator.generateOrderDto
                                 (
                                         trips.stream().filter(trip -> trip.getId().equals(5L)).findFirst().get(),
-                                        users.stream().filter(user -> user.getId().equals(10L)).findFirst().get()
+                                        user10,
+                                        Arrays.asList(user8.getEmail(),user9.getEmail())
                                 ),
-                        users.stream().filter(user -> user.getId().equals(10L)).findFirst().get()
+                        user10
                 );
     }
 
-    private void assignRoomMates(Map<Long, String> idEmail)
-    {
-
-        roomService.addRoomMates
-                (
-                        userRepository.findById(1L).get(),
-                        Arrays.asList(idEmail.get(2L)),
-                        1L
-                );
-
-        roomService.addRoomMates
-                (
-                        userRepository.findById(3L).get(),
-                        Arrays.asList(idEmail.get(4L)),
-                        2L
-                );
-        roomService.addRoomMates
-                (
-                        userRepository.findById(5L).get(),
-                        Arrays.asList(idEmail.get(6L)),
-                        3L
-                );
-        roomService.addRoomMates
-                (
-                        userRepository.findById(8L).get(),
-                        Arrays.asList(idEmail.get(9L), idEmail.get(10L)),
-                        5L
-                );
-    }
 }

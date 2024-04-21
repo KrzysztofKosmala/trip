@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
+import pl.kosmala.shop.admin.room.model.Room;
 import pl.kosmala.shop.admin.trip.dto.AdminTripDto;
 import pl.kosmala.shop.admin.trip.model.AdminTrip;
 import pl.kosmala.shop.admin.trip.service.AdminTripService;
@@ -31,7 +32,15 @@ public class Relation extends PrePost
     *  delete trip
     *  create trip
     *  update trip
-    *
+     *  delete order
+     *  create order
+     *  update order
+     *  delete user
+     *  create user
+     *  update user
+     *  delete room
+     *  create room
+     *  update room
     * */
     @Test
     @Transactional
@@ -92,7 +101,15 @@ public class Relation extends PrePost
     @DirtiesContext
     void shouldTrip()
     {
+        List<Order> orders = orderRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
+        List<Image> images = imageRepository.findAll();
+        List<AdminTrip> tripa = adminTripRepository.findAll();
+        List<User> users = userRepository.findAll();
 
+        rooms.forEach(room -> room.getId());
+
+        orders.forEach(order -> order.getUser());
 /*
         long ordersCount = orderRepository.count();
         long usersCount = userRepository.count();

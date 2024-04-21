@@ -1,6 +1,7 @@
 package pl.kosmala.shop.order.service;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosmala.shop.admin.room.service.RoomService;
@@ -9,6 +10,7 @@ import pl.kosmala.shop.admin.trip.repository.AdminTripRepository;
 import pl.kosmala.shop.common.model.Product;
 import pl.kosmala.shop.common.notification.mail.EmailMessage;
 import pl.kosmala.shop.common.notification.mail.OrderConfirmationEmailService;
+import pl.kosmala.shop.order.exception.FriendOrderException;
 import pl.kosmala.shop.order.model.Order;
 import pl.kosmala.shop.order.model.Payment;
 import pl.kosmala.shop.order.model.dto.OrderDto;
@@ -44,8 +46,13 @@ public class OrderService
         Order<Product> order = createNewOrder(orderDto, product, payment, user);
 
         product.addOrder(order);
-        if(!orderDto.getFriendEmails().isEmpty())
-            roomService.addRoomMates(user, orderDto.getFriendEmails(), orderDto.getProductslug());
+        List<String> friendEmails = orderDto.getFriendEmails();
+        if(!friendEmails.isEmpty())
+        {
+            checkIfFriendsOrderedTrip(friendEmails, orderDto.getProductslug());
+            roomService.addRoomMates(user, friendEmails, orderDto.getProductslug());
+
+        }
 
         Order<Product> newOrder = orderRepository.save(order);
 
@@ -54,6 +61,15 @@ public class OrderService
         orderConfirmationEmailService.send(message);
 
         return mapToOrderSummary(newOrder);
+    }
+
+    private void checkIfFriendsOrderedTrip(List<String> friendEmails, @NotBlank String productslug)
+    {
+        friendEmails.forEach(email ->{
+            if(!orderRepository.hasUserOrderedProduct(email, productslug)){
+                throw new FriendOrderException(String.format("%s ten znajomy nie zamówił jeszcze wycieczki, więc nie możemy dodać go do Twojego pokoju.", email));
+            }
+        });
     }
 
     private EmailMessage createNewOrderConfirmationEmail(Order order)

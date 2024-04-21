@@ -17,6 +17,7 @@ public class BasicHomePageStrategy implements HomePageProductStrategy
     @Override
     public List<Product> generateHomePageProducts()
     {
-        return productRepository.findTop5BySalePriceIsNotNull();
+        List<Product> top5BySalePriceIsNotNull = productRepository.findTop5BySalePriceIsNotNull();
+        return top5BySalePriceIsNotNull;
     }
 }

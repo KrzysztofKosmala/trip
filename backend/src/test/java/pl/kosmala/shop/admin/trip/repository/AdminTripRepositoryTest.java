@@ -13,7 +13,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
+import pl.kosmala.shop.common.model.ProductCurrency;
+import pl.kosmala.shop.common.model.TripDestination;
 @DataJpaTest
 public class AdminTripRepositoryTest
 {
@@ -29,10 +30,10 @@ public class AdminTripRepositoryTest
         adminTrip = AdminTrip.builder()
                 .name("Test Trip")
                 .desc("Test Description")
-                .currency(ProductCurrency.USD)
+                .currency(ProductCurrency.PLN)
                 .slug("test-trip")
                 .fullDesc("Test Full Description")
-                .destination(TripDestination.USA)
+                .destination(TripDestination.FR)
                 .basePrice(new BigDecimal("1000.00"))
                 .salePrice(new BigDecimal("800.00"))
                 .slopNearby(true)

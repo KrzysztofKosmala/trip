@@ -65,7 +65,6 @@ public class RelationTest
 
         allTrips.forEach(trip ->
                 {
-
                     Set<Integer> ints = new HashSet<>();
 
                     while(ints.size() < 2)

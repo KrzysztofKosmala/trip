@@ -14,4 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Long>
 
     @Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Order o WHERE o.user.email = :email AND o.product.slug = :slug AND o.orderStatus = 'PAID'")
     boolean hasUserPaidForProduct(@Param("email") String email, @Param("slug") String slug);
+
+    @Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Order o WHERE o.user.email = :email AND o.product.slug = :slug")
+    boolean hasUserOrderedProduct(@Param("email") String email, @Param("slug") String slug);
 }

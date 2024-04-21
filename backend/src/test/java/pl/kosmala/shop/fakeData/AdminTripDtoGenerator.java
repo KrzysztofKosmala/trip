@@ -42,7 +42,7 @@ public class AdminTripDtoGenerator
         trip.setApartment(faker.bool().bool());
 
 
-        int howMany = random.nextInt(1,4);
+        int howMany = random.nextInt(2,4);
 
         Image[] randomIds = new Image[howMany];
         for (int i = 0; i < howMany; i++)

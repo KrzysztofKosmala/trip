@@ -96,7 +96,7 @@ import java.util.Set;
                 inverseJoinColumns = @JoinColumn(name = "image_id"))
         private Set<Image> images;
 
-        @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true )
+        @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
         @JsonBackReference
         private List<Order> orders;
         @Column
